@@ -1,35 +1,21 @@
 function register() {
-    console.log('diste un click en resgister')
-    var email = document.getElementById('email').value;
-    var password = document.getElementById('password').value;
-    // console.log(email);
-    // console.log(password);
-    firebase.auth().createUserWithEmailAndPassword(email, password)
-        .then(function () {
-            verificar();
-        })
-        .catch(function (error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            console.log(errorCode);
-            console.log(errorMessage);
-            // ...
-        });
+  var email = document.getElementById('email').value;
+  var password = document.getElementById('password').value;
+  firebase.auth()
+    .createUserWithEmailAndPassword(email, password)
+    .then(function () {
+      verificar();
+    })
 }
 
 function entrance() {
-    console.log('diste un click en entrance')
     var email2 = document.getElementById('email2').value;
     var password2 = document.getElementById('password2').value;
-    firebase.auth().signInWithEmailAndPassword(email2, password2).catch(function (error) {
-        // Handle Errors here.
-        var errorCode = error.code;
+    firebase.auth().signInWithEmailAndPassword(email2, password2)
+      .catch(function (error) {
         var errorMessage = error.message;
-        console.log(errorCode);
         console.log(errorMessage);
-        // ...
-    });
+      });
 }
 
 function observador() {
@@ -41,13 +27,12 @@ function observador() {
             var displayName = user.displayName;
             var email = user.email;
             var emailVerified = user.emailVerified;
-            console.log('********************');
-            console.log(emailVerified);
-            console.log('********************');
             var photoURL = user.photoURL;
             var isAnonymous = user.isAnonymous;
             var uid = user.uid;
             var providerData = user.providerData;
+            console.log(user.photoURL);
+
             // ...
         } else {
             // user is signed out.
@@ -77,7 +62,7 @@ function aparece(user) {
         <div class="container mt-5">
         <div class="alert alert-success" role="alert">
         <h4 class="alert-heading">Bienvenido ${user.email}!!</h4>
-        <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
+        <img alt="" src = '${user.photoURL}' />
         <hr>
         <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
         </div>
@@ -110,13 +95,22 @@ function verificar() {
     });
 }
 //login con google
-var provider = new firebase.auth.GoogleAuthProvider();
+var providergoogle = new firebase.auth.GoogleAuthProvider();
 
 $('#loginGoogle').click(function(){
   firebase.auth()
-    .signInWithPopup(provider)
+    .signInWithPopup(providergoogle)
     .then(function(result) {
-    console.log(result);
+    console.log(result.user.photoURL);
     });
-
 });
+//login con facebook
+var providerfb = new firebase.auth.FacebookAuthProvider();
+
+$('#loginFacebook').click(function(){
+  firebase.auth()
+    .signInWithPopup(providerfb)
+    .then(function(result) {
+      console.log(result.user);
+    });
+})
