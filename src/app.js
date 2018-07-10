@@ -61,16 +61,14 @@ function aparece(user) {
         contenido.innerHTML = `
         <div class="container mt-5">
         <div class="alert alert-success" role="alert">
-        <h4 class="alert-heading">Bienvenido ${user.email}!!</h4>
-        <img alt="" src = '${user.photoURL}' />
+        <h4 class="alert-heading">Bienvenido ${user.displayName}!!</h4>
+        <img alt="" width="100px" src = '${user.photoURL}' />
         <hr>
-        <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
         </div>
         <button onclick="cerrar()" class="btn btn-danger">Cerrar sesion</button>
         </div>
         `;
     }
-
 }
 
 function cerrar() {
@@ -102,6 +100,7 @@ $('#loginGoogle').click(function(){
     .signInWithPopup(providergoogle)
     .then(function(result) {
     console.log(result.user.photoURL);
+    guardarDatos(result.user);
     });
 });
 //login con facebook
@@ -114,3 +113,23 @@ $('#loginFacebook').click(function(){
       console.log(result.user);
     });
 })
+
+//escribir en la base de datos
+function guardarDatos(user){
+  var usuario = {
+    uid:user.uid,
+    nombre: user.displayName,
+    email:user.email,
+    foto:user.photoURL
+  }
+  firebase.database().ref("usuario/" + usuario.uid)
+  .set(usuario)
+}
+//leyendo la databaseURL
+firebase.database().ref("usuario")
+  .on("child_added", function(s){
+    var user = s.val();
+    var usuarios = document.getElementById('usuarios');
+    usuarios.innerHTML += "<img src'"+user.foto+"'/>";
+
+  })
