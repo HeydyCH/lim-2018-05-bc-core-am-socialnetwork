@@ -1,72 +1,5 @@
 # Creando una Red Social
 
-## Preámbulo
-
-Instagram, Snapchat, Twitter, Facebook, Twitch, Linkedin, etc. Las redes
-sociales han invadido nuestras vidas. Las amamos u odiamos, y muchxs no podemos
-vivir sin ellas.
-
-Hay redes sociales de todo tipo y para todo tipo de intereses. Por ejemplo,
-en una ronda de financiamiento con inversionistas, se presentó una red social
-para químicos en la que los usuarios podían publicar artículos sobre sus
-investigaciones, comentar en los artículos de sus colegas, y filtrar artículos
-de acuerdo a determinadas etiquetas o su popularidad, lo más reciente, o lo
-más comentado.
-
-## Introducción
-
-Una emprendedora nos ha encargado crear una red social. No nos da mucho detalle
-sobre qué tipo de red social quiere, sólo nos dice que creemos la mejor que
-podamos, y que luego la convenzamos de lanzarla al mercado. Nos da ciertos temas
-en los que le gustaría invertir:
-
-* Alimentación
-* Feminismo
-* Educación
-* Salud
-* Energías Renovables
-
-## Objetivos
-
-El objetivo principal de aprendizaje de este proyecto es construir un sitio web
-[_responsive_](https://github.com/Laboratoria/curricula-js/tree/master/topics/css/02-responsive)
-con más de una vista (página), y en el que podamos leer y escribir datos.
-
-Algunos objetivos específicos:
-
-* Entender las necesidades de los usuarios para los que crearás el producto y que ayudarás a resolver.
-* Poner en juego tu creatividad para generar ideas que lleven a una solución original y valiosa del problema.
-* Cuentas con el apoyo de tus compañeras, debes trabajar en equipo buscando _feedback_ constante.
-
-## Consideraciones generales
-
-Este proyecto se debe "resolver" en tríos.
-
-La lógica del proyecto debe estar implementada completamente en JavaScript
-(ES6), HTML y CSS. En este proyecto **SÍ está permitido** usar librerías o
-frameworks, pero **no es obligatorio** :smiley:.
-
-Para comenzar tendrás que hacer un _fork_ y _clonar_ este
-repositorio.
-
-## Parte obligatoria
-
-### General
-
-En este proyecto, no hay un _boilerplate_, por lo que tú deberás definir
-la estructura de carpetas y archivos que consideres necesaria, puedes guiarte
-de los proyectos anteriores. Por lo tanto, los _tests_ y el _setup_ necesario
-para ejecutarlos serán hechos por ti misma :smiley:.
-
-### Responsive
-
-Debe verse bien en dispositivos de pantallas grandes (computadoras/es, laptops, etc.) y pequeñas (tablets, celulares, etc.). Te sugerimos seguir la técnica de `mobile first` (más detalles sobre esta técnica al final).
-
-### Tests unitarios
-
-Los tests unitarios deben cubrir un mínimo del 70% de _statements_, _functions_,
-_lines_, y _branches_.
-
 ### UI y comportamiento (User Interface / Interfaz de Usuario)
 
 La interfaz debe permitir lo siguiente:
@@ -135,93 +68,6 @@ Personaliza estas guías con los colores y/o tipografías que creas convenientes
 Recuerda que al hacer estas adaptaciones deberás seguir los fundamentos de
 _visual design_ como contraste, alineación, jerarquía, entre otros.
 
-## Implementación
-
-### Front end
-
-El corazón de este proyecto incluye:
-
-* Separar la manipulación del DOM de la lógica (separación de responsabilidades).
-* Que el sitio sea responsive, ya dicho.
-* Alterar y persistir datos. Los datos que agregues o modifiques deberán
-  persistir a lo largo de la aplicación, te recomendamos que uses
-  [`localStorage`](https://developer.mozilla.org/es/docs/Web/API/API_de_almacenamiento_web/Usando_la_API_de_almacenamiento_web)
-  como primera opción para resolver este desafío, aun así, tú
-  puedes optar por la que se acomode más a tu equipo.
-
-Además, podrías agregar algunas tareas nuevas de acuerdo a tus decisiones:
-
-* Recuerda que puedes usar una librería o framework si así lo desea el equipo. Al navegar en internet te darás cuenta de que algunas de estas construyen un
-  **boilerplate** por ti, tenlo presente al iniciar tu proyecto.
-* Recuerda que no hay un setup de **tests** definido, dependerá de
-  la estructura de tu proyecto también, pero algo que no debes de olvidar es
-  pensar en estas pruebas, pues incluso te podrían ayudar a definir la estructura y
-  nomenclatura de tu lógica.
-
-### UX
-
-Desde el punto de vista de UX, deberás:  
-
-* Hacer un _benchmark_ de las principales redes sociales.
-* Hacer al menos 2 o 3 entrevistas con usuarios.
-* Hacer un prototipo de alta fidelidad.
-* Testear el prototipo con usuarios.
-* Asegurarte de que la implementación en código siga los lineamientos del
-  diseño.
-* Hacer sesiones de testing con el producto en HTML.
-
-### Ágil
-
-Vamos a dar un paso importante para seguir aprendiendo de Ágil. Te será de mucha
-ayuda para ir avanzando tu proyecto de forma incremental y no en cascada.
-
-Esta vez te pedimos que los ítems de tu Backlog de Producto estén escritos
-como [Historias de Usuario](http://jmbeas.es/guias/historias-de-usuario/).
-Esta es una técnica muy simple que te ayudará a:
-
-* Organizar el trabajo en función del valor que le aporta al usuario.
-* Poder publicar partes completas y utilizables del producto al final del
-  sprint.
-* Que el equipo trabaje de manera multidisciplinaria de manera natural.
-
-### Habilidades Blandas
-
-Trabajar en equipo es un gran desafío porque coordinarse no es una tarea fácil,
-y es más difícil entre tres que entre dos. Trata que tu equipo te entienda,
-facilitando siempre el diálogo dentro del squad.
-
-Planifica enumerando las tareas y distribuyéndolas, considerando los
-recursos, las habilidades, y el tiempo del que dispones. Planifica de manera
-que te permita avanzar en los distintos aspectos del proyecto de forma paralela,
-teniendo un tablero donde puedas ver en qué está trabajando cada compañera.
-
-Entrega tu trabajo a tu equipo a tiempo y colabora con el objetivo
-final del proyecto, lo que puede implicar ayudar a los demás miembros del equipo
-con sus pendientes, con el fin de entregar una red social de calidad.
-
-**La división del trabajo debe permitir que todo el equipo
-practique el aprendizaje de todas las habilidades esperadas. No se dividan el
-trabajo como en una fábrica**.
-
-Para que tu red social responda a las necesidades de tus usuarios, probablemente deberás adquirir nuevos conocimientos para implementar sus preferencias. Para conocer a los usuarios y sus preferencias, debes salir e investigar. Tienes que ejercitar tus habilidades de comunicación y toma de decisiones.
-Existen infinitas opciones, depende de ti el camino que escojas.
-
-
-Esta vez, haz _code review_ (feedback de tu código) con **otro squad**, para
-que puedas mejorar el producto. Mientras más feedback reciban, mejor.
-
-Esperamos que valores y escuches los comentarios y críticas de los demás,
-rescatando aquellos aspectos que sirven para tu crecimiento. Entrega siempre
-tu opinión de manera constructiva, fundamentada y coherente, con el propósito
-de ayudar a tus compañeras. Estos comentarios los debes hacer de manera honesta,
-empática e inmediata.
-
-Finalmente, deberás presentar el proyecto que creaste, al usuario que escogiste
-y las necesidades que lograste resolver en este proceso. Como siempre, sabemos
-que presentar puede ser una tarea difícil, y esperamos que tengas capacidad de
-síntesis y articules tus ideas con claridad para que logres mostrar tu trabajo
-y que los demás lo comprendan.
-
 ## Hacker edition
 
 * Crear posts con imágenes.
@@ -237,12 +83,6 @@ y que los demás lo comprendan.
   + Aceptar solicitudes de amigos.
   + Eliminar amigos.
   + Mostrar los posts que son sólo para mis amigos.
-
-## Entrega
-
-El proyecto será _entregado_ subiendo tu código a GitHub (`commit`/`push`) y la
-interfaz será desplegada usando GitHub pages u otro servicio de hosting que
-puedas haber encontrado en el camino.
 
 ### Entregables
 
@@ -273,7 +113,7 @@ embargo, eres libre de utilizar otros editores gráficos como Adobe XD, Illustra
 Photoshop, PowerPoint, Keynote, etc.
 
 Este diseño debe representar la solución que se implementará finalmente en
-código. 
+código.
 
 Tu diseño debe seguir los fundamentos de visual design, como: contraste,
 alineación, jerarquía, entre otros. Tip: revisa el contenido de UX de la unidad
