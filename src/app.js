@@ -109,3 +109,14 @@ function verificar() {
         console.log(error);
     });
 }
+//login con google
+var provider = new firebase.auth.GoogleAuthProvider();
+
+$('#loginGoogle').click(function(){
+  firebase.auth()
+    .signInWithPopup(provider)
+    .then(function(result) {
+    console.log(result);
+    });
+
+});
