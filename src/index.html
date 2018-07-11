@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,13 +23,12 @@
     firebase.initializeApp(config);
   </script>
 </head>
-
 <body>
-<div class="log">
+  <div class="log">
   <img class= "logo" src="images/pregnant.png" alt="">
   <p class="profile">Mom Center</p>
 </div>
-  <div class="container mt-3">
+   <div class="container mt-3">
     <nav class="navbar navbar-dark">
       <a class="navbar-brand">Usuario</a>
       <div class="form-block">
@@ -42,8 +40,7 @@
       </div>
     </nav>
   </div>
-
-  <!-- Modal -->
+    <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -55,18 +52,22 @@
         </div>
         <div class="modal-body">
           <input id="email" type="email" placeholder="Ingrese email" class="form-control">
-          <div class="mt-2"></div>
+          <span id="emailOK"></span>
           <input id="password" type="password" placeholder="Ingrese su contraseña" class="form-control">
+          <span id="passwordOK"></span>
+          <div class="mt-2"></div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" onclick="register()">Guardar</button>
+          <button id="btnValidate" type="button" class="btn btn-primary" onclick="register()">Guardar</button>
+          <button type="button" id="loginGoogle">Ingresar con google</button>
+          <button type="button" id="loginFacebook">Ingresar con Facebook</button>
         </div>
       </div>
     </div>
   </div>
-
   <div id="contenido">
+  </div>
+  <div id="usuarios">Usuarios
   </div>
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -75,10 +76,12 @@
     crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
-
-
-
+<script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
   <script src="app.js"></script>
+  <script src="main.js"></script>
 </body>
 
 </html>
