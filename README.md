@@ -35,7 +35,7 @@ llegar a más usuarios y conocer lo que desean.
 
 [Encuesta] (https://docs.google.com/forms/d/e/1FAIpQLSeCWPjr1TOdrSDa4-GY00Jt80uofd25uFRGZ7LSpB-eqM743A/viewform)
 
-![Problemática](img/problemática.jpg)
+![Problematica](img/problematica.png)
 
 ### 2) Diseñar un sketch a mano
 
