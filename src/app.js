@@ -103,6 +103,7 @@ $('#loginGoogle').click(function(){
     guardarDatos(result.user);
     });
 });
+
 //login con facebook
 var providerfb = new firebase.auth.FacebookAuthProvider();
 
@@ -125,11 +126,11 @@ function guardarDatos(user){
   firebase.database().ref("usuario/" + usuario.uid)
   .set(usuario)
 }
+
 //leyendo la databaseURL
 firebase.database().ref("usuario")
   .on("child_added", function(s){
     var user = s.val();
     var usuarios = document.getElementById('usuarios');
     usuarios.innerHTML += "<img src'"+user.foto+"'/>";
-
-  })
+})
