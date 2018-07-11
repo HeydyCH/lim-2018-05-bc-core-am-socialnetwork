@@ -108,7 +108,15 @@ function guardarDatos(user){
     uid:user.uid,
     nombre: user.displayName,
     email:user.email,
-    foto:user.photoURL
+    foto:user.photoURL,
+    idPublicacion:{
+        contenido:"hola soy mami Anaey",
+        comentario: "yupi estoy feliz"
+    },
+    idPublicacion2:{
+        contenido:"hola como cambio pañales",
+        comentario: "solo se q nada se"
+    }
   }
   firebase.database().ref("users/" + usuario.uid)
   .set(usuario)
@@ -138,7 +146,7 @@ function mostrarPost() {
     //Creando la Referencia para realtime
     const dbRefObject = firebase.database().ref().child('users')
     // const dbRefList = dbRefObject.child('htaRDeoDVJXXHkF0VwBKncoq6tA2');
-    var postGroup = dbRefObject.child('K0WCmDHTsBcl9GZuXqbxagw4UKu1');
+    var postGroup = dbRefObject.child('7xFl31qD7SgITHpC0iUPXbn1DHm1');
     var postUser = postGroup.child('idPublicacion');
 
     // Sincronizar los cambios del objecto
