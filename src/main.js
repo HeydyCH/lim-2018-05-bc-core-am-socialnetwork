@@ -104,13 +104,12 @@ function guardarDatos(user){
     email:user.email,
     foto:user.photoURL
   }
-  firebase.database().ref("usuario/" + usuario.uid)
+  firebase.database().ref("users/" + usuario.uid)
   .set(usuario)
 }
 //leyendo la databaseURL
-firebase.database().ref("usuario")
+firebase.database().ref("users")
   .on("child_added", function(s){
     var user = s.val();
-    var usuarios = document.getElementById('usuarios');
-    usuarios.innerHTML += "<img src'"+user.foto+"'/>";
+    $('#usuarios').append("<img width='100px' src='"+user.foto+"'/>");
   })
