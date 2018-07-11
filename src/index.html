@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,19 +21,13 @@
     firebase.initializeApp(config);
   </script>
 </head>
-
 <body>
-
+  <!-- Container -->
   <div class="container mt-3">
-    <nav class="navbar navbar-dark bg-primary justify-content-between">
-      <a class="navbar-brand">Navbar</a>
-      <div class="form-inline">
-        <input id="email2" type="email" placeholder="Ingrese email" class="form-control form-contro-sm mr-sm-2">
-        <input id="password2" type="password" placeholder="Ingrese contraseña" class="form-control form-contro-sm mr-sm-2">
-        <button class="btn btn-dark my-2 my-sm-0 btn-sm" onclick="entrance()">Acceder</button>
-        <button class="btn btn-danger my-2 my-sm-0 btn-sm ml-2" data-toggle="modal" data-target="#exampleModal">Registrar</button>
-      </div>
-    </nav>
+    <input id="email2" type="email" placeholder="Ingrese email" class="form-control form-contro-sm mr-sm-2">
+    <input id="password2" type="password" placeholder="Ingrese contraseña" class="form-control form-contro-sm mr-sm-2">
+    <button class="btn btn-dark my-2 my-sm-0 btn-sm" onclick="entrance()">Acceder</button>
+    <button class="btn btn-danger my-2 my-sm-0 btn-sm ml-2" data-toggle="modal" data-target="#exampleModal">Registrar</button>
   </div>
 
   <!-- Modal -->
@@ -49,24 +42,41 @@
         </div>
         <div class="modal-body">
           <input id="email" type="email" placeholder="Ingrese email" class="form-control">
+          <span id="emailOK"></span>
+
           <div class="mt-2"></div>
           <input id="password" type="password" placeholder="Ingrese tu contraseña" class="form-control">
+          <span id="passwordOK"></span>
+
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" onclick="register()">Guardar</button>
+          <button id="btnValidate" type="button" class="btn btn-primary" onclick="register()">Guardar</button>
           <button type="button" id="loginGoogle">Ingresar con google</button>
           <button type="button" id="loginFacebook">Ingresar con Facebook</button>
-
         </div>
       </div>
     </div>
   </div>
-
   <div id="contenido">
   </div>
-  <div id="usuarios">
+  <div id="usuarios">Usuarios
   </div>
+
+  <pre id="object">
+  </pre>
+
+  <div id="post"></div>
+
+  <div class="container">
+    <div id = "CreatePost" style="display: none">
+        <h1>Agregar Post !!</h1>
+        <input type="text" id="post2" placeholder="Escribe tu post" class="form-control my-3">
+        <button class="btn btn-info" id="boton" onclick="guardar()">Guardar</button>
+    </div>
+      
+  </div>
+
+
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
     crossorigin="anonymous"></script>
@@ -79,10 +89,8 @@
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
     <script src="app.js"></script>
-
-
-
   <script src="app.js"></script>
+  <script src="main.js"></script>
 </body>
 
 </html>
