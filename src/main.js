@@ -112,6 +112,8 @@ function guardarDatos(user){
   }
   firebase.database().ref("users/" + usuario.uid)
   .set(usuario)
+  var post = document.getElementById('post2').value;
+
 }
 //leyendo la databaseURL
 firebase.database().ref("users")
@@ -208,4 +210,5 @@ function guardar() {
     console.log("estoy en guardar");
     var post = document.getElementById('post2').value;
     console.log(post);
+
   }
