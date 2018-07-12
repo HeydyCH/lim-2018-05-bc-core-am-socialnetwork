@@ -1,104 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
-  <title>Document</title>
-  <link href="style.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-    crossorigin="anonymous">
-  <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
-  <script>
-    // Initialize Firebase
-    var config = {
-      apiKey: "AIzaSyC4saWEKhESE7xPJUu-o02qa9a5Oh3y1yA",
-      authDomain: "usuarios-b983e.firebaseapp.com",
-      databaseURL: "https://usuarios-b983e.firebaseio.com",
-      projectId: "usuarios-b983e",
-      storageBucket: "usuarios-b983e.appspot.com",
-      messagingSenderId: "953796606000"
-    };
-    firebase.initializeApp(config);
-  </script>
+  <meta charset="utf-8" />
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
 </head>
+
 <body>
-  <div class="log">
-  <img class= "logo" src="images/pregnant.png" alt="">
-  <p class="profile">Mom Center</p>
-</div>
-   <div class="container mt-3">
-    <nav class="navbar navbar-dark">
-      <!-- <a class="navbar-brand">Usuario</a> -->
-      <div class="form-block">
-        <input id="email2" type="email" placeholder="Ingrese email" class="form-control">
-        <input id="password2" type="password" placeholder="Ingrese contraseña" class="form-control">
-        <p>Aún no tienes cuenta, registrate!</p>
-        <button class="btn btn-dark my-2 my-sm-0 btn-sm" onclick="entrance()">Acceder</button>
-        <button class="btn btn-danger my-2 my-sm-0 btn-sm ml-2" data-toggle="modal" data-target="#exampleModal">Registrar</button>
-      </div>
-    </nav>
-  </div>
-    <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Formulario Registro de Usuarios</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <input id="email" type="email" placeholder="Ingrese email" class="form-control">
-          <span id="emailOK"></span>
-          <input id="password" type="password" placeholder="Ingrese su contraseña" class="form-control">
-          <span id="passwordOK"></span>
-          <div class="mt-2"></div>
-        </div>
-        <div class="modal-footer">
-          <button id="btnValidate" type="button" class="btn btn-primary" onclick="register()">Guardar</button>
-          <button type="button" id="loginGoogle">Ingresar con google</button>
-          <button type="button" id="loginFacebook">Ingresar con Facebook</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div id="contenido">
-  </div>
-  <div id="usuarios">
-    <h3> Usuarios registrados hasta el momento</h3>
-  </div>
-
-  <pre id="object">
-  </pre>
-
-  <div id="post"></div>
 
   <div class="container">
-    <div id = "CreatePost" style="display: none">
-        <h1>Agregar Post !!</h1>
-        <input type="text" id="post2" placeholder="Escribe tu post" class="form-control my-3">
-        <button class="btn btn-info" id="boton" onclick="guardar()">Guardar</button>
+    <div id="userLogin">
+      <input id="email" type="email" placeholder="Ingrese email" class="formulario">
+      <input id="password" type="password" placeholder="Ingrese contraseña" class="formulario">
+      <p>Aún no tienes cuenta, registrate!</p>
+      <button class="" id="login">Acceder</button>
+      <button class="" id="registerUser">Registrar</button>
     </div>
-      
+
+    <div id="userRegister">
+        <input id="email2" type="email" placeholder="Ingrese email" class="formulario">
+        <input id="password2" type="password" placeholder="Ingrese contraseña" class="formulario">
+        <p>Aún no tienes cuenta, registrate!</p>
+        <button class="register" id="register">Registrar ahora</button>
+        <button class="">volver a inicior</button>
+      </div>
+
+    <div id="userProfile"></div>
   </div>
 
-
-
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
-<script
-    src="https://code.jquery.com/jquery-3.3.1.min.js"
-    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous"></script>
-  <script src="app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
   <script src="main.js"></script>
+  <script src="app.js"></script>
 </body>
 
 </html>
