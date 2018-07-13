@@ -1,0 +1,52 @@
+body{
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+.log{
+  background-color: #b3ffec;
+  vertical-align: middle;
+  display: flex;
+  
+}
+@media (max-width:400px){
+  .log{
+    width: 90%;
+  }
+}
+.logo{
+  width: 20%;
+  height: 20%;
+  left: 10%;
+  margin: auto;
+}
+.profile{
+  font-family: 'Pacifico', cursive;
+  text-align: center;
+  font-size: 200%;
+}
+.container{
+  border: black solid 1px;
+  border-radius: 5px;
+  padding: 17px;
+  width: 300px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+
+}
+@media(max-width:400px){
+  .login{
+    width: 90%;
+  }
+}
+.userLogin{
+  display: block;
+}
+
+.userRegister{
+  display: block;
+}
