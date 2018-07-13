@@ -3,8 +3,18 @@ document.getElementById("close").addEventListener("click", close);
 console.log("ya estoy en post")
 
 document.getElementById("btnPost").addEventListener("click", savePost)
-userpost = 'TAS6EO8lhdU31PYAdFzA4dl69Cl1';
 mostrarPostUser();
+welcomeUser();
+
+function welcomeUser() {
+    var user = firebase.auth().currentUser;
+    if (user != null) {
+      user.providerData.forEach(function (profile) {
+        document.getElementById("userName").innerHTML = profile.displayName;
+        document.getElementById('userPhoto').innerHTML = "<img width='100px' src='"+profile.photoURL+"  '/>"
+      });
+    }
+}
 
 function savePost() {
     const post = {

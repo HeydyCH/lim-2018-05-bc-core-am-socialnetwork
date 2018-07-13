@@ -26,9 +26,13 @@ document.getElementById("registerUser").addEventListener("click", () => {
 
 document.getElementById("register").addEventListener("click", userRegister)
 
+
+// Acceder con algun correo 
+
 function userRegister() {
   var email = document.getElementById('email2').value;
   var password = document.getElementById('password2').value;
+  let name = document.getElementById('name').value;
   firebase.auth()
     .createUserWithEmailAndPassword(email, password)
     .then(function () {
@@ -36,15 +40,46 @@ function userRegister() {
       user.sendEmailVerification().then(function () {
         console.log('enviando correo .... !!')
         console.log(user);
-        guardarDatos(user);
+        alert("Revisa tu bandeja de entrada por favor :D");
+        writeDatabase(user);
       })
     })
+    .catch(function (error) {
+      var errorMessage = error.message;
+      alert(error.message + "Revisa tu bandeja de entrada, ya hemos enviado el mensaje :)");
+    });
 }
 
-// ***************** Parte de Heydy *********************************
+//acceder con google
+
+var providergoogle = new firebase.auth.GoogleAuthProvider();
+$('#loginGoogle').click(function(){
+  firebase.auth()
+    .signInWithPopup(providergoogle)
+    .then(function(result) {
+      let user = firebase.auth().currentUser;
+      writeDatabase(user);
+      document.location.href = 'profile.html'
+    });
+});
+
+
+//acceder con facebook
+
+var providerfb = new firebase.auth.FacebookAuthProvider();
+
+$('#loginFacebook').click(function(){
+  firebase.auth()
+    .signInWithPopup(providerfb)
+    .then(function(result) {
+      let user = firebase.auth().currentUser;
+      writeDatabase(user);
+      document.location.href = 'profile.html'
+    });
+})
 
 // Funcion para escribir en la base de datos
-function guardarDatos(user) {
+function writeDatabase(user) {
   console.log(user);
   var usuario = {
     uid: user.uid,
@@ -55,6 +90,10 @@ function guardarDatos(user) {
   firebase.database().ref("users/" + usuario.uid)
     .set(usuario)
 }
-
+//volver al inicio
+document.getElementById('returnHome').addEventListener("click", () => {
+  document.getElementById("userLogin").style.display = "block" ;
+  document.getElementById("userRegister").style.display = "none" ;
+})
 
 
