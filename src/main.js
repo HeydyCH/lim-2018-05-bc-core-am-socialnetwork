@@ -1,8 +1,8 @@
-document.getElementById("login").addEventListener("click", login);
+document.getElementById("login").addEventListener("click",login);
 document.getElementById("userRegister").style.display = "none";
 
 // Funcion de Inicio de Sesion para usuario con correo registrado
-login = () => {
+function login(){
   let email = document.getElementById('email').value;
   let password = document.getElementById('password').value;
 
