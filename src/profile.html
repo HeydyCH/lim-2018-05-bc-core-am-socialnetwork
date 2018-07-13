@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Page Title</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-  <script src="main.js"></script>
 </head>
-
 <body>
-
-  <h2>Hola
-    <span id="userEmail"></span>
-  </h2>
-
+  <div class="container">
+    <div id="userProfile"></div>
+    <button id="close">Cerrar sesion</button>
+    <div id="sectionPost">
+      <input id="inputPost" type="text" placeholder="Ingrese post">
+      <button id="btnPost" class="">postear</button>
+    </div>
+  </div>
+  <div>hola heydy</div>
+  <h2 id="userEmail"></h2>
   <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
-  <script src="main.js"></script>
-  <script src="app.js"></script>
+  <script src="init-fbase.js"></script>
+  <script src="post.js"></script>
 </body>
-
 </html>
