@@ -114,12 +114,15 @@ function welcomeUser() {
       document.getElementById("userName").innerHTML = userData.nombre;
       document.getElementById('userPhoto').innerHTML = "<img width='100px' src='"+userData.foto+"  '/>"
     })
+    chargePosts();
   }
 }
 //escribiendo publicaciones
 document.getElementById('savePost').addEventListener("click", savePost)
 function savePost() {
   let message = document.getElementById('currentPost').value;
+  document.getElementById('currentPost').value = '';
+  console.log('listo');
   let userUID = firebase.auth().currentUser.uid;
   let optionValue = document.getElementById('privateOptions');
   optionValue = optionValue.options[optionValue.selectedIndex].value;
@@ -135,10 +138,14 @@ function chargePosts() {
   firebase.database().ref('users/'+user.uid+'/publicaciones')
   .on('value', function(snapshot) {
     let muroPosts = document.getElementById('myPosts');
-    muroPosts = '';
+    muroPosts.innerHTML = '';
     let postData = JSON.stringify(snapshot.val(),null,3);//tbm funciona un solo parametro
     postData = JSON.parse(postData);
-    console.log(Object.keys(postData));
+    let postUIDs = Object.keys(postData);
+    for(i=1; i<postUIDs.length; i++) {
+      let mensaje = (postData[postUIDs[i]].message);
+      muroPosts.innerHTML += '<li><b>' + mensaje + '</b></li>';
+    }
     // snapshot.forEach(function(e) {
     //   var element = e.val();
     //   var mensaje = element.message;
