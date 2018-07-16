@@ -127,28 +127,38 @@ function savePost() {
     optionValue,
     message
   });
-  chargePosts();
+  firebase.database().ref('users/'+userUID+'/publicaciones')
+   .on('value', function(snapshot) {
+     let muroPosts = document.getElementById('myPosts');
+     muroPosts = '';
+     let postData = JSON.stringify(snapshot.val(),null,3);//tbm funciona un solo parametro
+     postData = JSON.parse(postData);
+     console.log(postData);
+     // postData.forEach(function(element) {
+     //   document.getElementById('myPosts').innerHTML += '<button>'+element+'</button>';
+     // });
+   });
 };
 //mostrando todos las publicaciones del usuario actual
-function chargePosts() {
-  let user = firebase.auth().currentUser;
-  firebase.database().ref('users/'+user.uid+'/publicaciones')
-  .on('value', function(snapshot) {
-    let muroPosts = document.getElementById('myPosts');
-    muroPosts = '';
-    let postData = JSON.stringify(snapshot.val(),null,3);//tbm funciona un solo parametro
-    postData = JSON.parse(postData);
-    console.log(postData);
-    // snapshot.forEach(function(e) {
-    //   var element = e.val();
-    //   var mensaje = element.message;
-    //   muroPosts.innerHTML += '<li><b>' + mensaje + '</b></li>';
-    // });
-    // postData.forEach(function(element) {
-    //   document.getElementById('myPosts').innerHTML += '<button>'+element+'</button>';
-    // });
-  });
-}
+// function chargePosts() {
+//   let user = firebase.auth().currentUser;
+//   firebase.database().ref('users/'+user.uid+'/publicaciones')
+//   .on('value', function(snapshot) {
+//     let muroPosts = document.getElementById('myPosts');
+//     muroPosts = '';
+//     let postData = JSON.stringify(snapshot.val(),null,3);//tbm funciona un solo parametro
+//     postData = JSON.parse(postData);
+//     console.log(postData);
+//     // snapshot.forEach(function(e) {
+//     //   var element = e.val();
+//     //   var mensaje = element.message;
+//     //   muroPosts.innerHTML += '<li><b>' + mensaje + '</b></li>';
+//     // });
+//     // postData.forEach(function(element) {
+//     //   document.getElementById('myPosts').innerHTML += '<button>'+element+'</button>';
+//     // });
+//   });
+// }
 //volver al inicio
 document.getElementById('returnHome').addEventListener("click", () => {
   document.getElementById("userLogin").style.display = "block" ;
