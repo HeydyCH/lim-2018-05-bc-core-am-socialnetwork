@@ -11,4 +11,4 @@ const initFirebase = () => {
   firebase.initializeApp(config);
 }
 
-initFirebase();
+

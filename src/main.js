@@ -1,16 +1,16 @@
 document.getElementById("login").addEventListener("click",login);
 document.getElementById("userRegister").style.display = "none";
 
-// Funcion de Inicio de Sesion para usuario con correo registrado
+initFirebase();
+
+// Funcion de Inicio de Sesion para usuario con CORREO registrado
 function login(){
   let email = document.getElementById('email').value;
   let password = document.getElementById('password').value;
-
   firebase.auth().signInWithEmailAndPassword(email, password)
     .then(function () {
       console.log("ingrese");
-      document.location.href = 'profile.html'
-      
+      document.location.href = 'profile.html'   
     })
     .catch(function (error) {
       var errorMessage = error.message;
@@ -46,18 +46,20 @@ function userRegister() {
     })
     .catch(function (error) {
       var errorMessage = error.message;
-      alert(error.message + "Revisa tu bandeja de entrada, ya hemos enviado el mensaje :)");
+      alert(errorMessage + "Revisa tu bandeja de entrada, ya hemos enviado el mensaje :)");
     });
 }
 
 //acceder con google
 
-var providergoogle = new firebase.auth.GoogleAuthProvider();
 $('#loginGoogle').click(function(){
+  let providergoogle = new firebase.auth.GoogleAuthProvider();
   firebase.auth()
     .signInWithPopup(providergoogle)
     .then(function(result) {
       let user = firebase.auth().currentUser;
+      console.log("mandando a google datos")
+      console.log(user)
       writeDatabase(user);
       document.location.href = 'profile.html'
     });
@@ -66,12 +68,14 @@ $('#loginGoogle').click(function(){
 
 //acceder con facebook
 
-var providerfb = new firebase.auth.FacebookAuthProvider();
+
 
 $('#loginFacebook').click(function(){
+  let providerfb = new firebase.auth.FacebookAuthProvider();
   firebase.auth()
     .signInWithPopup(providerfb)
     .then(function(result) {
+      console.log('Login Google');
       let user = firebase.auth().currentUser;
       writeDatabase(user);
       document.location.href = 'profile.html'
@@ -80,15 +84,17 @@ $('#loginFacebook').click(function(){
 
 // Funcion para escribir en la base de datos
 function writeDatabase(user) {
+  console.log("esstoy en writeDatabase")
   console.log(user);
   var usuario = {
-    uid: user.uid,
-    nombre: user.displayName,
-    email: user.email,
-    foto: user.photoURL,
+    uid:user.uid,
+    nombre: "user.displayName",
+    email:user.email,
+    foto:"user.photoURL",
+    publicaciones: ["hola"]
   }
   firebase.database().ref("users/" + usuario.uid)
-    .set(usuario)
+  .set(usuario)
 }
 //volver al inicio
 document.getElementById('returnHome').addEventListener("click", () => {
