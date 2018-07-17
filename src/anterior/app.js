@@ -1,5 +1,5 @@
 //valida la dirección de correo electrónico y la contraseña
-function emailValidator() {
+const emailValidator=()=> {
     campo = event.target;
     valido = document.getElementById('emailOK');
     emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
@@ -11,13 +11,13 @@ function emailValidator() {
     }
 }
 
-function nameValidator() {
+const nameValidator=()=> {
     campo = event.target;
     valido = document.getElementById('nameOK');
     /^.{8,}$/.test(campo.value) ? valido.innerHTML = "\u2714" : valido.innerHTML ="\u2718";
 }
 
-function passwordValidator() {
+const passwordValidator=()=> {
     campo = event.target;
     validoEmail = document.getElementById('emailOK');
     valido = document.getElementById('passwordOK');
@@ -40,10 +40,14 @@ function passwordValidator() {
       document.getElementById("register").disabled = true;
     }
 }
-function valuesGood(myNode) {
+const valuesGood=(myNode)=> {
   for(let i=0; i<=3; i++){
     if(sugerir.childNodes[i] == myNode) {
       sugerir.removeChild(sugerir.childNodes[i]);
     }
   }
 }
+window.emailValidator = emailValidator;
+window.passwordValidator = passwordValidator;
+window.valuesGood = valuesGood;
+window.nameValidator = nameValidator;
