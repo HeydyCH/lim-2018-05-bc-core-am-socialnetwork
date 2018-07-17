@@ -88,10 +88,9 @@ function writeDatabase(user) {
   console.log(user);
   var usuario = {
     uid:user.uid,
-    nombre: "user.displayName",
+    nombre: user.displayName,
     email:user.email,
-    foto:"user.photoURL",
-    publicaciones: ["hola"]
+    foto:user.photoURL
   }
   firebase.database().ref("users/" + usuario.uid)
   .set(usuario)
