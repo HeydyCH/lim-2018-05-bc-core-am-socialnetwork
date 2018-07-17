@@ -2,25 +2,35 @@
 <html>
 
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Page Title</title>
+  <title>Profile</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+  <link rel="icon" type="image/jpg" href="../src/images/pregnant.png" >
   <link rel="stylesheet" type="text/css" media="screen" href="styleprofile.css" />
-  <script src="main.js"></script>
+  <link rel="stylesheet" href="../src/fonts.css">
 </head>
 
 <body>
   <!--Cabecera-->
   <div class="log">
-    <img class= "logo" src="images/pregnant.png" alt="">
+    <img class= "logo" src="../src/images/pregnant.png" alt="">
     <p class="profile">Mom Center</p>
   </div>
-  <h2>Hola
+  <h2>
     <span id="userEmail"></span>
   </h2>
-
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#"><span class="primero"><i class="icon icon-home3"></i></span>Inicio</a></li>
+        <li><a href="#"><span class="segundo"><i class="icon icon-search"></i></span>Buscar</a></li>
+        <li><a href="#"><span class="tercero"><i class="icon icon-bell"></i></span>Notificaciones</a></li>
+        <li><a href="#"><span class="cuarto"><i class="icon icon-user"></i></span>Perfil</a></li>
+      </ul>
+    </nav>
+  </header>
   <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
   <script src="main.js"></script>
   <script src="app.js"></script>

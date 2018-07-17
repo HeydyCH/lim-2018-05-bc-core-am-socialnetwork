@@ -1,35 +1,124 @@
+/*Header*/
 body{
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    display: block;
-  }
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: block;
+}
+.log{
+  background-color: #b3ffec;
+  vertical-align: middle;
+  width: 1360px;
+  height: 100px;
+  display: inline-flex;
+  margin: auto;
+  left: 50%;
+}
+@media (max-width:400px){
   .log{
-    background-color: #b3ffec;
-    vertical-align: middle;
-    width: 1360px;
-    height: 100px;
-    display: inline-flex;
-    margin: auto;
-    left: 50%;
+    width: 100%;
   }
-  @media (max-width:400px){
-    .log{
-      width: 100%;
-    }
-  }
-  .logo{
-    width: 80px;
-    height: 80px;
-    margin: auto;
-    float: left;
-  }
-  .profile{
-    font-family: 'Pacifico', cursive;
-    text-align: center;
-    font-size: 40px;
-    margin: auto;
-    
-  }
+}
+.logo{
+  width: 80px;
+  height: 80px;
+  margin: auto;
+  float: left;
+}
+.profile{
+  font-family: 'Pacifico', cursive;
+  text-align: center;
+  font-size: 40px;
+  margin: auto;
+}
+/*Menu*/
+*{
+  margin: 0;
+  padding: 0;
+}
+header{
+  margin-top: 0;
+  width: 100%;
+  height: 150px;
+  position: relative;
+  overflow: hidden;
+}
+nav{
+  top: 0;
+  position: relative;
+  left: 0;
+  right: 0;
+  margin: 0;
+  max-width: 100%;
+  width: 100%;
+}
+
+nav ul{
+  list-style: none;
+}
+nav > ul{
+  display: table;
+  overflow: hidden;
+  width: 100%;
+  background: #000;
+  position: relative;
+}
+nav > ul li{
+  display: table-cell;
+  font-family: sans-serif;
+  font-size: 18px;
+}
+
+nav > ul li a{
+  color: white;
+  display: block;
+  line-height: 20px;
+  padding: 20px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+nav > ul > li > ul > li a:hover{
+  background: #5da5a2;
+}
+nav > ul > li > a span{
+  background: #174459;
+  display: block;
+  height: 100%;
+  width: 100%;
+  left: 0; 
+  position: absolute;
+  top: -55px;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+nav > ul > li > a span .icon{
+  display: block;
+  line-height: 60px;
+}
+nav > ul > li > a:hover > span{
+  top: 0;
+}
+/*Colores*/
+nav > ul > li > a .primero{
+  background:  #00b33c;
+}
+nav > ul > li > a .segundo{
+  background: #008ae6;
+}
+nav > ul > li > a .tercero{
+  background: #f25724;
+}
+nav > ul > li > a .cuarto{
+  background: #ff1a75;
+}
