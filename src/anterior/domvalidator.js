@@ -1,0 +1,17 @@
+let sugerir = document.getElementById('sugerencias');
+var itemMin8 = document.createElement('li');
+itemMin8.innerHTML = 'minimo 8 caracteres';
+var itemUpper = document.createElement('li');
+itemUpper.innerHTML = 'debe contener una mayuscula';
+var itemLower = document.createElement('li');
+itemLower.innerHTML = 'debe contener una minuscula';
+var itemNum = document.createElement('li');
+itemNum.innerHTML = 'debe contener un numero';
+sugerir.appendChild(itemMin8);
+sugerir.appendChild(itemUpper);
+sugerir.appendChild(itemLower);
+sugerir.appendChild(itemNum);
+document.getElementById("register").disabled = true;
+document.getElementById('email2').addEventListener('input', emailValidator);
+document.getElementById('name').addEventListener('input', nameValidator);
+document.getElementById('password2').addEventListener('input', passwordValidator);

@@ -1,18 +1,5 @@
-let sugerir = document.getElementById('sugerencias');
-var itemMin8 = document.createElement('li');
-itemMin8.innerHTML = 'minimo 8 caracteres';
-var itemUpper = document.createElement('li');
-itemUpper.innerHTML = 'debe contener una mayuscula';
-var itemLower = document.createElement('li');
-itemLower.innerHTML = 'debe contener una minuscula';
-var itemNum = document.createElement('li');
-itemNum.innerHTML = 'debe contener un numero';
-sugerir.appendChild(itemMin8);
-sugerir.appendChild(itemUpper);
-sugerir.appendChild(itemLower);
-sugerir.appendChild(itemNum);
 //valida la dirección de correo electrónico y la contraseña
-document.getElementById('email2').addEventListener('input', function() {
+function emailValidator() {
     campo = event.target;
     valido = document.getElementById('emailOK');
     emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
@@ -22,8 +9,15 @@ document.getElementById('email2').addEventListener('input', function() {
     } else {
       valido.innerText = "\u2718";
     }
-});
-document.getElementById('password2').addEventListener('input', function() {
+}
+
+function nameValidator() {
+    campo = event.target;
+    valido = document.getElementById('nameOK');
+    /^.{8,}$/.test(campo.value) ? valido.innerHTML = "\u2714" : valido.innerHTML ="\u2718";
+}
+
+function passwordValidator() {
     campo = event.target;
     validoEmail = document.getElementById('emailOK');
     valido = document.getElementById('passwordOK');
@@ -45,8 +39,7 @@ document.getElementById('password2').addEventListener('input', function() {
       valido.innerText = "\u2718";
       document.getElementById("register").disabled = true;
     }
-});
-document.getElementById("register").disabled = true;
+}
 function valuesGood(myNode) {
   for(let i=0; i<=3; i++){
     if(sugerir.childNodes[i] == myNode) {
