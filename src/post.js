@@ -57,14 +57,16 @@ function savePost() {
   console.log(usuario)
   console.log(usuarioNew)
 
+  var newPostKey = firebase.database().ref().child('posts').push().key;
+
+  var updates = {};
+  updates['/posts/' + newPostKey] = post;
+  updates['/users-posts/' + usuarioNew + '/' + newPostKey] = post;
+
   document.getElementById('inputPost').value = '';
-  const dbRef = firebase.database().ref("users-posts/" + usuarioNew);
-  const newPost = dbRef.push();
-  const dbRef1 = firebase.database().ref("posts/");
-  const newPost1 = dbRef1.push();
-  newPost.set(post);
-  newPost1.set(post);
-  console.log("vaa  entrar a usuario neww ")
+
+  firebase.database().ref().update(updates);
+
   // mostrarPostUser(usuarioNew)
 
 }
@@ -90,35 +92,21 @@ function mostrarPostUser(dbRefObjectUsersPosts) {
   // Sincronizar los cambios del objecto
 
   // *********************** 
-
-
-  const postGroup1 = dbRefObjectUsersPosts.child("2uDZRphUwCWI60yJznk5tZ6nm313");
-  console.log(postGroup1)
+  const postGroup1 = dbRefObjectUsersPosts.child("8f9dlKpokuSFnY9kCTwzZsozH7v1");
+  // console.log(postGroup1)
 
   console.log("####")
 
   postGroup1.on('child_added', snap => {
-    // console.log(snap.val());
+    // console.log("ya entre");
+    console.log(snap.val());
     var objPost = snap.val();
-    console.log(objPost);
-    console.log(snap.key);
-    // console.log("holiiiiiii")
-
+    // console.log(objPost);
+    // console.log(snap.key);
     if (objPost.hasOwnProperty('contenido')) {
-      // const p = document.createElement('p');
-      // p.innerText = snap.val();
-      // p.innerHTML = `
-      // <div class="container mt-5">
-      // <div class="alert alert-success" role="alert">
-      // <h5 class="alert-heading">Bienvenido ${objPost.contenido}!!</h5>
-      // </div>
-      // </div>`;
-      // // console.log(snap.key);
-      // p.id = snap.key;
-      // listposts.appendChild(p);
-
 
       var btnUpdate = document.createElement("input");
+
       btnUpdate.setAttribute("value", "Update");
       btnUpdate.setAttribute("type", "button");
 
@@ -128,6 +116,7 @@ function mostrarPostUser(dbRefObjectUsersPosts) {
 
       var contPost = document.createElement('div');
       var textPost = document.createElement('textarea')
+      
       textPost.innerText = snap.val();
       textPost.setAttribute("id", snap.key);
 
@@ -144,10 +133,10 @@ function mostrarPostUser(dbRefObjectUsersPosts) {
       console.log("se va a borrar")
       console.log(snap.key)
 
-      firebase.database().ref().child('/user-posts/' + "2uDZRphUwCWI60yJznk5tZ6nm313" + '/' + snap.key).remove();
+      firebase.database().ref().child('/user-posts/' + "8f9dlKpokuSFnY9kCTwzZsozH7v1" + '/' + snap.key).remove();
       firebase.database().ref().child('posts/' + snap.key).remove();
 
-      while (postGroup1.firstChild) posts.removeChild(postGroup1.firstChild);
+      // while (postGroup1.firstChild) posts.removeChild(postGroup1.firstChild);
 
       alert('The user is deleted successfully!');
 
