@@ -1,12 +1,4 @@
-const preObject = document.getElementById("object");
-const nameUser = document.getElementById('name');
-const listposts = document.getElementById('listposts');
-
-
-initFirebase()
-console.log("ya estoy en post.js")
-console.log()
-welcomeUsers();
+// console.log("ya estoy en post.js")
 
 function welcomeUsers() {
 
@@ -41,21 +33,18 @@ function welcomeUsers() {
 
 }
 
+
 function savePost() {
 
   console.log("guardando mi post ..... ")
-
   const post = {
     contenido: document.getElementById('inputPost').value,
     estado: "feliz"
   };
-
   console.log(post);
 
   let usuario = firebase.auth().currentUser;
   let usuarioNew = usuario.uid;
-  console.log(usuario)
-  console.log(usuarioNew)
 
   let newPostKey = firebase.database().ref().child('posts').push().key;
 
@@ -67,20 +56,78 @@ function savePost() {
 
   firebase.database().ref().update(updates);
 
-  // mostrarPostUser(usuarioNew)
+  // ---------------------------------------------------------------
+  
+  const postGroup1 = dbRefObjectUsersPosts.child(usuarioNew);
+  postGroup1.on('child_added', snap => {
+    // console.log("ya entre");
+    console.log(snap.val());
+    let objPost = snap.val();
+    // console.log(objPost);
+    // console.log(snap.key);
+    if (objPost.hasOwnProperty('contenido')) {
 
-}
+      var btnUpdate = document.createElement("input");
 
-function close() {
-  console.log("saliendo de mi perfil")
-  firebase.auth().signOut()
-    .then(function () {
-      console.log('saliendo ... ')
-      document.location.href = 'index.html';
-    })
-    .catch(function (error) {
-      console.log(error);
-    })
+      btnUpdate.setAttribute("value", "Update");
+      btnUpdate.setAttribute("type", "button");
+
+      var btnDelete = document.createElement("input");
+      btnDelete.setAttribute("value", "Delete");
+      btnDelete.setAttribute("type", "button");
+
+      let contPost = document.createElement('div');
+      let textPost = document.createElement('textarea')
+
+      textPost.innerText = snap.val();
+      textPost.setAttribute("id", snap.key);
+
+      textPost.innerHTML = objPost.contenido;
+
+      contPost.appendChild(textPost);
+      contPost.appendChild(btnUpdate);
+      contPost.appendChild(btnDelete);
+      listposts.appendChild(contPost);
+    }
+
+    btnDelete.addEventListener('click', () => {
+
+      console.log("se va a borrar")
+      console.log(snap.key)
+
+      firebase.database().ref().child('/user-posts/' + "8f9dlKpokuSFnY9kCTwzZsozH7v1" + '/' + snap.key).remove();
+      firebase.database().ref().child('posts/' + snap.key).remove();
+
+      // while (postGroup1.firstChild) posts.removeChild(postGroup1.firstChild);
+
+      alert('The user is deleted successfully!');
+
+      // const pToRemove = document.getElementById(snap.key);
+      // pToRemove.remove();
+
+
+    });
+
+    btnUpdate.addEventListener('click', () => {
+      const newUpdate = document.getElementById(newPost);
+      const nuevoPost = {
+        body: newUpdate.value,
+      };
+
+      var updatesUser = {};
+      var updatesPost = {};
+
+      updatesUser['/user-posts/' + userId + '/' + newPost] = nuevoPost;
+      updatesPost['/posts/' + newPost] = nuevoPost;
+
+      firebase.database().ref().update(updatesUser);
+      firebase.database().ref().update(updatesPost);
+
+    });
+
+
+  })
+
 }
 
 function mostrarPostUser(dbRefObjectUsersPosts) {
@@ -92,7 +139,7 @@ function mostrarPostUser(dbRefObjectUsersPosts) {
   // Sincronizar los cambios del objecto
 
   // *********************** 
-  const postGroup1 = dbRefObjectUsersPosts.child("8f9dlKpokuSFnY9kCTwzZsozH7v1");
+  const postGroup1 = dbRefObjectUsersPosts.child("J04DWExMqYVcqEqd8eI4gxJq5Gi2");
   // console.log(postGroup1)
 
   console.log("####")
@@ -179,5 +226,15 @@ function mostrarPostUser(dbRefObjectUsersPosts) {
 
 }
 
-document.getElementById("close").addEventListener("click", close);
-document.getElementById("btnPost").addEventListener("click", savePost);
+function close() {
+  console.log("saliendo de mi perfil")
+  firebase.auth().signOut()
+    .then(function () {
+      console.log('saliendo ... ')
+      document.location.href = 'index.html';
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+}
+

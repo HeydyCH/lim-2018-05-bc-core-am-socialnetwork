@@ -1,16 +1,11 @@
-document.getElementById("login").addEventListener("click",login);
-document.getElementById("userRegister").style.display = "none";
-
-initFirebase();
-
 // Funcion de Inicio de Sesion para usuario con CORREO registrado
-function login(){
-  let email = document.getElementById('email').value;
-  let password = document.getElementById('password').value;
+function login(email, password) {
   firebase.auth().signInWithEmailAndPassword(email, password)
     .then(function () {
       console.log("ingrese");
-      document.location.href = 'profile.html'   
+      let user = firebase.auth().currentUser;
+      welcomeUser();
+      document.location.href = 'profile.html'
     })
     .catch(function (error) {
       var errorMessage = error.message;
@@ -18,87 +13,68 @@ function login(){
     });
 }
 
-// Funcion que crea nuevos usuarios con correo
-document.getElementById("registerUser").addEventListener("click", () => {
-  document.getElementById("userLogin").style.display = "none";
-  document.getElementById("userRegister").style.display = "block";
-});
-
-document.getElementById("register").addEventListener("click", userRegister)
-
-
-// Acceder con algun correo 
-
-function userRegister() {
-  var email = document.getElementById('email2').value;
-  var password = document.getElementById('password2').value;
-  let name = document.getElementById('name').value;
+// Funcion para la creación de nuevos usuarios con CORREO
+function userRegister(email,password,name){
   firebase.auth()
     .createUserWithEmailAndPassword(email, password)
     .then(function () {
-      var user = firebase.auth().currentUser;
+      let user = firebase.auth().currentUser;
       user.sendEmailVerification().then(function () {
-        console.log('enviando correo .... !!')
-        console.log(user);
-        alert("Revisa tu bandeja de entrada por favor :D");
-        writeDatabase(user);
+          console.log('enviando correo .... !!')
+          alert("Revisa tu bandeja de entrada por favor :D");
+          writeDatabase(user);
       })
     })
     .catch(function (error) {
-      var errorMessage = error.message;
-      alert(errorMessage + "Revisa tu bandeja de entrada, ya hemos enviado el mensaje :)");
-    });
+        var errorMessage = error.message;
+        alert(error.message + "Revisa tu bandeja de entrada, ya hemos enviado el mensaje :)");
+      });
 }
 
-//acceder con google
-
-$('#loginGoogle').click(function(){
+// Funcion que crea nuevos usuarios con GOOGLE
+function userRegisterGoogle(){
   let providergoogle = new firebase.auth.GoogleAuthProvider();
   firebase.auth()
     .signInWithPopup(providergoogle)
     .then(function(result) {
       let user = firebase.auth().currentUser;
-      console.log("mandando a google datos")
-      console.log(user)
       writeDatabase(user);
       document.location.href = 'profile.html'
+      welcomeUser();
     });
-});
+}
 
-
-//acceder con facebook
-
-
-
-$('#loginFacebook').click(function(){
+// Funcion que crea nuevos usuarios con FACEBOOK
+function userRegisterFacebook(){
   let providerfb = new firebase.auth.FacebookAuthProvider();
   firebase.auth()
     .signInWithPopup(providerfb)
     .then(function(result) {
-      console.log('Login Google');
       let user = firebase.auth().currentUser;
       writeDatabase(user);
+      welcomeUser();
       document.location.href = 'profile.html'
-    });
-})
+  });
+}
 
-// Funcion para escribir en la base de datos
+//Escribiendo en la BD con los DATOS del USUARIO
 function writeDatabase(user) {
-  console.log("esstoy en writeDatabase")
-  console.log(user);
+  if(user.photoURL == null){
+    foto = "https://cdn.dribbble.com/users/37144/screenshots/3739334/edit.gif";
+  } else {
+    foto= user.photoURL;
+  }
+  if(user.displayName == null){
+    nombre = document.getElementById('name').value;
+  } else {
+    nombre = user.displayName;
+  }
   var usuario = {
-    uid:user.uid,
-    nombre: user.displayName,
+    uid : user.uid,
+    nombre,
     email:user.email,
-    foto:user.photoURL
+    foto,
   }
   firebase.database().ref("users/" + usuario.uid)
   .set(usuario)
 }
-//volver al inicio
-document.getElementById('returnHome').addEventListener("click", () => {
-  document.getElementById("userLogin").style.display = "block" ;
-  document.getElementById("userRegister").style.display = "none" ;
-})
-
-
