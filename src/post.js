@@ -137,7 +137,7 @@ function mostrarPostUser(dbRefObjectUsersPosts) {
   // Sincronizar los cambios del objecto
 
   // *********************** 
-  const postGroup1 = dbRefObjectUsersPosts.child("J04DWExMqYVcqEqd8eI4gxJq5Gi2");
+  const postGroup1 = dbRefObjectUsersPosts.child("436egotGA3QEMdf0iaGwpmMazVc2");
   // console.log(postGroup1)
 
   console.log("####")
