@@ -52,14 +52,14 @@ function savePost() {
 
   console.log(post);
 
-  var usuario = firebase.auth().currentUser;
-  var usuarioNew = usuario.uid;
+  let usuario = firebase.auth().currentUser;
+  let usuarioNew = usuario.uid;
   console.log(usuario)
   console.log(usuarioNew)
 
-  var newPostKey = firebase.database().ref().child('posts').push().key;
+  let newPostKey = firebase.database().ref().child('posts').push().key;
 
-  var updates = {};
+  const updates = {};
   updates['/posts/' + newPostKey] = post;
   updates['/users-posts/' + usuarioNew + '/' + newPostKey] = post;
 
@@ -100,7 +100,7 @@ function mostrarPostUser(dbRefObjectUsersPosts) {
   postGroup1.on('child_added', snap => {
     // console.log("ya entre");
     console.log(snap.val());
-    var objPost = snap.val();
+    let objPost = snap.val();
     // console.log(objPost);
     // console.log(snap.key);
     if (objPost.hasOwnProperty('contenido')) {
@@ -114,9 +114,9 @@ function mostrarPostUser(dbRefObjectUsersPosts) {
       btnDelete.setAttribute("value", "Delete");
       btnDelete.setAttribute("type", "button");
 
-      var contPost = document.createElement('div');
-      var textPost = document.createElement('textarea')
-      
+      let contPost = document.createElement('div');
+      let textPost = document.createElement('textarea')
+
       textPost.innerText = snap.val();
       textPost.setAttribute("id", snap.key);
 
