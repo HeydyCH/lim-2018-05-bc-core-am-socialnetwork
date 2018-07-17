@@ -33,24 +33,22 @@ function welcomeUsers() {
 
 }
 
-
-function savePost() {
+function savePost(userUID,optionValue){
 
   console.log("guardando mi post ..... ")
+  optionValue = optionValue.options[optionValue.selectedIndex].value;
   const post = {
     contenido: document.getElementById('inputPost').value,
-    estado: "feliz"
+    estado: "feliz",
+    optionValue
   };
   console.log(post);
-
-  let usuario = firebase.auth().currentUser;
-  let usuarioNew = usuario.uid;
 
   let newPostKey = firebase.database().ref().child('posts').push().key;
 
   const updates = {};
   updates['/posts/' + newPostKey] = post;
-  updates['/users-posts/' + usuarioNew + '/' + newPostKey] = post;
+  updates['/users-posts/' + userUID + '/' + newPostKey] = post;
 
   document.getElementById('inputPost').value = '';
 
@@ -58,7 +56,7 @@ function savePost() {
 
   // ---------------------------------------------------------------
   
-  const postGroup1 = dbRefObjectUsersPosts.child(usuarioNew);
+  const postGroup1 = dbRefObjectUsersPosts.child(userUID);
   postGroup1.on('child_added', snap => {
     // console.log("ya entre");
     console.log(snap.val());
