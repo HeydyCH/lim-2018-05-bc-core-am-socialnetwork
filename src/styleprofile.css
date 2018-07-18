@@ -68,7 +68,8 @@ nav > ul{
 nav > ul li{
   display: table-cell;
   font-family: sans-serif;
-  font-size: 18px;
+  font-size: 15px;
+  
 }
 
 nav > ul li a{
@@ -127,7 +128,13 @@ nav > ul > li > a .cuarto{
 #container{
   display: block;
 }
+h1{
+  font-family: sans-serif;
+  font-size: 16px;
+  margin-top: 10px;
+}
 input{
+  margin-top: 10px;
   margin-bottom: 0;
   background: white;
   color: black;
@@ -137,12 +144,18 @@ input{
   overflow: auto;
   border: 1px solid rgb(156, 155, 155);
   font-size: 18px;
-  width: 90%;
-  
+  width: 90%; 
 }
+#privateOptions{
+  margin-top: 10px;
+  font-size: 15px;
+  font-family: sans-serif;
+  cursor: pointer;
+}
+
 #name, #object, #listPost{
   font-family: sans-serif;
-
+  margin-top: 10px;
 }
 #btnPost{
   display: block;

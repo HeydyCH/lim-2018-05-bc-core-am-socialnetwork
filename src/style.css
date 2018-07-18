@@ -63,7 +63,7 @@ body{
   padding: 10px;
   margin: 30px 0;
 }
-#login, #loginGoogle, #loginFacebook, #registerUser, #register, #returnHome{
+#login, #loginFacebook, #registerUser, #register, #returnHome{
   border: 0;
   width: 200px;
   height: 40px;
@@ -71,6 +71,30 @@ body{
   cursor: pointer;
   margin-bottom: 0;
   background-color: #4d4dff;
+  font-size: 18px;
+  color: white;
+  border-radius: 5px;
+}
+#loginGoogle{
+  border: 0;
+  width: 200px;
+  height: 40px;
+  opacity: 0.8;
+  cursor: pointer;
+  margin-bottom: 0;
+  background-color: #ff4000;
+  font-size: 18px;
+  color: white;
+  border-radius: 5px;
+}
+#loginFacebook{
+  border: 0;
+  width: 200px;
+  height: 40px;
+  opacity: 0.8;
+  cursor: pointer;
+  margin-bottom: 0;
+  background-color: 	#0000ff;
   font-size: 18px;
   color: white;
   border-radius: 5px;
