@@ -23,7 +23,30 @@ document.getElementById('name').addEventListener('input', () => {
   nameValidator(myInput) ? valido.innerHTML = "\u2714" : valido.innerHTML ="\u2718";
 });
 document.getElementById('password2').addEventListener('input', () => {
+  let myInput = document.getElementById('password2').value;
   validoEmail = document.getElementById('emailOK');
   valido = document.getElementById('passwordOK');
   sugerir = document.getElementById('sugerencias');
+  //MOSTRANDO SUGERENCIAS
+  /^(?=.*\d).{1,}$/.test(myInput) ? valuesGood(itemNum): sugerir.appendChild(itemNum);
+  /^(?=.*[A-Z]).{1,}$/.test(myInput) ? valuesGood(itemUpper): sugerir.appendChild(itemUpper);
+  /^(?=.*[a-z]).{1,}$/.test(myInput) ? valuesGood(itemLower): sugerir.appendChild(itemLower);
+  /^.{8,}$/.test(myInput) ? valuesGood(itemMin8): sugerir.appendChild(itemMin8);
+
+  if (passwordValidator(myInput)) {
+    valido.innerText = "\u2714";
+    if(validoEmail.text = "\u2714") {
+      document.getElementById("register").disabled = false;
+    }
+  } else {
+    valido.innerText = "\u2718";
+    document.getElementById("register").disabled = true;
+  }
 });
+function valuesGood (myNode) {
+  for(let i=0; i<=3; i++){
+    if(sugerir.childNodes[i] == myNode) {
+      sugerir.removeChild(sugerir.childNodes[i]);
+    }
+  }
+}
