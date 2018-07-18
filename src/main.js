@@ -4,7 +4,6 @@ function login(email, password) {
     .then(function () {
       console.log("ingrese");
       let user = firebase.auth().currentUser;
-      welcomeUser();
       document.location.href = 'profile.html'
     })
     .catch(function (error) {
@@ -38,9 +37,9 @@ function userRegisterGoogle(){
     .signInWithPopup(providergoogle)
     .then(function(result) {
       let user = firebase.auth().currentUser;
-      writeDatabase(user);
+      console.log("no corre con gmail")
+      writeDatabase(user)
       document.location.href = 'profile.html'
-      welcomeUser();
     });
 }
 
@@ -51,8 +50,8 @@ function userRegisterFacebook(){
     .signInWithPopup(providerfb)
     .then(function(result) {
       let user = firebase.auth().currentUser;
-      writeDatabase(user);
-      welcomeUser();
+      console.log("no corre con facebook")
+      writeDatabase(user)
       document.location.href = 'profile.html'
   });
 }

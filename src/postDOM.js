@@ -13,3 +13,18 @@ document.getElementById("btnPost").addEventListener("click", () => {
   let optionValue = document.getElementById('privateOptions');
   savePost(userUID,optionValue)
 });
+
+
+document.getElementById("addPost").addEventListener("click", ()=>{
+
+  let userUID = firebase.auth().currentUser.uid;
+  const dbRefObjectUsers = firebase.database().ref().child('users/');
+  const dataUser = dbRefObjectUsers.child(userUID);
+  // dUser(userUID);
+  const dbRefObjectUsersPosts = firebase.database().ref().child('users-posts')
+  mostrarPostUser(dbRefObjectUsersPosts,userUID)
+
+
+
+
+});
