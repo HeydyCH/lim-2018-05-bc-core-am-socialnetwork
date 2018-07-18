@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,8 +9,8 @@
   <link rel="icon" type="image/jpg" href="../src/images/pregnant.png" >
   <link rel="stylesheet" type="text/css" media="screen" href="styleprofile.css" />
   <link rel="stylesheet" href="../src/fonts.css">
+  <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
 </head>
-
 <body>
   <!--Cabecera-->
   <div class="log">
@@ -31,9 +30,29 @@
       </ul>
     </nav>
   </header>
+  <div class="container">
+    <div id="userProfile"></div>
+    <button id="close">Cerrar sesion</button>
+    <div id="sectionPost">
+        <span id = "name"></span>
+        <pre id="object"></pre>
+        <div id="listposts"></div>
+        <h1>Agregar Post !!</h1>
+      <input id="inputPost" type="text" placeholder="Ingrese post">
+      <select id="privateOptions">
+        <option value="0">Amigos</option>
+        <option value="1">Publico</option>
+      </select>
+      <button id="btnPost" class="">Postear</button>
+    </div>
+  </div>
+  <div><span id="userName"></span></div>
+  <span id="userPhoto"></span>
+  <h2 id="userEmail"></h2>
   <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+  <script src="init-fbase.js"></script>
+  <script src="post.js"></script>
   <script src="main.js"></script>
-  <script src="app.js"></script>
+  <script src="postDOM.js"></script>
 </body>
-
 </html>

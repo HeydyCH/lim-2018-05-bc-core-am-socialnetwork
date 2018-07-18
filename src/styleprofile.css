@@ -122,3 +122,43 @@ nav > ul > li > a .tercero{
 nav > ul > li > a .cuarto{
   background: #ff1a75;
 }
+
+/*Post*/
+#container{
+  display: block;
+}
+input{
+  margin-bottom: 0;
+  background: white;
+  color: black;
+  box-sizing: border-box;
+  display: block;
+  text-align: justify;
+  overflow: auto;
+  border: 1px solid rgb(156, 155, 155);
+  font-size: 18px;
+  width: 90%;
+  
+}
+#name, #object, #listPost{
+  font-family: sans-serif;
+
+}
+#btnPost{
+  display: block;
+  background: #3939ac;
+  color: white;
+  box-sizing: border-box;
+  border: 1px solid black;
+  padding: 10px 30px;
+  text-align: center;
+  font-size: 15px;
+  font-family: sans-serif;
+  border-radius: 8px;
+  width: 100px;
+  margin: 20px;
+  cursor: pointer
+}
+button:hover{
+  box-shadow: 0 10px 50px 0 rgba(0,0,0,0.24), 0 15px 105px 0 rgba(0,0,0,0.19);
+}
