@@ -1,68 +1,35 @@
-describe('data', () => {
+describe('emailValidator(string)', () => {
 
-  it('debería exponer función computeUsersStats en objeto global', () => {
-    assert.isFunction(emailValidator);
+  it('debería retornar true para fiorella@gmail.com', () => {
+     assert.equal(window.emailValidator('fiorella@gmail.com'), true);
   });
 
-  it('debería exponer función sortUsers en objeto global', () => {
-    assert.isFunction(passwordValidator);
+  it('debería retornar false para hola123', () => {
+     assert.equal(window.emailValidator('hola123'), false);
   });
 
-  it('debería exponer función filterUsers en objeto global', () => {
-    assert.isFunction(nameValidator);
+});
+
+describe('nameValidator(string)', () => {
+
+  it('debería retornar true para fiorella', () => {
+     assert.equal(window.nameValidator('fiorella'), true);
   });
 
-  it('debería exponer función processCohortData en objeto global', () => {
-    assert.isFunction(valuesGood);
+  it('debería retornar false para hola', () => {
+     assert.equal(window.nameValidator('hola'), false);
   });
 
-  // describe('computeUsersStats(users, progress, courses)', () => {
-  //
-  //   it('debería retornar arreglo de usuarios con propiedad stats', () => {
-  //     const processed = computeUsersStats(users, progress, courses);
-  //
-  //     assert.equal(users.length, processed.length);
-  //
-  //     processed.forEach(user => {
-  //       assert.ok(user.hasOwnProperty('stats'));
-  //       assert.isNumber(user.stats.percent);
-  //       assert.isObject(user.stats.exercises);
-  //       assert.isObject(user.stats.quizzes);
-  //       assert.isObject(user.stats.reads);
-  //     });
-  //   });
-  //
-  //   describe('user.stats para el primer usuario en data de prueba - ver carpeta data/');
-  //
-  // });
+});
 
-  describe('sortUsers(users, orderBy, orderDirection)', () => {
+describe('passwordValidator(string)', () => {
 
-    it('debería retornar arreglo de usuarios ordenado por nombre ASC');
-    it('debería retornar arreglo de usuarios ordenado por nombre DESC');
-    it('debería retornar arreglo de usuarios ordenado por porcentaje general ASC');
-    it('debería retornar arreglo de usuarios ordenado por porcentaje general DESC');
-    it('debería retornar arreglo de usuarios ordenado por ejercicios completados ASC');
-    it('debería retornar arreglo de usuarios ordenado por ejercicios completados DESC');
-    it('debería retornar arreglo de usuarios ordenado por quizzes completados ASC');
-    it('debería retornar arreglo de usuarios ordenado por quizzes completados DESC');
-    it('debería retornar arreglo de usuarios ordenado por score promedio en quizzes completados ASC');
-    it('debería retornar arreglo de usuarios ordenado por score promedio en quizzes completados DESC');
-    it('debería retornar arreglo de usuarios ordenado por lecturas (reads) completadas ASC');
-    it('debería retornar arreglo de usuarios ordenado por lecturas (reads) completadas DESC');
-
+  it('debería retornar true para 1Abcfiore', () => {
+     assert.equal(window.passwordValidator('1Abcfiore'), true);
   });
 
-  describe('filterUsers(users, filterBy)', () => {
-
-    it('debería retornar nuevo arreglo solo con usuarios con nombres que contengan string (case insensitive)');
-
-  });
-
-  describe('processCohortData({ cohortData, orderBy, orderDirection, filterBy })', () => {
-
-    it('debería retornar arreglo de usuarios con propiedad stats y aplicar sort y filter');
-
+  it('debería retornar false para hola123', () => {
+     assert.equal(window.passwordValidator('hola123'), false);
   });
 
 });

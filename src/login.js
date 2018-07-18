@@ -114,6 +114,7 @@ function welcomeUser() {
       document.getElementById("userName").innerHTML = userData.nombre;
       document.getElementById('userPhoto').innerHTML = "<img width='100px' src='"+userData.foto+"  '/>"
     })
+    console.log('hola');
     chargePosts();
   }
 }
