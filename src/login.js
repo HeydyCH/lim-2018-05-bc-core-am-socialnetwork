@@ -59,8 +59,11 @@ $('#loginGoogle').click(function(){
     .signInWithPopup(providergoogle)
     .then(function(result) {
       let user = firebase.auth().currentUser;
+      console.log(user.uid);
+      console.log(result)
+
       writeDatabase(user);
-      localStorage.currentUser = JSON.parse(JSON.stringify(user.uid));
+      localStorage.currentUser = user.uid;
       document.location.href = 'profile.html';
     });
 });
@@ -72,8 +75,9 @@ $('#loginFacebook').click(function(){
     .signInWithPopup(providerfb)
     .then(function(result) {
       let user = firebase.auth().currentUser;
+      console.log(result)
       writeDatabase(user);
-      localStorage.currentUser = JSON.parse(JSON.stringify(user.uid));
+      localStorage.currentUser = user.uid;
       document.location.href = 'profile.html';
     });
 })
@@ -85,6 +89,8 @@ function writeDatabase(user) {
   profile.on('value', snap => {
     let userData = JSON.stringify(snap.val(),null,3);//tbm funciona un solo parametro
     userData = JSON.parse(userData);
+    console.log(userData);
+    console.log(user.uid);
     if(userData == null) {
       if(user.photoURL == null){
         foto = "https://cdn.dribbble.com/users/37144/screenshots/3739334/edit.gif";
