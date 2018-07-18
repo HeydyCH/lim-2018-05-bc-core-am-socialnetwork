@@ -61,8 +61,8 @@ $('#loginGoogle').click(function(){
       let user = firebase.auth().currentUser;
       console.log(user.uid);
       console.log(result)
-
-      writeDatabase(user);
+      writeDatabase(result.user);
+      console.log(result.user);
       localStorage.currentUser = user.uid;
       document.location.href = 'profile.html';
     });
@@ -75,8 +75,8 @@ $('#loginFacebook').click(function(){
     .signInWithPopup(providerfb)
     .then(function(result) {
       let user = firebase.auth().currentUser;
-      console.log(result)
-      writeDatabase(user);
+      console.log(result.user)
+      writeDatabase(result.user);
       localStorage.currentUser = user.uid;
       document.location.href = 'profile.html';
     });
