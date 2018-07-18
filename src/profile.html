@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <!-- <div class="container">
+    <div id="userProfile"></div>
+    <button id="close">Cerrar sesion</button>
+    <div id="sectionPost">
+        <span id = "name"></span>
+        <pre id="object"></pre>
+        <div id="listposts"></div>
+        <h1>Agregar Post !!</h1>
+      <input id="inputPost" type="text" placeholder="Ingrese post">
+      <select id="privateOptions">
+        <option value="0">Amigos</option>
+        <option value="1">Publico</option>
+      </select>
+      <button id="btnPost" class="">postear</button>
+    </div>
+  </div> -->
+  <div class="container" id="userProfile">
+    <div id="userData">
+        <h2>Hola <span id="userName"></span></h2>
+        <div id="userPhoto"></div>
+    </div>
+    <div id="userPosts">
+      <h1>Mis publicaciones</h1>
+      <div id="myPosts"></div>
+      <hr>
+      <input id="currentPost" placeholder="Escribe lo que quieras publicar">
+      <select id="privateOptions">
+        <option value="0">Amigos</option>
+        <option value="1">Publico</option>
+      </select>
+      <button id="savePost">Publicar</button>
+    </div>
+    <hr>
+    <button id="signOut">Cerrar sesion</button>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous">
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+  <script src="muro.js"></script>
+  <script src="anterior/app.js"></script>
+  <script src="profile.js"></script>
+</body>
+</html>

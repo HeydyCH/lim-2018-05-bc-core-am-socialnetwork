@@ -11,14 +11,14 @@ firebase.initializeApp(config);
 
 document.getElementById("login").addEventListener("click", login);
 document.getElementById("userRegister").style.display = "none" ;
-document.getElementById("userProfile").style.display = "none";
 // Funcion de Inicio de Sesion para usuario con correo registrado
 function login() {
   var email = document.getElementById('email').value;
   var password = document.getElementById('password').value;
   firebase.auth().signInWithEmailAndPassword(email, password).then(function(){
-    console.log("ingrese");
-    welcomeUser();
+    user = firebase.auth().currentUser;
+    localStorage.currentUser = user.uid;
+    document.location.href = 'profile.html';
   })
   .catch(function (error) {
       var errorMessage = error.message;
@@ -60,7 +60,8 @@ $('#loginGoogle').click(function(){
     .then(function(result) {
       let user = firebase.auth().currentUser;
       writeDatabase(user);
-      welcomeUser();
+      localStorage.currentUser = JSON.parse(JSON.stringify(user.uid));
+      document.location.href = 'profile.html';
     });
 });
 //acceder con facebook
@@ -72,87 +73,41 @@ $('#loginFacebook').click(function(){
     .then(function(result) {
       let user = firebase.auth().currentUser;
       writeDatabase(user);
-      welcomeUser();
+      localStorage.currentUser = JSON.parse(JSON.stringify(user.uid));
+      document.location.href = 'profile.html';
     });
 })
 //Escribiendo en la base de datos el profile del usuario
 function writeDatabase(user) {
-  if(user.photoURL == null){
-    foto = "https://cdn.dribbble.com/users/37144/screenshots/3739334/edit.gif";
-  } else {
-    foto= user.photoURL;
-  }
-  if(user.displayName == null){
-    nombre = document.getElementById('name').value;
-  } else {
-    nombre = user.displayName;
-  }
-  var usuario = {
-    uid : user.uid,
-    nombre,
-    email:user.email,
-    foto,
-    publicaciones: ["hola"]
-  }
-  firebase.database().ref("users/" + usuario.uid)
-  .set(usuario)
-}
-
-//redireccionando al muro
-function welcomeUser() {
-  document.getElementById("userLogin").style.display = "none" ;
-  document.getElementById("userProfile").style.display = "block";
-  var user = firebase.auth().currentUser;
-  if (user != null) {
-    // console.log(user);
-    var profile = firebase.database().ref().child('users/'+user.uid);
-    profile.on('value', snap => {
-      let userData = JSON.stringify(snap.val(),null,3);//tbm funciona un solo parametro
-      userData = JSON.parse(userData);
-      console.log(userData);
-      console.log(userData.nombre);
-      document.getElementById("userName").innerHTML = userData.nombre;
-      document.getElementById('userPhoto').innerHTML = "<img width='100px' src='"+userData.foto+"  '/>"
-    })
-    console.log('hola');
-    chargePosts();
-  }
-}
-//escribiendo publicaciones
-document.getElementById('savePost').addEventListener("click", savePost)
-function savePost() {
-  let message = document.getElementById('currentPost').value;
-  document.getElementById('currentPost').value = '';
-  console.log('listo');
-  let userUID = firebase.auth().currentUser.uid;
-  let optionValue = document.getElementById('privateOptions');
-  optionValue = optionValue.options[optionValue.selectedIndex].value;
-  firebase.database().ref('users/'+userUID+'/publicaciones').push({
-    optionValue,
-    message
-  });
-  chargePosts();
-};
-//mostrando todos las publicaciones del usuario actual
-function chargePosts() {
-  let user = firebase.auth().currentUser;
-  firebase.database().ref('users/'+user.uid+'/publicaciones')
-  .on('value', function(snapshot) {
-    let muroPosts = document.getElementById('myPosts');
-    muroPosts.innerHTML = '';
-    let postData = JSON.stringify(snapshot.val(),null,3);//tbm funciona un solo parametro
-    postData = JSON.parse(postData);
-    let postUIDs = Object.keys(postData);
-    for(i=1; i<postUIDs.length; i++) {
-      let mensaje = (postData[postUIDs[i]].message);
-      muroPosts.innerHTML += '<li><b>' + mensaje + '</b></li>';
+  //muestrame si existe el usuario
+  // var user = firebase.auth().currentUser.uid;
+  var profile = firebase.database().ref().child('users/' + user.uid);
+  profile.on('value', snap => {
+    let userData = JSON.stringify(snap.val(),null,3);//tbm funciona un solo parametro
+    userData = JSON.parse(userData);
+    if(userData == null) {
+      if(user.photoURL == null){
+        foto = "https://cdn.dribbble.com/users/37144/screenshots/3739334/edit.gif";
+      } else {
+        foto= user.photoURL;
+      }
+      if(user.displayName == null){
+        nombre = document.getElementById('name').value;
+      } else {
+        nombre = user.displayName;
+      }
+      var usuario = {
+        uid : user.uid,
+        nombre,
+        email:user.email,
+        foto,
+      }
+      firebase.database().ref("users/" + usuario.uid)
+      .set(usuario)
+    } else {
+      console.log('ya existia el usuario');
     }
-    // snapshot.forEach(function(e) {
-    //   var element = e.val();
-    //   var mensaje = element.message;
-    //   muroPosts.innerHTML += '<li><b>' + mensaje + '</b></li>';
-    // });
-  });
+  })
 }
 //volver al inicio
 document.getElementById('returnHome').addEventListener("click", () => {
