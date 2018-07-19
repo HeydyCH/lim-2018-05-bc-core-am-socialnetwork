@@ -33,11 +33,12 @@
   <div class="container">
     <div id="userProfile"></div>
     <button id="close">Cerrar sesion</button>
+    <pre id="object"></pre>
     <div id="sectionPost">
         <span id = "name"></span>
-        <pre id="object"></pre>
         <div id="listposts"></div>
-        <button id= "addPost">PUBLICACIONES</button>
+        <button id= "addPost">MIS PUBLICACIONES</button>
+        <input type="button" id="addPostPublica" value="PUBLICACIONES PUBLICAS GENERALES">
         <h1>Agregar Post !!</h1>
       <input id="inputPost" type="text" placeholder="Ingrese post">
       <select id="privateOptions">
@@ -47,9 +48,11 @@
       <button id="btnPost" class="">Postear</button>
     </div>
   </div>
+
   <div><span id="userName"></span></div>
   <span id="userPhoto"></span>
   <h2 id="userEmail"></h2>
+
   <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
   <script src="init-fbase.js"></script>
   <script src="post.js"></script>

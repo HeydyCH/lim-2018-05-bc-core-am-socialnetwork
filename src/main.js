@@ -12,6 +12,10 @@ function login(email, password) {
     });
 }
 
+function otrapagina(){
+  document.location.href = 'profile.html'
+}
+
 // Funcion para la creación de nuevos usuarios con CORREO
 function userRegister(email,password,name){
   firebase.auth()
@@ -22,6 +26,7 @@ function userRegister(email,password,name){
           console.log('enviando correo .... !!')
           alert("Revisa tu bandeja de entrada por favor :D");
           writeDatabase(user);
+          otrapagina();
       })
     })
     .catch(function (error) {
@@ -39,7 +44,7 @@ function userRegisterGoogle(){
       let user = firebase.auth().currentUser;
       console.log("no corre con gmail")
       writeDatabase(user)
-      document.location.href = 'profile.html'
+      otrapagina();
     });
 }
 
@@ -52,8 +57,9 @@ function userRegisterFacebook(){
       let user = firebase.auth().currentUser;
       console.log("no corre con facebook")
       writeDatabase(user)
-      document.location.href = 'profile.html'
+      otrapagina();
   });
+  
 }
 
 //Escribiendo en la BD con los DATOS del USUARIO
