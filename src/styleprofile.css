@@ -69,7 +69,8 @@ nav > ul{
 nav > ul li{
   display: table-cell;
   font-family: sans-serif;
-  font-size: 18px;
+  font-size: 15px;
+  
 }
 
 nav > ul li a{

@@ -56,14 +56,14 @@ body{
 .userRegister{
   display: block;
 }
-#email, #password, #email2, #password2{
+#email, #password, #email2, #password2, #name{
   display: block;
   width: 90%;
   font-size: 18px;
   padding: 10px;
   margin: 30px 0;
 }
-#login, #registerUser, .register, .back{
+#login, #loginFacebook, #registerUser, #register, #returnHome{
   border: 0;
   width: 200px;
   height: 40px;
@@ -75,9 +75,33 @@ body{
   color: #ffe6ff;
   border-radius: 5px;
 }
-#login, #registerUser, .register, .back:hover{
+#loginGoogle{
+  border: 0;
+  width: 200px;
+  height: 40px;
+  opacity: 0.8;
+  cursor: pointer;
+  margin-bottom: 0;
+  background-color: #ff4000;
+  font-size: 18px;
+  color: white;
+  border-radius: 5px;
+}
+#loginFacebook{
+  border: 0;
+  width: 200px;
+  height: 40px;
+  opacity: 0.8;
+  cursor: pointer;
+  margin-bottom: 0;
+  background-color: 	#0000ff;
+  font-size: 18px;
+  color: white;
+  border-radius: 5px;
+}
+#login, #loginGoogle, #loginFacebook, #registerUser, #register, #returnHome:hover{
   opacity: 1;
 }
-#login, #registerUser, .register, .back:active{
+#login, #loginGoogle, #loginFacebook, #registerUser, #register, #returnHome:active{
   transform: scale(0.95);
 }

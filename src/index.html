@@ -23,24 +23,28 @@
       <input id="email" type="email" placeholder="Ingrese email" class="formulario">
       <input id="password" type="password" placeholder="Ingrese contraseña" class="formulario">
       <p>Aún no tienes cuenta, registrate!</p>
-      <button class="" id="login">Acceder</button>
-      <button class="" id="registerUser">Registrar</button>
+      <button id="login">Acceder</button>
+      <button id="loginGoogle">Google</button>
+      <button id="loginFacebook">Facebook</button>
+      <button id="registerUser">Registrar</button>
     </div>
-
     <div id="userRegister">
-        <input id="email2" type="email" placeholder="Ingrese email" class="formulario">
-        <input id="password2" type="password" placeholder="Ingrese contraseña" class="formulario">
-        <p>Aún no tienes cuenta, registrate!</p>
-        <button class="register" id="register">Registrar ahora</button>
-        <button class="back">volver a iniciar</button>
-      </div>
-
-    <div id="userProfile"></div>
+      <input id="email2" type="email" placeholder="Ingrese email" class="formulario">
+      <input id="password2" type="password" placeholder="Ingrese contraseña" class="formulario">
+      <input id="name" type="text" placeholder="Ingresa tu nombre">
+      <p>Aún no tienes cuenta, registrate!</p>
+      <button id="register">Registrar ahora</button>
+      <button id="returnHome">volver a inicio</button>
+    </div>
   </div>
-
+  <!-- Codigos para los archivos javascript -->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous">
+  </script>
   <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+  <script src="init-fbase.js"></script>
   <script src="main.js"></script>
-  <script src="app.js"></script>
+  <script src="mainDOM.js"></script>
 </body>
 
 </html>
