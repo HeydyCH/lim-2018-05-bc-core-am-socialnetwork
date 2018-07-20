@@ -56,20 +56,27 @@ function chargePosts() {
   });
 }
 //mostrando la lista de usuarios pero falta filtrar
-const nameUsers = [];
-firebase.database().ref("users")
-  .on("child_added", function(s){
-    var user = s.val();
-    nameUsers.push(user.nombre);
-    console.log(nameUsers);
-    $('#userFilterList').append(`
-    <div>
-      <img width=100px src= ${user.foto} />
-      <p> ${user.nombre} </p>
-      <button>Seguir</button>
-    </div>
-    `);
-  })
+document.getElementById('searchText').addEventListener('input', () =>{
+  let wordSearch = document.getElementById('searchText').value;
+})
+document.getElementById('buttonSearch').addEventListener('click', ()=>{
+  document.getElementById('userFilterList').innerHTML = '';
+  firebase.database().ref("users")
+    .on("child_added", function(s){
+      let wordSearch = document.getElementById('searchText').value;
+      var user = s.val();
+      if((user.nombre.toUpperCase()).indexOf(wordSearch.toUpperCase())!==-1){
+        $('#userFilterList').append(`
+        <div>
+          <img width=100px src= ${user.foto} />
+          <p> ${user.nombre} </p>
+          <button>Seguir</button>
+        </div>
+        `);
+      }
+    })
+})
+
 
 document.getElementById('signOut').addEventListener('click', closeSession);
 //funcion para cerrar sesion
