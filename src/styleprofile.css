@@ -146,6 +146,9 @@ main h2{
 .container-comments-request{
   margin-top: 20px;
 }
+.container-comments-request{
+  margin-left: 100px;
+}
 .comments, 
 .comments-request{
     display: flex;
@@ -156,7 +159,17 @@ main h2{
   border-radius: 50%;
   overflow: hidden;
 }
+.photo-perfil-request{
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+}
 .photo-perfil img{
+  width: 100%;
+  height: 100%;
+}
+.photo-perfil-request img{
   width: 100%;
   height: 100%;
 }
@@ -191,16 +204,19 @@ main h2{
   display: flex;
   justify-content: space-between;
 }
-.info-comments .footer h6{
+.info-comments .footer h6,
+.info-comments-request .footer h6{
   font-size: 15px;
   cursor: pointer;
 }
-.info-comments .icon-heart{
+.info-comments .icon-heart,
+.info-comments-request .icon-heart{
   color: #aaaaaa;
   transition: all 300 ms;
   font-size: 20px;
 }
-.info-comments .icon-heart:hover{
+.info-comments .icon-heart:hover,
+.info-comments-request .icon-heart:hover{
   color: #d91111;
   cursor: pointer;
 }
