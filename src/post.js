@@ -1,19 +1,19 @@
 // console.log("ya estoy en post.js")
 
-function dUser(userUID) {
-  console.log(userUID);
-  let dbRefObjectUsers = firebase.database().ref().child('users/');
-  let dataUser = dbRefObjectUsers.child(userUID); // por mejorar para q no sea especifico
-  dataUser.on('value', snap => {
-    let userData = JSON.stringify(snap.val(), null, 3); //tbm funciona un solo parametro
-    console.log(userData);
-    userData = JSON.parse(userData);
-    console.log(userData);
-    console.log(userData.nombre);
-    document.getElementById("userName").innerHTML = userData.nombre;
-    document.getElementById('userPhoto').innerHTML = "<img width='100px' src='" + userData.foto + "  '/>";
-  })
-}
+// function dUser(userUID) {
+//   console.log(userUID);
+//   let dbRefObjectUsers = firebase.database().ref().child('users/');
+//   let dataUser = dbRefObjectUsers.child(userUID); // por mejorar para q no sea especifico
+//   dataUser.on('value', snap => {
+//     let userData = JSON.stringify(snap.val(), null, 3); //tbm funciona un solo parametro
+//     console.log(userData);
+//     userData = JSON.parse(userData);
+//     console.log(userData);
+//     console.log(userData.nombre);
+//     document.getElementById("userName").innerHTML = userData.nombre;
+//     document.getElementById('userPhoto').innerHTML = "<img width='100px' src='" + userData.foto + "  '/>";
+//   })
+// }
 
 function welcomeUsers() {
   console.log(" welcomeUsers --> bienvenida mamita :) :3 !! ");
@@ -33,14 +33,15 @@ function welcomeUsers() {
 
 }
 
-function savePost(userUID, optionValue) {
+function savePost(user, optionValue) {
 
   console.log("guardando mi post ..... ")
   optionValue = optionValue.options[optionValue.selectedIndex].value;
   const post = {
     contenido: document.getElementById('inputPost').value,
     estado: "feliz",
-    optionValue
+    optionValue ,
+    usuario:user.displayName
   };
   console.log(post);
 
@@ -48,7 +49,7 @@ function savePost(userUID, optionValue) {
 
   const updates = {};
   updates['/posts/' + newPostKey] = post;
-  updates['/users-posts/' + userUID + '/' + newPostKey] = post;
+  updates['/users-posts/' + user.uid + '/' + newPostKey] = post;
 
   document.getElementById('inputPost').value = '';
 
