@@ -7,22 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-  <!-- <div class="container">
-    <div id="userProfile"></div>
-    <button id="close">Cerrar sesion</button>
-    <div id="sectionPost">
-        <span id = "name"></span>
-        <pre id="object"></pre>
-        <div id="listposts"></div>
-        <h1>Agregar Post !!</h1>
-      <input id="inputPost" type="text" placeholder="Ingrese post">
-      <select id="privateOptions">
-        <option value="0">Amigos</option>
-        <option value="1">Publico</option>
-      </select>
-      <button id="btnPost" class="">postear</button>
-    </div>
-  </div> -->
   <div class="container" id="userProfile">
     <div id="userData">
         <h2>Hola <span id="userName"></span></h2>
@@ -42,6 +26,12 @@
     <hr>
     <button id="signOut">Cerrar sesion</button>
   </div>
+  <div class="container">
+    <input type="text" id="searchText" class="form-control" placeholder="Search...">
+    <button id="buttonSearch">Look</button>
+    <div id="userFilterList"></div>
+  </div>
+
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous">

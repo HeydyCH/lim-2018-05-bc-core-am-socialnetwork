@@ -55,6 +55,21 @@ function chargePosts() {
     }
   });
 }
+//mostrando la lista de usuarios pero falta filtrar
+const nameUsers = [];
+firebase.database().ref("users")
+  .on("child_added", function(s){
+    var user = s.val();
+    nameUsers.push(user.nombre);
+    console.log(nameUsers);
+    $('#userFilterList').append(`
+    <div>
+      <img width=100px src= ${user.foto} />
+      <p> ${user.nombre} </p>
+      <button>Seguir</button>
+    </div>
+    `);
+  })
 
 document.getElementById('signOut').addEventListener('click', closeSession);
 //funcion para cerrar sesion
