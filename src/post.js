@@ -131,7 +131,9 @@ function mostrarPostUser(dbRefObjectUsersPosts, userUID, userName){
       const nuevoPost = {
         contenido: newUpdate.value,
         estado: "feliz",
-        optionValue: objPost.optionValue
+        optionValue: objPost.optionValue,
+        usuario:userName
+
       };
 
       console.log(nuevoPost)
