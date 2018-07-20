@@ -1,6 +1,7 @@
 const preObject = document.getElementById("object");
 const nameUser = document.getElementById('name');
 const listposts = document.getElementById('listposts');
+const listPostsGeneral = document.getElementById('listpostsgeneral');
 
 initFirebase();
 console.log("ya estoy en postDOM.js");
@@ -31,10 +32,9 @@ document.getElementById("addPostPublica").addEventListener("click", ()=>{
 
   let userUID = firebase.auth().currentUser.uid;
   let userName = firebase.auth().currentUser.displayName;
+  // let dbRefObjectUsers = firebase.database().ref().child('post/');
 
-  let dbRefObjectUsers = firebase.database().ref().child('users/');
-  
-
-  mostrarPostUserPublic(dbRefObjectUsers)
+  const dbRefObjectUsersPosts = firebase.database().ref().child('users-posts')
+  mostrarPostUserPublic(dbRefObjectUsersPosts,userUID,userName)
 
 });

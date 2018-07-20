@@ -15,7 +15,7 @@ function dUser(userUID) {
   })
 }
 
-function welcomeUsers(){
+function welcomeUsers() {
   console.log(" welcomeUsers --> bienvenida mamita :) :3 !! ");
   //  Base de datos ACTUAL
   //  -----------------------
@@ -56,7 +56,7 @@ function savePost(userUID, optionValue) {
 
 }
 
-function mostrarPostUser(dbRefObjectUsersPosts, userUID, userName) {
+function mostrarPostUser(dbRefObjectUsersPosts, userUID, userName){
 
   console.log("voy a mostrar todos mis posts publicos y privados")
 
@@ -68,7 +68,7 @@ function mostrarPostUser(dbRefObjectUsersPosts, userUID, userName) {
   postGroup1.on('child_added', snap => {
     // console.log(snap.val());
     let objPost = snap.val();
-    console.log(objPost);
+    // console.log(objPost);
     // console.log(snap.key);
 
     if (objPost.hasOwnProperty('contenido')) {
@@ -150,13 +150,47 @@ function mostrarPostUser(dbRefObjectUsersPosts, userUID, userName) {
 
 }
 
+function mostrarPostUserPublic(dbRefObjectUsersPosts, userUID, userName) {
 
-function mostrarPostUserPublic(dbRefObjectUsers){
+  console.log("publicos y privados")
 
-  console.log(dbRefObjectUsers);
+  // mostrando el post del usuario logueado 
+  // Sincronizar los cambios del objecto
+  const postGroup1 = dbRefObjectUsersPosts.child(userUID);
+  // console.log(postGroup1)console.log("####")
 
+  let dbRefObjectUsers = firebase.database().ref('posts/');
+
+  dbRefObjectUsers.on('child_added', snap => {
+    // console.log(snap.val());
+    let objPost = snap.val();
+    // console.log(objPost);
+    // console.log(objPost.optionValue);
+    // console.log(snap.key);
+
+    if (objPost.optionValue == 1) {
+
+      // var etiquetaName = document.createElement("span");
+      // etiquetaName.innerHTML = userName;
+
+      var contPost = document.createElement('div');
+      var textPost = document.createElement('textarea')
+      textPost.setAttribute("id", snap.key);
+
+      textPost.innerText = snap.val();
+
+      textPost.innerHTML = objPost.contenido;
+
+      // contPost.appendChild(etiquetaName);
+      contPost.appendChild(textPost);
+
+      listPostsGeneral.appendChild(contPost);
+
+    }
+
+  });
+ 
 }
-
 
 function close() {
   console.log("saliendo de mi perfil")
