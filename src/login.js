@@ -64,7 +64,6 @@ $('#loginGoogle').click(function(){
       writeDatabase(result.user);
       console.log(result.user);
       localStorage.currentUser = user.uid;
-      document.location.href = 'profile.html';
     });
 });
 //acceder con facebook
@@ -78,7 +77,6 @@ $('#loginFacebook').click(function(){
       console.log(result.user)
       writeDatabase(result.user);
       localStorage.currentUser = user.uid;
-      document.location.href = 'profile.html';
     });
 })
 //Escribiendo en la base de datos el profile del usuario
@@ -110,8 +108,11 @@ function writeDatabase(user) {
       }
       firebase.database().ref("users/" + usuario.uid)
       .set(usuario)
+      console.log(usuario);
+      document.location.href = 'profile.html';
     } else {
       console.log('ya existia el usuario');
+      document.location.href = 'profile.html';
     }
   })
 }
