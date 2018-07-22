@@ -34,7 +34,7 @@ document.getElementById("addPostPublica").addEventListener("click", ()=>{
   let userName = firebase.auth().currentUser.displayName;
   // let dbRefObjectUsers = firebase.database().ref().child('post/');
 
-  const dbRefObjectUsersPosts = firebase.database().ref().child('users-posts')
+  let dbRefObjectUsersPosts = firebase.database().ref().child('users-posts')
   mostrarPostUserPublic(dbRefObjectUsersPosts,userUID,userName)
 
 });
