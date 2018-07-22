@@ -37,23 +37,30 @@ function savePost(user, optionValue) {
 
   console.log("guardando mi post ..... ")
   optionValue = optionValue.options[optionValue.selectedIndex].value;
-  const post = {
-    contenido: document.getElementById('inputPost').value,
-    estado: "feliz",
-    optionValue ,
-    usuario:user.displayName
-  };
-  console.log(post);
+  let contenidoNewPost = document.getElementById('inputPost').value
+  if(contenidoNewPost != ''){
+    const post = {
+      contenido: contenidoNewPost,
+      estado: "feliz",
+      optionValue ,
+      usuario:user.displayName
+    };
+    console.log(post);
+  
+    let newPostKey = firebase.database().ref().child('posts').push().key;
+  
+    const updates = {};
+    updates['/posts/' + newPostKey] = post;
+    updates['/users-posts/' + user.uid + '/' + newPostKey] = post;
+  
+    document.getElementById('inputPost').value = '';
+  
+    firebase.database().ref().update(updates);
 
-  let newPostKey = firebase.database().ref().child('posts').push().key;
-
-  const updates = {};
-  updates['/posts/' + newPostKey] = post;
-  updates['/users-posts/' + user.uid + '/' + newPostKey] = post;
-
-  document.getElementById('inputPost').value = '';
-
-  firebase.database().ref().update(updates);
+  }else{
+    console.log("post vacio") ;
+  }
+  
 
 }
 
