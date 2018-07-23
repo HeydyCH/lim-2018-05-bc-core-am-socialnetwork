@@ -29,7 +29,6 @@ document.getElementById('savePost').addEventListener("click", savePost)
 function savePost() {
   let message = document.getElementById('currentPost').value;
   document.getElementById('currentPost').value = '';
-  console.log('listo');
   let userUID = firebase.auth().currentUser.uid;
   let optionValue = document.getElementById('privateOptions');
   optionValue = optionValue.options[optionValue.selectedIndex].value;
@@ -41,7 +40,6 @@ function savePost() {
 };
 //mostrando todos las publicaciones del usuario actual
 function chargePosts() {
-  let user = firebase.auth().currentUser;
   firebase.database().ref('users/'+userUID+'/publicaciones')
   .on('value', function(snapshot) {
     let muroPosts = document.getElementById('myPosts');
@@ -55,7 +53,22 @@ function chargePosts() {
     }
   });
 }
-//mostrando la lista de usuarios pero falta filtrar
+//mostrando todas las publicaciones de personas a las que sigo
+// function chargeFriendPosts() {
+//   firebase.database().ref('users/'+userUID+'/publicaciones')
+//   .on('value', function(snapshot) {
+//     let muroPosts = document.getElementById('myPosts');
+//     muroPosts.innerHTML = '';
+//     let postData = JSON.stringify(snapshot.val(),null,3);//tbm funciona un solo parametro
+//     postData = JSON.parse(postData);
+//     let postUIDs = Object.keys(postData);
+//     for(i=0; i<postUIDs.length; i++) {
+//       let mensaje = (postData[postUIDs[i]].message);
+//       muroPosts.innerHTML += '<li><b>' + mensaje + '</b></li>';
+//     }
+//   });
+// }
+//mostrando la lista de usuarios registrados por busqueda
 document.getElementById('searchText').addEventListener('input', () =>{
   let wordSearch = document.getElementById('searchText').value;
 })
@@ -70,13 +83,19 @@ document.getElementById('buttonSearch').addEventListener('click', ()=>{
         <div>
           <img width=100px src= ${user.foto} />
           <p> ${user.nombre} </p>
-          <button>Seguir</button>
+          <button value= ${user.uid} onclick= "followPeople()">Seguir</button>
         </div>
         `);
       }
     })
 })
-
+//funcion para almacenar uid de seguidores
+function followPeople() {
+  let uidFollow = event.target.value;
+  firebase.database().ref('users/'+userUID+'/quienes-sigo').push({
+    uidFollow
+  });
+}
 
 document.getElementById('signOut').addEventListener('click', closeSession);
 //funcion para cerrar sesion
