@@ -23,6 +23,7 @@ function welcomeUser(uid) {
     document.getElementById('userPhoto').innerHTML = "<img width='100px' src='"+userData.foto+"  '/>"
   })
   chargePosts();
+  chargeFriendPosts();
 }
 //escribiendo publicaciones
 document.getElementById('savePost').addEventListener("click", savePost)
@@ -54,20 +55,39 @@ function chargePosts() {
   });
 }
 //mostrando todas las publicaciones de personas a las que sigo
-// function chargeFriendPosts() {
-//   firebase.database().ref('users/'+userUID+'/publicaciones')
-//   .on('value', function(snapshot) {
-//     let muroPosts = document.getElementById('myPosts');
-//     muroPosts.innerHTML = '';
-//     let postData = JSON.stringify(snapshot.val(),null,3);//tbm funciona un solo parametro
-//     postData = JSON.parse(postData);
-//     let postUIDs = Object.keys(postData);
-//     for(i=0; i<postUIDs.length; i++) {
-//       let mensaje = (postData[postUIDs[i]].message);
-//       muroPosts.innerHTML += '<li><b>' + mensaje + '</b></li>';
-//     }
-//   });
-// }
+function chargeFriendPosts() {
+  let usersIFollow = [];
+  firebase.database().ref('users/'+userUID+'/quienes-sigo')
+  .on('value', function(snapshot) {
+    let postData = JSON.stringify(snapshot.val(),null,3);//tbm funciona un solo parametro
+    postData = JSON.parse(postData);
+    let postUIDs = Object.keys(postData);
+    for(i=0; i<postUIDs.length; i++) {
+      let mensaje = (postData[postUIDs[i]].uidFollow);
+      usersIFollow.push(mensaje);
+    }
+    console.log(usersIFollow);
+    for(i=0; i< usersIFollow.length; i++) {
+      console.log(usersIFollow[i]);
+      firebase.database().ref('users/'+usersIFollow[i]+'/publicaciones')
+      .on('value', function(snapshot) {
+        let friendPosts = document.getElementById('myFriendsPost');
+        friendPosts.innerHTML = '';
+        let postDataFriends = JSON.stringify(snapshot.val(),null,3);//tbm funciona un solo parametro
+        postDataFriends = JSON.parse(postDataFriends);
+        // if(postDataFriends!=null) {
+          let postUIDs = Object.keys(postDataFriends);
+          console.log(postDataFriends);
+          for(i=0; i<postUIDs.length; i++) {
+            let mensaje = (postData[postUIDs[i]].message);
+            console.log(mensaje);
+            friendPosts.innerHTML += '<li><b>' + mensaje + '</b></li>';
+          }
+        // }
+      });
+    }
+  });
+}
 //mostrando la lista de usuarios registrados por busqueda
 document.getElementById('searchText').addEventListener('input', () =>{
   let wordSearch = document.getElementById('searchText').value;
@@ -96,6 +116,7 @@ function followPeople() {
     uidFollow
   });
 }
+//funcion para dejar de seguir a alguie
 
 document.getElementById('signOut').addEventListener('click', closeSession);
 //funcion para cerrar sesion
