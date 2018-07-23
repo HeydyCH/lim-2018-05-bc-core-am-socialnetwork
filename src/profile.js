@@ -22,7 +22,8 @@ function welcomeUser(uid) {
     document.getElementById("userName").innerHTML = userData.nombre;
     document.getElementById('userPhoto').innerHTML = "<img width='100px' src='"+userData.foto+"  '/>"
   })
-  chargePosts();
+  let muroPosts = document.getElementById('myPosts');
+  chargePosts(userUID,muroPosts);
   chargeFriendPosts();
 }
 //escribiendo publicaciones
@@ -37,13 +38,13 @@ function savePost() {
     optionValue,
     message
   });
-  chargePosts();
+  let muroPosts = document.getElementById('myPosts');
+  chargePosts(userUID, muroPosts);
 };
 //mostrando todos las publicaciones del usuario actual
-function chargePosts() {
+function chargePosts(userUID, muroPosts) {
   firebase.database().ref('users/'+userUID+'/publicaciones')
   .on('value', function(snapshot) {
-    let muroPosts = document.getElementById('myPosts');
     muroPosts.innerHTML = '';
     let postData = JSON.stringify(snapshot.val(),null,3);//tbm funciona un solo parametro
     postData = JSON.parse(postData);
@@ -56,35 +57,26 @@ function chargePosts() {
 }
 //mostrando todas las publicaciones de personas a las que sigo
 function chargeFriendPosts() {
-  let usersIFollow = [];
+  let usersIFollow =[];
   firebase.database().ref('users/'+userUID+'/quienes-sigo')
   .on('value', function(snapshot) {
+
+    let usersIFollow = [];
     let postData = JSON.stringify(snapshot.val(),null,3);//tbm funciona un solo parametro
     postData = JSON.parse(postData);
     let postUIDs = Object.keys(postData);
     for(i=0; i<postUIDs.length; i++) {
       let mensaje = (postData[postUIDs[i]].uidFollow);
+      console.log(mensaje);
       usersIFollow.push(mensaje);
+      console.log(usersIFollow);
     }
     console.log(usersIFollow);
+    let friendPosts = document.getElementById('myFriendsPost');
+    console.log(usersIFollow.length);
     for(i=0; i< usersIFollow.length; i++) {
       console.log(usersIFollow[i]);
-      firebase.database().ref('users/'+usersIFollow[i]+'/publicaciones')
-      .on('value', function(snapshot) {
-        let friendPosts = document.getElementById('myFriendsPost');
-        friendPosts.innerHTML = '';
-        let postDataFriends = JSON.stringify(snapshot.val(),null,3);//tbm funciona un solo parametro
-        postDataFriends = JSON.parse(postDataFriends);
-        // if(postDataFriends!=null) {
-          let postUIDs = Object.keys(postDataFriends);
-          console.log(postDataFriends);
-          for(i=0; i<postUIDs.length; i++) {
-            let mensaje = (postData[postUIDs[i]].message);
-            console.log(mensaje);
-            friendPosts.innerHTML += '<li><b>' + mensaje + '</b></li>';
-          }
-        // }
-      });
+      chargePosts(usersIFollow[i], friendPosts);
     }
   });
 }
@@ -115,6 +107,7 @@ function followPeople() {
   firebase.database().ref('users/'+userUID+'/quienes-sigo').push({
     uidFollow
   });
+  console.log(uidFollow);
 }
 //funcion para dejar de seguir a alguie
 
