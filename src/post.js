@@ -83,34 +83,55 @@ function mostrarPostUser(dbRefObjectUsersPosts, userUID, username) {
     if (objPost.hasOwnProperty('contenido')) {
       // var etiquetaName = document.createElement("span");
       // etiquetaName.innerHTML = userName;
+      let aux = 0;
       listposts.innerHTML += `
       <div>
       <textarea id=${snap.key} >${objPost.contenido}</textarea>
-      <button onclick="removePost('${snap.key}','${userUID}')" >DELETE</button>
-      <button onclick="editPost('${snap.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}')">Update</button>
+      <button  onclick="removePost('${snap.key}','${userUID}')" >DELETE</button>
+      <button id=${snap.key + 'b'} onclick="editPost('${snap.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snap.key + 'b'}')">Update</button>
       <select id="privateOptions">
         <option value="0">Amigos</option>
         <option value="1">Publico</option>
       </select>
       </div>
       `;
+      document.getElementById(snap.key).disabled = true;
+
     }
   })
 }
 
-
-function editPost(idPost, userUID, usuario, option) {
+function editPost(idPost, userUID, usuario, option, aux, btn) {
   console.log("voy a editar")
+  console.log(aux)
+  console.log(btn)
   // let boton = document.getElementById('boton');
   // boton.innerHTML = 'Editar';
   // let textareaModificar = document.getElementById('boton');
   // console.log(objPost)
-  console.log(idPost)
-  console.log(userUID)
-  console.log(usuario)
-  console.log(option)
+  // $("#idPost"+idPost).removeAttr("readonly");
+
+  // console.log(idPost)
+  // console.log(userUID)
+  // console.log(usuario)
+  // console.log(option)
 
   const newUpdate = document.getElementById(idPost);
+
+  const boton = document.getElementById(btn);
+  boton.innerHTML = 'Guardar';
+
+
+  if (aux == 0) {
+    console.log("false")
+    newUpdate.disabled = false;
+    aux = 1;
+    console.log(aux)
+  } else {
+    console.log("true")
+    newUpdate.disabled = true;
+    aux = 0;
+  }
 
   // console.log(newUpdate.value)
   const nuevoPost = {
@@ -132,25 +153,32 @@ function editPost(idPost, userUID, usuario, option) {
   firebase.database().ref().update(updatesUser);
   firebase.database().ref().update(updatesPost);
 
-
-
-
-
-
-
-
 }
 
 function removePost(idPost, userUID) {
   console.log("se va a borrar")
-  console.log(idPost)
-  console.log(userUID)
-  let dbRefObjectUsersPosts = firebase.database().ref().child('users-posts')
-  firebase.database().ref().child('/users-posts/' + userUID + '/' + idPost).remove();
-  firebase.database().ref().child('posts/' + idPost).remove();
-  while (listposts.firstChild) listposts.removeChild(listposts.firstChild);
-  mostrarPostUser(dbRefObjectUsersPosts, userUID)
-  alert('The user is deleted successfully!');
+
+
+  //Ingresamos un mensaje a mostrar
+  let mensaje = confirm("¿Deseas eliminar el POST");
+  //Detectamos si el usuario acepto el mensaje
+  if (mensaje) {
+    // alert("¡Gracias por aceptar!");
+    console.log(idPost)
+    console.log(userUID)
+    let dbRefObjectUsersPosts = firebase.database().ref().child('users-posts')
+    firebase.database().ref().child('/users-posts/' + userUID + '/' + idPost).remove();
+    firebase.database().ref().child('posts/' + idPost).remove();
+    while (listposts.firstChild) listposts.removeChild(listposts.firstChild);
+    mostrarPostUser(dbRefObjectUsersPosts, userUID)
+    // alert('The user is deleted successfully!');
+
+  }
+  //Detectamos si el usuario denegó el mensaje
+  else {
+    alert("¡Haz denegado la eliminacion del post !");
+  }
+
 }
 
 function mostrarPostUserPublic(dbRefObjectUsersPosts, userUID, userName) {
