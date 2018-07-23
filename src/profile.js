@@ -45,7 +45,7 @@ function savePost() {
 function chargePosts(userUID, muroPosts) {
   firebase.database().ref('users/'+userUID+'/publicaciones')
   .on('value', function(snapshot) {
-    muroPosts.innerHTML = '';
+    // muroPosts.innerHTML = '';
     let postData = JSON.stringify(snapshot.val(),null,3);//tbm funciona un solo parametro
     postData = JSON.parse(postData);
     let postUIDs = Object.keys(postData);
