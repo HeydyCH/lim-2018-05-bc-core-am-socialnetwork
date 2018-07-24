@@ -9,10 +9,11 @@
   <link rel="icon" type="image/jpg" href="../src/images/pregnant.png" >
   <link rel="stylesheet" type="text/css" media="screen" href="styleprofile.css" />
   <link rel="stylesheet" href="../src/fonts.css">
-  <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-  <link rel="stylesheet"
+  <!--Import Google Icon Font-->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+  <!--Materialize CSS-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
+  
 </head>
 <body>
   <!-- Navbar goes here -->
@@ -52,6 +53,37 @@
       <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
     </ul>
   </div>
+  <h2>
+    <span id="userEmail"></span>
+  </h2>
+  <header>
+
+
+    
+      <ul id="slide-out" class="side-nav">
+        <li><a class="waves-effect" href="#">Home</a></li>
+        <li><a href="#"><span class="segundo"><i class="icon icon-search"></i></span>Buscar</a></li>
+        <li><a href="#"><span class="tercero"><i class="icon icon-bell"></i></span>Notificaciones</a></li>
+        <li><a href="#"><span class="cuarto"><i class="icon icon-user"></i></span>Perfil</a></li>
+      </ul>
+      
+      <a class="btn" data-activates="slide-out"><i class="material-icons">Menu</i></a>
+
+
+    
+
+  </header>
+  <main>
+     <div class="container-comments">
+      <div class="comments">
+        <div class="photo-perfil">
+          <img src="..//src/images/mami.gif" alt="">
+        </div>
+        <div class="info-comments">
+          <div class="header">
+            <h4>Usuario Logueado</h4>
+            <h5>19 julio 2018</h5>
+          </div>
 
 
 
@@ -133,10 +165,11 @@
         </div>
   
       </div>
-            
+    </div>
+  </main>
+
   
-  <!---
- 
+
   <div class="container">
     <div id="userProfile"></div>
     <button id="close">Cerrar sesion</button>
@@ -156,13 +189,15 @@
   <div><span id="userName"></span></div>
   <span id="userPhoto"></span>
   <h2 id="userEmail"></h2>
-  !-->
   <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
   <script src="init-fbase.js"></script>
   <script src="post.js"></script>
   <script src="main.js"></script>
   <script src="postDOM.js"></script>
-  
+<!-- JQuery -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!--Materialize JS-->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
 </body>
 ​
 </html>
