@@ -78,3 +78,11 @@ function writeDatabase(user) {
   firebase.database().ref("users/" + usuario.uid)
   .set(usuario)
 }
+
+
+//Materialize
+
+$(document).ready(function () {
+  $(".btn").sideNav();
+});
+
