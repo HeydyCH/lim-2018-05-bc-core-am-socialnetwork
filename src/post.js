@@ -38,12 +38,17 @@ function savePost(user, optionValue) {
   console.log("guardando mi post ..... ")
   optionValue = optionValue.options[optionValue.selectedIndex].value;
   let contenidoNewPost = document.getElementById('inputPost').value
+  let datePosted = new Date();
   if (contenidoNewPost != '') {
     const post = {
       contenido: contenidoNewPost,
       estado: "feliz",
       optionValue,
-      usuario: user.displayName
+      usuario: user.displayName,
+      // fecha: datePosted.getFullYear() añooo
+      // fecha:(datePosted.getMonth() +1)  mes
+      // fecha: datePosted.getDate()  dia 
+      fecha:datePosted
     };
     console.log(post);
     console.log(optionValue);
@@ -89,10 +94,6 @@ function mostrarPostUser(dbRefObjectUsersPosts, userUID, username) {
       <textarea id=${snap.key} >${objPost.contenido}</textarea>
       <button  onclick="removePost('${snap.key}','${userUID}')" >DELETE</button>
       <button id=${snap.key + 'b'} onclick="editPost('${snap.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snap.key + 'b'}')">Update</button>
-      <select id="privateOptions">
-        <option value="0">Amigos</option>
-        <option value="1">Publico</option>
-      </select>
       </div>
       `;
       document.getElementById(snap.key).disabled = true;
