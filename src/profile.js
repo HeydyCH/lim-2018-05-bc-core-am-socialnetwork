@@ -20,7 +20,7 @@ function welcomeUser(uid) {
     console.log(userData);
     console.log(userData.nombre);
     document.getElementById("userName").innerHTML = userData.nombre;
-    document.getElementById('userPhoto').innerHTML = "<img width='100px' src='"+userData.foto+"  '/>"
+    document.getElementById('userPhoto').innerHTML = "<img width='100px' class='circle img-responsive' src='"+userData.foto+"  '/>"
   })
   let muroPosts = document.getElementById('myPosts');
   chargePosts(userUID,muroPosts);
@@ -51,7 +51,8 @@ function chargePosts(userUID, muroPosts) {
     let postUIDs = Object.keys(postData);
     for(i=0; i<postUIDs.length; i++) {
       let mensaje = (postData[postUIDs[i]].message);
-      muroPosts.innerHTML += '<li><b>' + mensaje + '</b></li>';
+      muroPosts.innerHTML += `<li class="collection-item avatar"><h5> ${mensaje} </h5>
+      <a href="#!" class="secondary-content"><i class="material-icons">favorite_border</i></a></li>`;
     }
   });
 }
@@ -92,10 +93,10 @@ document.getElementById('buttonSearch').addEventListener('click', ()=>{
       var user = s.val();
       if((user.nombre.toUpperCase()).indexOf(wordSearch.toUpperCase())!==-1){
         $('#userFilterList').append(`
-        <div>
-          <img width=100px src= ${user.foto} />
-          <p> ${user.nombre} </p>
-          <button value= ${user.uid} onclick= "followPeople()">Seguir</button>
+        <div class='row'>
+          <img class='col s4 m4 circle' width=100px class="circle" src= ${user.foto} />
+          <p class='col s6 m6'> ${user.nombre} </p>
+          <button class='btn col s2 m2' value= ${user.uid} onclick= "followPeople()">Seguir</button>
         </div>
         `);
       }
@@ -103,9 +104,15 @@ document.getElementById('buttonSearch').addEventListener('click', ()=>{
 })
 //funcion para almacenar uid de seguidores
 function followPeople() {
+  //amigos 0 si son amigos y 1 si no son amigos
   let uidFollow = event.target.value;
   firebase.database().ref('users/'+userUID+'/quienes-sigo').push({
-    uidFollow
+    uidFollow,
+    habilitado : 1
+  });
+  let userName = document.getElementById('userName').innerHTML;
+  firebase.database().ref('users/'+uidFollow+'/notificaciones').push({
+    message : userName + ' quiere ser tu amigo'
   });
   console.log(uidFollow);
 }

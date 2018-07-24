@@ -5,35 +5,42 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Page Title</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name = "viewport" content = "width = device-width, initial-scale = 1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
   <div class="container" id="userProfile">
     <div id="userData">
-        <h2>Hola <span id="userName"></span></h2>
-        <div id="userPhoto"></div>
+      <h3>Bienvenida</h3>
+      <div class="row">
+        <div class="col s6 m6" id="userPhoto"></div>
+        <h4 class="col s6 m6"><span id="userName"></span></h4>
+
+      </div>
     </div>
     <div id="userPosts">
       <h2>Mis publicaciones</h2>
-      <div id="myPosts"></div>
+      <div id="myPosts" class="collection"></div>
       <hr>
       <input id="currentPost" placeholder="Escribe lo que quieras publicar">
       <select id="privateOptions">
         <option value="0">Amigos</option>
         <option value="1">Publico</option>
       </select>
-      <button id="savePost">Publicar</button>
+      <button class="btn" id="savePost">Publicar</button>
     </div>
-    <div id="myFriendsPost">
+    <div id="myFriendsPost" class="collection">
       <h2>Publicaciones de personas a quienes sigo</h2>
     </div>
     <hr>
   </div>
   <div class="container">
     <input type="text" id="searchText" placeholder="Search...">
-    <button id="buttonSearch">Look</button>
+    <button class="btn" id="buttonSearch">Look</button>
     <div id="userFilterList"></div>
   </div>
-  <button id="signOut">Cerrar sesion</button>
+  <button class="btn red" id="signOut">Cerrar sesion</button>
 
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -43,5 +50,6 @@
   <script src="muro.js"></script>
   <script src="anterior/app.js"></script>
   <script src="profile.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
 </body>
 </html>
