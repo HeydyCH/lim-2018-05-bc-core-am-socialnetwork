@@ -94,9 +94,9 @@ document.getElementById('buttonSearch').addEventListener('click', ()=>{
       if((user.nombre.toUpperCase()).indexOf(wordSearch.toUpperCase())!==-1){
         $('#userFilterList').append(`
         <div class='row'>
-          <img class='col s4 m4 circle' width=100px class="circle" src= ${user.foto} />
-          <p class='col s6 m6'> ${user.nombre} </p>
-          <button class='btn col s2 m2' value= ${user.uid} onclick= "followPeople()">Seguir</button>
+          <img class='col s4 m2 circle' width=100px class="circle" src= ${user.foto} />
+          <p class='col s6 m10'> ${user.nombre} </p>
+          <button class='btn-small col s2 m2' value= ${user.uid} onclick= "followPeople()">Seguir</button>
         </div>
         `);
       }
