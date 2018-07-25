@@ -80,12 +80,11 @@ function writeDatabase(user) {
 }
 
 
-//Materialize
-
+//Menu Materialize//
 $(document).ready(function () {
   $(".btn").sideNav({
     menuWidth: 300,
-    edge: 'rigth'
+    edge: 'left'
   });
 });
-
+ //Menu Materialize//
