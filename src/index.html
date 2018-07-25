@@ -7,11 +7,17 @@
   <meta name = "viewport" content = "width = device-width, initial-scale = 1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <!-- Empieza el login -->
-  <div class="container row">
-    <div class="col s0 m6">
+  <nav>
+    <div class="container-fluid section color nav-wrapper">
+      <img class="img-responsive" width="80px"src="images/pregnancy.png" alt="">MomCenter
+    </div>
+  </nav>
+  <div class="container row ">
+    <div class="col m6 hide-on-small-only	">
       <div class="card horizontal">
         <div class="row">
           <div class="card-image col m3">
@@ -49,7 +55,7 @@
         <input id="email" type="email" placeholder="Ingrese email" class="formulario">
         <input id="password" type="password" placeholder="Ingrese contraseña" class="formulario">
         <p>Aún no tienes cuenta, registrate!</p>
-        <button class="btn teal accent-2" id="login">Acceder</button>
+        <button class="btn" id="login">Acceder</button>
         <button class="btn" id="loginGoogle">Google</button>
         <button class="btn" id="loginFacebook">Facebook</button>
         <button class="btn" id="registerUser">Registrar</button>
