@@ -23,6 +23,7 @@ function welcomeUser(uid) {
     document.getElementById('userPhoto').innerHTML = "<img width='100px' class='circle img-responsive' src='"+userData.foto+"  '/>"
   })
   let muroPosts = document.getElementById('myPosts');
+  muroPosts.innerHTML = '';
   chargePosts(userUID,muroPosts);
   chargeFriendPosts();
 }
@@ -39,13 +40,13 @@ function savePost() {
     message
   });
   let muroPosts = document.getElementById('myPosts');
+  muroPosts.innerHTML = '';
   chargePosts(userUID, muroPosts);
 };
 //mostrando todos las publicaciones del usuario actual
 function chargePosts(userUID, muroPosts) {
   firebase.database().ref('users/'+userUID+'/publicaciones')
   .on('value', function(snapshot) {
-    muroPosts.innerHTML = '';
     let postData = JSON.stringify(snapshot.val(),null,3);//tbm funciona un solo parametro
     postData = JSON.parse(postData);
     let postUIDs = Object.keys(postData);
@@ -56,31 +57,7 @@ function chargePosts(userUID, muroPosts) {
     }
   });
 }
-//mostrando todas las publicaciones de personas a las que sigo
-function chargeFriendPosts() {
-  let usersIFollow =[];
-  firebase.database().ref('users/'+userUID+'/quienes-sigo')
-  .on('value', function(snapshot) {
 
-    let usersIFollow = [];
-    let postData = JSON.stringify(snapshot.val(),null,3);//tbm funciona un solo parametro
-    postData = JSON.parse(postData);
-    let postUIDs = Object.keys(postData);
-    for(i=0; i<postUIDs.length; i++) {
-      let mensaje = (postData[postUIDs[i]].uidFollow);
-      console.log(mensaje);
-      usersIFollow.push(mensaje);
-      console.log(usersIFollow);
-    }
-    console.log(usersIFollow);
-    let friendPosts = document.getElementById('myFriendsPost');
-    console.log(usersIFollow.length);
-    for(i=0; i< usersIFollow.length; i++) {
-      console.log(usersIFollow[i]);
-      chargePosts(usersIFollow[i], friendPosts);
-    }
-  });
-}
 //mostrando la lista de usuarios registrados por busqueda
 document.getElementById('searchText').addEventListener('input', () =>{
   let wordSearch = document.getElementById('searchText').value;
