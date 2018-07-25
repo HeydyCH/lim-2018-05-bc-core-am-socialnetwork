@@ -1,4 +1,4 @@
-/*Header*/
+/*Header
 body{
   margin: 0;
   padding: 0;
@@ -39,7 +39,7 @@ body{
   color:  #333333;
 }
 
-/*Menu*/
+/*Menu
 *{
   margin: 0;
   padding: 0;
@@ -135,7 +135,7 @@ body{
 
 }
 
-/*Comment*/
+/*Comment
 main{
   width: 100%;
   max-width: 800px;

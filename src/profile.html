@@ -8,70 +8,70 @@
   <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
   <link rel="icon" type="image/jpg" href="../src/images/pregnant.png" >
   <link rel="stylesheet" type="text/css" media="screen" href="styleprofile.css" />
-  <link rel="stylesheet" href="../src/fonts.css">
+  <!--<link rel="stylesheet" href="../src/fonts.css">
   <!--Import Google Icon Font-->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!--Materialize CSS-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
+  <script src="main.js"></script>
   
 </head>
 <body>
-  <!-- Navbar goes here -->
-
-    <!-- Page Layout here -->
-    <div class="row">
-      <div class="grid-example col s12"><span class="flow-text">I am always full-width (col s12)</span></div>
-      <div class="grid-example col s12 m6"><span class="flow-text">I am full-width on mobile (col s12 m6)</span></div>
-      
-      <!--Cabecera-->
+  
+      <!--Cabecera
   <div class="log">
       <img class= "logo" src="../src/images/pregnant.png" alt="">
       <p class="profile">Mom Center</p>
-    </div>
+  </div>
     <h2>
       <span id="userEmail"></span>
     </h2>
-
-        <div class="col s12 m4 l3"> <!-- Note that "m4 l3" was added -->
-          <!-- Grey navigation panel
+Cabecera-->
   
-                This content will be:
-            3-columns-wide on large screens,
-            4-columns-wide on medium screens,
-            12-columns-wide on small screens  -->
-  hola
-  <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
-
-  <div class="fixed-action-btn">
-    <a class="btn-floating btn-large red">
-      <i class="large material-icons">mode_edit</i>
-    </a>
-    <ul>
-      <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
-      <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
-      <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
-      <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
-    </ul>
-  </div>
-  <h2>
-    <span id="userEmail"></span>
-  </h2>
-  <header>
 
 
     
-      <ul id="slide-out" class="side-nav">
-        <li><a class="waves-effect" href="#">Home</a></li>
-        <li><a href="#"><span class="segundo"><i class="icon icon-search"></i></span>Buscar</a></li>
-        <li><a href="#"><span class="tercero"><i class="icon icon-bell"></i></span>Notificaciones</a></li>
-        <li><a href="#"><span class="cuarto"><i class="icon icon-user"></i></span>Perfil</a></li>
+      <ul id="slide-out" class="side-nav-fixed">
+        <li>
+          <div class="user-view">
+            <div class="background">
+              <img src="images/mami.gif">
+            </div>
+            <a href="#"><img class="circle" src="images/user.png"></a>
+            <a href="##"><span class="whîte-text name">Fiorella Effio</span></a>
+            <a href="#"><span class="white-text email">fiorellaeffio@gmail.com</span></a>
+          </div>
+        </li>
+
+
+        <li><a class="waves-effect" href="#">home</a></li>
+        <li><div class="divider"></div></li>
+        <li><a href="#"><i class="material-icons"></i>Buscar</a></li>
+        <li><a class="subheader" href="#"><i class="icon icon-bell"></i>Notificaciones</a></li>
+        <li><a href="#"><i class="icon icon-user"></i>Perfil</a></li>
+      
+        <li class="no-padding">
+          <ul class="collapsible collapsible-accordion">
+            <li>
+              <a class="collapsible-header">Dropdown<i class="material-icons">arrow-drp-down</i></a>
+              <div class="collapsible-body">
+                <ul>
+                  <li><a href="#">Link1</a></li>
+                  <li><a href="#">Link1</a></li>
+                  <li><a href="#">Link1</a></li>
+
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </li>
       </ul>
       
-      <a class="btn" data-activates="slide-out"><i class="material-icons">Menu</i></a>
+      <a class="btn hide-on-large-only" data-activates="slide-out"><i class="material-icons">menu</i></a>
 
 
     
-
+<!--
   </header>
   <main>
      <div class="container-comments">
@@ -91,17 +91,6 @@
 
 
 
-  <header>
-      <nav>
-        <ul>
-          <li><a href="#"><span class="primero"><i class="icon icon-home3"></i></span>Inicio</a></li>
-          <li><a href="#"><span class="segundo"><i class="icon icon-search"></i></span>Buscar</a></li>
-          <li><a href="#"><span class="tercero"><i class="icon icon-bell"></i></span>Notificaciones</a></li>
-          <li><a href="#"><span class="cuarto"><i class="icon icon-user"></i></span>Perfil</a></li>
-        </ul>
-      </nav>
-    </header>
-
         </div>
   
         <div class="col s12 m8 l9"> <!-- Note that "m8 l9" was added -->
@@ -111,6 +100,7 @@
             9-columns-wide on large screens,
             8-columns-wide on medium screens,
             12-columns-wide on small screens  -->
+            <!--
             <main>
                 <h2>Pregunta del mes</h2>
                 <hr class="line">

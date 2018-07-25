@@ -83,6 +83,9 @@ function writeDatabase(user) {
 //Materialize
 
 $(document).ready(function () {
-  $(".btn").sideNav();
+  $(".btn").sideNav({
+    menuWidth: 300,
+    edge: 'rigth'
+  });
 });
 
