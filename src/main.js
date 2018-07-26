@@ -4,13 +4,16 @@ function login(email, password) {
     .then(function () {
       console.log("ingrese");
       let user = firebase.auth().currentUser;
-      welcomeUser();
       document.location.href = 'profile.html'
     })
     .catch(function (error) {
       var errorMessage = error.message;
       console.log(errorMessage);
     });
+}
+
+function otrapagina(){
+  document.location.href = 'profile.html'
 }
 
 // Funcion para la creación de nuevos usuarios con CORREO
@@ -23,6 +26,7 @@ function userRegister(email,password,name){
           console.log('enviando correo .... !!')
           alert("Revisa tu bandeja de entrada por favor :D");
           writeDatabase(user);
+          otrapagina();
       })
     })
     .catch(function (error) {
@@ -38,9 +42,9 @@ function userRegisterGoogle(){
     .signInWithPopup(providergoogle)
     .then(function(result) {
       let user = firebase.auth().currentUser;
-      writeDatabase(user);
-      document.location.href = 'profile.html'
-      welcomeUser();
+      console.log("no corre con gmail")
+      writeDatabase(user)
+      otrapagina();
     });
 }
 
@@ -51,10 +55,11 @@ function userRegisterFacebook(){
     .signInWithPopup(providerfb)
     .then(function(result) {
       let user = firebase.auth().currentUser;
-      writeDatabase(user);
-      welcomeUser();
-      document.location.href = 'profile.html'
+      console.log("no corre con facebook")
+      writeDatabase(user)
+      otrapagina();
   });
+  
 }
 
 //Escribiendo en la BD con los DATOS del USUARIO

@@ -1,4 +1,3 @@
-
 initFirebase();
 
 document.getElementById("login").addEventListener("click", () => {

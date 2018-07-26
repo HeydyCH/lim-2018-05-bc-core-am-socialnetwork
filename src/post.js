@@ -1,46 +1,47 @@
 // console.log("ya estoy en post.js")
 
+// function dUser(userUID) {
+//   console.log(userUID);
+//   let dbRefObjectUsers = firebase.database().ref().child('users/');
+//   let dataUser = dbRefObjectUsers.child(userUID); // por mejorar para q no sea especifico
+//   dataUser.on('value', snap => {
+//     let userData = JSON.stringify(snap.val(), null, 3); //tbm funciona un solo parametro
+//     console.log(userData);
+//     userData = JSON.parse(userData);
+//     console.log(userData);
+//     console.log(userData.nombre);
+//     document.getElementById("userName").innerHTML = userData.nombre;
+//     document.getElementById('userPhoto').innerHTML = "<img width='100px' src='" + userData.foto + "  '/>";
+//   })
+// }
+
 function welcomeUsers() {
-
   console.log(" welcomeUsers --> bienvenida mamita :) :3 !! ");
-
   //  Base de datos ACTUAL
   //  -----------------------
   // Mostrando la lista sincronizada de objetos de users-posts 
 
   const dbRefObjectUsersPosts = firebase.database().ref().child('users-posts')
-  // var profile = firebase.database().ref().child('users/'+user.uid);
-  const dbRefObjectUsers = firebase.database().ref().child('users/');
-  const dataUser = dbRefObjectUsers.child("7gDR0YSny1SWvKyen6Nz81XT9292"); // por mejorar para q no sea especifico
 
   dbRefObjectUsersPosts.on('value', snap => {
     preObject.innerHTML = JSON.stringify(snap.val(), null, 3);
   });
 
-  dataUser.on('value', snap => {
-    let userData = JSON.stringify(snap.val(), null, 3); //tbm funciona un solo parametro
-    //   console.log(userData);
-    userData = JSON.parse(userData);
-    //   console.log(userData);
-    console.log(userData.nombre);
-    document.getElementById("userName").innerHTML = userData.nombre;
-    document.getElementById('userPhoto').innerHTML = "<img width='100px' src='" + userData.foto + "  '/>";
-  })
+  nameUser.innerHTML = "HOLA MAMITA";
 
-  nameUser.innerHTML = "hola mundo";
-
-  mostrarPostUser(dbRefObjectUsersPosts);
+  // mostrarPostUser(dbRefObjectUsersPosts);
 
 }
 
-function savePost(userUID,optionValue){
+function savePost(user, optionValue) {
 
   console.log("guardando mi post ..... ")
   optionValue = optionValue.options[optionValue.selectedIndex].value;
   const post = {
     contenido: document.getElementById('inputPost').value,
     estado: "feliz",
-    optionValue
+    optionValue ,
+    usuario:user.displayName
   };
   console.log(post);
 
@@ -48,25 +49,35 @@ function savePost(userUID,optionValue){
 
   const updates = {};
   updates['/posts/' + newPostKey] = post;
-  updates['/users-posts/' + userUID + '/' + newPostKey] = post;
+  updates['/users-posts/' + user.uid + '/' + newPostKey] = post;
 
   document.getElementById('inputPost').value = '';
 
   firebase.database().ref().update(updates);
 
-  // ---------------------------------------------------------------
-  
+}
+
+function mostrarPostUser(dbRefObjectUsersPosts, userUID, userName){
+
+  console.log("voy a mostrar todos mis posts publicos y privados")
+
+  // mostrando el post del usuario logueado 
+  // Sincronizar los cambios del objecto
   const postGroup1 = dbRefObjectUsersPosts.child(userUID);
+  // console.log(postGroup1)console.log("####")
+
   postGroup1.on('child_added', snap => {
-    // console.log("ya entre");
-    console.log(snap.val());
+    // console.log(snap.val());
     let objPost = snap.val();
     // console.log(objPost);
     // console.log(snap.key);
+
     if (objPost.hasOwnProperty('contenido')) {
 
-      var btnUpdate = document.createElement("input");
+      // var etiquetaName = document.createElement("span");
+      // etiquetaName.innerHTML = userName;
 
+      var btnUpdate = document.createElement("input");
       btnUpdate.setAttribute("value", "Update");
       btnUpdate.setAttribute("type", "button");
 
@@ -74,154 +85,114 @@ function savePost(userUID,optionValue){
       btnDelete.setAttribute("value", "Delete");
       btnDelete.setAttribute("type", "button");
 
-      let contPost = document.createElement('div');
-      let textPost = document.createElement('textarea')
+      var contPost = document.createElement('div');
+      var textPost = document.createElement('textarea')
+      textPost.setAttribute("id", snap.key);
 
       textPost.innerText = snap.val();
-      textPost.setAttribute("id", snap.key);
 
       textPost.innerHTML = objPost.contenido;
 
+      // contPost.appendChild(etiquetaName);
       contPost.appendChild(textPost);
       contPost.appendChild(btnUpdate);
       contPost.appendChild(btnDelete);
+
       listposts.appendChild(contPost);
+
     }
 
     btnDelete.addEventListener('click', () => {
-
-      console.log("se va a borrar")
-      console.log(snap.key)
-
-      firebase.database().ref().child('/user-posts/' + "8f9dlKpokuSFnY9kCTwzZsozH7v1" + '/' + snap.key).remove();
+      // console.log("se va a borrar")
+      // console.log(snap.key)
+      // console.log(userUID);
+      firebase.database().ref().child('/users-posts/' + userUID + '/' + snap.key).remove();
       firebase.database().ref().child('posts/' + snap.key).remove();
 
-      // while (postGroup1.firstChild) posts.removeChild(postGroup1.firstChild);
-
+      // console.log(listposts);
+      while (listposts.firstChild) listposts.removeChild(listposts.firstChild);
+      mostrarPostUser(dbRefObjectUsersPosts, userUID)
       alert('The user is deleted successfully!');
-
-      // const pToRemove = document.getElementById(snap.key);
-      // pToRemove.remove();
-
-
     });
 
     btnUpdate.addEventListener('click', () => {
-      const newUpdate = document.getElementById(newPost);
+
+      // console.log("voy a editar")
+      // console.log(snap.key)
+      // console.log(postGroup1)
+
+      let objPost = snap.val();
+      // console.log(objPost);
+      // console.log(objPost.optionValue)
+
+      const newUpdate = document.getElementById(snap.key);
+
+      // console.log(newUpdate.value)
       const nuevoPost = {
-        body: newUpdate.value,
+        contenido: newUpdate.value,
+        estado: "feliz",
+        optionValue: objPost.optionValue,
+        usuario:userName
+
       };
+
+      console.log(nuevoPost)
 
       var updatesUser = {};
       var updatesPost = {};
 
-      updatesUser['/user-posts/' + userId + '/' + newPost] = nuevoPost;
-      updatesPost['/posts/' + newPost] = nuevoPost;
+      updatesUser['/users-posts/' + userUID + '/' + snap.key] = nuevoPost;
+      updatesPost['/posts/' + snap.key] = nuevoPost;
 
       firebase.database().ref().update(updatesUser);
       firebase.database().ref().update(updatesPost);
 
     });
-
 
   })
 
 }
 
-function mostrarPostUser(dbRefObjectUsersPosts) {
+function mostrarPostUserPublic(dbRefObjectUsersPosts, userUID, userName) {
 
-  console.log("voy a mostrar todos mis posts publicos y privados")
+  console.log("publicos y privados")
 
   // mostrando el post del usuario logueado 
-
   // Sincronizar los cambios del objecto
+  const postGroup1 = dbRefObjectUsersPosts.child(userUID);
+  // console.log(postGroup1)console.log("####")
 
-  // *********************** 
-  const postGroup1 = dbRefObjectUsersPosts.child("436egotGA3QEMdf0iaGwpmMazVc2");
-  // console.log(postGroup1)
+  let dbRefObjectUsers = firebase.database().ref('posts/');
 
-  console.log("####")
-
-  postGroup1.on('child_added', snap => {
-    // console.log("ya entre");
-    console.log(snap.val());
+  dbRefObjectUsers.on('child_added', snap => {
+    // console.log(snap.val());
     let objPost = snap.val();
     // console.log(objPost);
+    // console.log(objPost.optionValue);
     // console.log(snap.key);
-    if (objPost.hasOwnProperty('contenido')) {
 
-      var btnUpdate = document.createElement("input");
+    if (objPost.optionValue == 1) {
 
-      btnUpdate.setAttribute("value", "Update");
-      btnUpdate.setAttribute("type", "button");
+      // var etiquetaName = document.createElement("span");
+      // etiquetaName.innerHTML = userName;
 
-      var btnDelete = document.createElement("input");
-      btnDelete.setAttribute("value", "Delete");
-      btnDelete.setAttribute("type", "button");
-
-      let contPost = document.createElement('div');
-      let textPost = document.createElement('textarea')
+      var contPost = document.createElement('div');
+      var textPost = document.createElement('textarea')
+      textPost.setAttribute("id", snap.key);
 
       textPost.innerText = snap.val();
-      textPost.setAttribute("id", snap.key);
 
       textPost.innerHTML = objPost.contenido;
 
+      // contPost.appendChild(etiquetaName);
       contPost.appendChild(textPost);
-      contPost.appendChild(btnUpdate);
-      contPost.appendChild(btnDelete);
-      listposts.appendChild(contPost);
+
+      listPostsGeneral.appendChild(contPost);
+
     }
 
-    btnDelete.addEventListener('click', () => {
-
-      console.log("se va a borrar")
-      console.log(snap.key)
-
-      firebase.database().ref().child('/user-posts/' + "8f9dlKpokuSFnY9kCTwzZsozH7v1" + '/' + snap.key).remove();
-      firebase.database().ref().child('posts/' + snap.key).remove();
-
-      // while (postGroup1.firstChild) posts.removeChild(postGroup1.firstChild);
-
-      alert('The user is deleted successfully!');
-
-      // const pToRemove = document.getElementById(snap.key);
-      // pToRemove.remove();
-
-
-    });
-
-    btnUpdate.addEventListener('click', () => {
-      const newUpdate = document.getElementById(newPost);
-      const nuevoPost = {
-        body: newUpdate.value,
-      };
-
-      var updatesUser = {};
-      var updatesPost = {};
-
-      updatesUser['/user-posts/' + userId + '/' + newPost] = nuevoPost;
-      updatesPost['/posts/' + newPost] = nuevoPost;
-
-      firebase.database().ref().update(updatesUser);
-      firebase.database().ref().update(updatesPost);
-
-    });
-
-
-  })
-
-  console.log("--------------")
-  // postGroup.on('child_changed', snap => {
-  //     const pChanged = document.getElementById(snap.key);
-  //     pChanged.innerHTML = snap.val();
-  // })
-
-  // postGroup.on('child_changed', snap => {
-  //     const pToRemove = document.getElementById(snap.key);
-  //     pToRemove.remove();
-  // })
-
+  });
+ 
 }
 
 function close() {

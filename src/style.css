@@ -70,9 +70,9 @@ body{
   opacity: 0.8;
   cursor: pointer;
   margin-bottom: 0;
-  background-color: #8D008D;
+  background-color: #4d4dff;
   font-size: 18px;
-  color: #ffe6ff;
+  color: white;
   border-radius: 5px;
 }
 #loginGoogle{
