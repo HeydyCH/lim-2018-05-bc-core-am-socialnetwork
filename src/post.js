@@ -84,6 +84,7 @@ function mostrarPostUser(dbRefObjectUsersPosts, userUID, username) {
     var objPost = snap.val();
     console.log(objPost);
     // console.log(snap.key);
+    // listposts.innerHTML = '';
 
     if (objPost.hasOwnProperty('contenido')) {
       // var etiquetaName = document.createElement("span");
