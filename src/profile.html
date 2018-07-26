@@ -4,29 +4,83 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Page Title</title>
+  <link rel="icon" type="image/jpg" href="../src/images/pregnant.png">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name = "viewport" content = "width = device-width, initial-scale = 1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
   <!-- Header logo y cerrar sesion -->
-  <nav class="nav-extended">
-    <div class="nav-wrapper">
-      <a href="#" class="brand-logo">
-        <img src="images/pregnancy.png" width="80px">
-      </a>
-      <i class="material-icons right" id="signOut">exit_to_app</i>
-    </div>
-    <div class="nav-content">
-      <ul class="tabs tabs-transparent">
-        <li class="tab"><a href="#home">Inicio</a></li>
-        <li class="tab"><a class="active" href="#search">Busqueda</a></li>
-        <li class="tab disabled"><a href="#notifications">Notificaciones</a></li>
-        <li class="tab"><a href="#userProfile">Mi perfil</a></li>
+  <ul id="slide-out" class="side-nav fixed">
+    <li>
+      <div class="user-view">
+        <div class="background">
+          <img class="responsive-img" src="images/banner.jpg">
+        </div>
+        <a href="#">
+          <div class="" id="userPhoto"></div>
+        </a>
+        <a href="##">
+          <span class="white-text name" id="userName"></span>
+        </a>
+        <a href="#">
+          <span class="white-text email" id="userEmail"></span>
+        </a>
+      </div>
+    </li>
+
+
+    <li>
+      <a class="waves-effect" href="#">Menu</a>
+    </li>
+    <li>
+      <div class="divider"></div>
+    </li>
+    <li>
+      <a href="#"><i class="material-icons">home</i>Home</a>
+    </li>
+    <li>
+      <a href="#"><i class="material-icons">search</i>Buscar</a>
+    </li>
+    <li>
+      <a href="#"><i class="material-icons">notifications</i>Notificaciones</a>
+    </li>
+    <li>
+      <a href="#"><i class="material-icons">person</i>Perfil</a>
+    </li>
+    <li>
+      <a href="#"><i class="material-icons">exit_to_app</i>Salir</a>
+    </li>
+
+
+    <li class="no-padding">
+      <ul class="collapsible collapsible-accordion">
+        <li>
+          <a class="collapsible-header">Mas<i class="material-icons">arrow_drop_down</i></a>
+          <div class="collapsible-body">
+            <ul>
+              <li>
+                <a href="#">Acerca de Mom Center</a>
+              </li>
+              <li>
+                <a href="#">Ayuda</a>
+              </li>
+              <li>
+                <a href="#">Terminos y condiciones</a>
+              </li>
+
+            </ul>
+          </div>
+        </li>
       </ul>
-    </div>
-  </nav>
+    </li>
+  </ul>
+
+  <a class="btn hide-on-large-only" data-activates="slide-out">
+    <i class="material-icons">menu</i>
+  </a>
+  <!-- termina nav -->
   <div class="container" id="home">
     <input id="currentPost" placeholder="Escribe lo que quieras publicar">
     <select id="privateOptions">
@@ -60,12 +114,15 @@
       <div id="myPosts" class="collection"></div>
     </div>
   </div>
-
+  <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous">
   </script>
-  <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
+
+  <script src="main.js"></script>
   <script src="muro.js"></script>
   <script src="anterior/app.js"></script>
   <script src="search.js"></script>

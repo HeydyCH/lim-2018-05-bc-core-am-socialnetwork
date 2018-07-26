@@ -21,6 +21,7 @@ function welcomeUser(uid) {
     console.log(userData.nombre);
     document.getElementById("userName").innerHTML = userData.nombre;
     document.getElementById('userPhoto').innerHTML = "<img width='100px' class='circle img-responsive' src='"+userData.foto+"  '/>"
+    document.getElementById('userEmail').innerHTML = userData.email;
   })
   let muroPosts = document.getElementById('myPosts');
   muroPosts.innerHTML = '';
