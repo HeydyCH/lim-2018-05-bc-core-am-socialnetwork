@@ -1,14 +1,4 @@
-// Inicializando  Firebase
-var config = {
-  apiKey: "AIzaSyC4saWEKhESE7xPJUu-o02qa9a5Oh3y1yA",
-  authDomain: "usuarios-b983e.firebaseapp.com",
-  databaseURL: "https://usuarios-b983e.firebaseio.com",
-  projectId: "usuarios-b983e",
-  storageBucket: "usuarios-b983e.appspot.com",
-  messagingSenderId: "953796606000"
-};
-firebase.initializeApp(config);
-
+initFirebase();
 document.getElementById("login").addEventListener("click", login);
 document.getElementById("userRegister").style.display = "none" ;
 // Funcion de Inicio de Sesion para usuario con correo registrado

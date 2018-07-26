@@ -1,18 +1,9 @@
 // Inicializando  Firebase
-var config = {
-  apiKey: "AIzaSyC4saWEKhESE7xPJUu-o02qa9a5Oh3y1yA",
-  authDomain: "usuarios-b983e.firebaseapp.com",
-  databaseURL: "https://usuarios-b983e.firebaseio.com",
-  projectId: "usuarios-b983e",
-  storageBucket: "usuarios-b983e.appspot.com",
-  messagingSenderId: "953796606000"
-};
-firebase.initializeApp(config);
+initFirebase();
 let userUID = localStorage.currentUser;
 welcomeUser(userUID);
 //redireccionando al muro
 function welcomeUser(uid) {
-  console.log(uid);
   var profile = firebase.database().ref().child('users/'+uid);
   profile.on('value', snap => {
     let userData = JSON.stringify(snap.val(),null,3);//tbm funciona un solo parametro
@@ -48,23 +39,49 @@ function savePost() {
 //mostrando todos las publicaciones del usuario actual
 function chargePosts(userUID, muroPosts) {
   firebase.database().ref('users/'+userUID+'/publicaciones')
-  .on('value', function(snapshot) {
-    let postData = JSON.stringify(snapshot.val(),null,3);//tbm funciona un solo parametro
-    postData = JSON.parse(postData);
-    let postUIDs = Object.keys(postData);
-    var profile = firebase.database().ref().child('users/'+userUID);
-    profile.on('value', snap => {
-      let userData = JSON.stringify(snap.val(),null,3);//tbm funciona un solo parametro
-      userData = JSON.parse(userData);
-      for(i=0; i<postUIDs.length; i++) {
-        let mensaje = (postData[postUIDs[i]].message);
-        muroPosts.innerHTML += "<img width='100px' class='circle img-responsive' src='"+userData.foto+"  '/>";
-        muroPosts.innerHTML += `
-        <li class="collection-item avatar"><h5> ${mensaje} </h5>
-        <a href="#!" class="secondary-content"><i class="material-icons">favorite_border</i></a></li>`;
-      }
-    })
+  .on('child_added', function(snapshot) {
+     var objPost = snapshot.val();
+     console.log(objPost);
+     let aux = 0;
+     var profile = firebase.database().ref().child('users/'+userUID);
+     profile.on('value', snap => {
+       let userData = JSON.stringify(snap.val(),null,3);//tbm funciona un solo parametro
+       userData = JSON.parse(userData);
+       muroPosts.innerHTML += "<img width='100px' class='circle img-responsive' src='"+userData.foto+"  '/>";
+       muroPosts.innerHTML += `
+       <div>
+       <textarea id=${snapshot.key} class="collection-item avatar">${objPost.message}</textarea>
+       <a href="#!" class="secondary-content"><i class="material-icons">favorite_border</i></a></li>
+       <button  onclick="removePost('${snapshot.key}','${userUID}')" >DELETE</button>
+       <button id=${snapshot.key + 'b'} onclick="editPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key + 'b'}')">Update</button>
+       </div>
+       `;
+       document.getElementById(snapshot.key).disabled = true;
+     })
   });
+}
+//eliminar post
+function removePost(idPost, userUID) {
+ console.log("se va a borrar")
+ //Ingresamos un mensaje a mostrar
+ let mensaje = confirm("¿Deseas eliminar el POST");
+ //Detectamos si el usuario acepto el mensaje
+ if (mensaje) {
+   // alert("¡Gracias por aceptar!");
+   console.log(idPost)
+   console.log(userUID)
+   let dbRefObjectUsersPosts = firebase.database().ref().child('users-posts')
+   firebase.database().ref().child('users/' + userUID + '/publicaciones/' + idPost).remove();
+   // firebase.database().ref().child('posts/' + idPost).remove();
+   muroPosts = document.getElementById('myFriendsPost');
+   while (muroPosts.firstChild) muroPosts.removeChild(muroPosts.firstChild);
+   chargePosts(userUID, muroPosts);
+   // alert('The user is deleted successfully!');
+ }
+ //Detectamos si el usuario denegó el mensaje
+ else {
+   alert("¡Haz denegado la eliminacion del post !");
+ }
 }
 //cargar las Notificaciones
 function chargeNotifications() {
@@ -130,7 +147,7 @@ function followPeople() {
   console.log(uidFollow);
 }
 //funcion para dejar de seguir a alguie
-
+//funciones para los botones de redireccionamiento
 document.getElementById('signOut').addEventListener('click', closeSession);
 //funcion para cerrar sesion
 function closeSession() {
@@ -146,7 +163,7 @@ function closeSession() {
 document.getElementById('btn-home').addEventListener('click', redirectHome);
 function redirectHome() {
   document.getElementById('home').style.display = 'block';
-  document.getElementById('notifications').style.display = 'none';
+  document.getElementById('myNotifications').style.display = 'none';
   document.getElementById('search').style.display = 'none';
   document.getElementById('userProfile').style.display = 'none';
 }
@@ -154,7 +171,7 @@ function redirectHome() {
 document.getElementById('btn-search').addEventListener('click', redirectSearch);
 function redirectSearch() {
   document.getElementById('home').style.display = 'none';
-  document.getElementById('notifications').style.display = 'none';
+  document.getElementById('myNotifications').style.display = 'none';
   document.getElementById('search').style.display = 'block';
   document.getElementById('userProfile').style.display = 'none';
 }
@@ -162,7 +179,7 @@ function redirectSearch() {
 document.getElementById('btn-notification').addEventListener('click', redirectNotification);
 function redirectNotification() {
   document.getElementById('home').style.display = 'none';
-  document.getElementById('notifications').style.display = 'block';
+  document.getElementById('myNotifications').style.display = 'block';
   document.getElementById('search').style.display = 'none';
   document.getElementById('userProfile').style.display = 'none';
 }
@@ -170,11 +187,11 @@ function redirectNotification() {
 document.getElementById('btn-userProfile').addEventListener('click', redirectProfile);
 function redirectProfile() {
   document.getElementById('home').style.display = 'none';
-  document.getElementById('notifications').style.display = 'none';
+  document.getElementById('myNotifications').style.display = 'none';
   document.getElementById('search').style.display = 'none';
   document.getElementById('userProfile').style.display = 'block';
 }
 
-document.getElementById('notifications').style.display = 'none';
+document.getElementById('myNotifications').style.display = 'none';
 document.getElementById('search').style.display = 'none';
 document.getElementById('userProfile').style.display = 'none';
