@@ -1,3 +1,4 @@
+
 /*Header
 body{
   margin: 0;
@@ -7,11 +8,12 @@ body{
   position: absolute;
   display: block;
 }
+
 .log{
   background-color: #f4a6a9;
   vertical-align: middle;
   width: 100%;
-  height: 100px;
+  height: 80px;
   display: inline-flex;
   margin: auto;
   left: 50%;
@@ -21,119 +23,24 @@ body{
     width: 100%;
   }
   .logo{
-    width: 50px;
-    height: 50%;
+    width: 100%;
+    height: 100%;
   }
 }
 .logo{
-  width: 80px;
-  height: 80px;
+  width: 100%;
+  height: 100%;
   margin: auto;
   float: left;
 }
 .profile{
-  font-family: 'Pacifico', cursive;
+  font-family: sans-serif;
   text-align: center;
   font-size: 30px;
   margin: auto;
   color:  #333333;
 }
 
-/*Menu
-*{
-  margin: 0;
-  padding: 0;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-body{
-  background: #FEFEFE;
-  font-family: sans-serif;
-}
-.menu-bar{
-  display: none;
-  font-family: sans-serif;
-}
-header{
-  width: 100%;
-  
-}
-header nav{
-  background: #c268a1;
-  z-index: 1000;
-  max-width: 1000px;
-  width: 15%;
-  height: 565px;
-}
-header nav ul{
-  list-style: none;
-}
-header nav ul li{
-  display: table-row;
-  position: relative;
-}
-header nav ul li a:hover{
-  background: #90406e;
-}
-header nav ul li a{
-  color: #fff;
-  display: block;
-  text-decoration: none;
-  padding: 25px;
-}
-header nav ul li span{
-  margin-right: 10px;
-}
-@media screen and (max-width:800px){
-  body{
-    padding-top: 0;
-  }
-  .menu-bar{
-    display: block;
-    width: 100%;
-    position: fixed;
-    top: 100px;
-    background: #E6344A;
-  }
-  .menu-bar .bt-menu{
-    display: block;
-    padding: 20px;
-    background: #a2c0a1;
-    color: #fff;
-    overflow: hidden;
-    font-size: 25px;
-    font-weight: bold;
-    text-decoration: none;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-  }
-  .menu-bar span{
-    float: right;
-    font-size: 35px;
-  }
-  header nav{
-    width: 80%;
-    height: calc(100% - 80px);
-    position: fixed;
-    right: 100%;
-    margin: 0;
-    overflow: scroll;
-  }
-  header nav ul li{
-    display: block;
-    border-bottom: 1px solid rgba(255,255,255,.3);
-  }
-  header nav ul li a{
-    display: block;
-  }
-}
-body{
-  background: white;
-
-}
 
 /*Comment
 main{
