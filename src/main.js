@@ -6,3 +6,6 @@ $(document).ready(function () {
   });
 });
  //Menu Materialize//
+ $(document).ready(function(){
+     $('select').formSelect();
+   });

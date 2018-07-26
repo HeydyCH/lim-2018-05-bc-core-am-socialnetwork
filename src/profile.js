@@ -51,11 +51,18 @@ function chargePosts(userUID, muroPosts) {
     let postData = JSON.stringify(snapshot.val(),null,3);//tbm funciona un solo parametro
     postData = JSON.parse(postData);
     let postUIDs = Object.keys(postData);
-    for(i=0; i<postUIDs.length; i++) {
-      let mensaje = (postData[postUIDs[i]].message);
-      muroPosts.innerHTML += `<li class="collection-item avatar"><h5> ${mensaje} </h5>
-      <a href="#!" class="secondary-content"><i class="material-icons">favorite_border</i></a></li>`;
-    }
+    var profile = firebase.database().ref().child('users/'+userUID);
+    profile.on('value', snap => {
+      let userData = JSON.stringify(snap.val(),null,3);//tbm funciona un solo parametro
+      userData = JSON.parse(userData);
+      for(i=0; i<postUIDs.length; i++) {
+        let mensaje = (postData[postUIDs[i]].message);
+        muroPosts.innerHTML += "<img width='100px' class='circle img-responsive' src='"+userData.foto+"  '/>";
+        muroPosts.innerHTML += `
+        <li class="collection-item avatar"><h5> ${mensaje} </h5>
+        <a href="#!" class="secondary-content"><i class="material-icons">favorite_border</i></a></li>`;
+      }
+    })
   });
 }
 
@@ -107,3 +114,39 @@ function closeSession() {
       console.log(error);
     })
 }
+
+document.getElementById('btn-home').addEventListener('click', redirectHome);
+function redirectHome() {
+  document.getElementById('home').style.display = 'block';
+  document.getElementById('notifications').style.display = 'none';
+  document.getElementById('search').style.display = 'none';
+  document.getElementById('userProfile').style.display = 'none';
+}
+
+document.getElementById('btn-search').addEventListener('click', redirectSearch);
+function redirectSearch() {
+  document.getElementById('home').style.display = 'none';
+  document.getElementById('notifications').style.display = 'none';
+  document.getElementById('search').style.display = 'block';
+  document.getElementById('userProfile').style.display = 'none';
+}
+
+document.getElementById('btn-notification').addEventListener('click', redirectNotification);
+function redirectNotification() {
+  document.getElementById('home').style.display = 'none';
+  document.getElementById('notifications').style.display = 'block';
+  document.getElementById('search').style.display = 'none';
+  document.getElementById('userProfile').style.display = 'none';
+}
+
+document.getElementById('btn-userProfile').addEventListener('click', redirectProfile);
+function redirectProfile() {
+  document.getElementById('home').style.display = 'none';
+  document.getElementById('notifications').style.display = 'none';
+  document.getElementById('search').style.display = 'none';
+  document.getElementById('userProfile').style.display = 'block';
+}
+
+document.getElementById('notifications').style.display = 'none';
+document.getElementById('search').style.display = 'none';
+document.getElementById('userProfile').style.display = 'none';

@@ -12,108 +12,120 @@
 </head>
 <body>
   <!-- Header logo y cerrar sesion -->
-  <ul id="slide-out" class="side-nav fixed">
-    <li>
-      <div class="user-view">
-        <div class="background">
-          <img class="responsive-img" src="images/banner.jpg">
-        </div>
-        <a href="#">
-          <div class="" id="userPhoto"></div>
-        </a>
-        <a href="##">
-          <span class="white-text name" id="userName"></span>
-        </a>
-        <a href="#">
-          <span class="white-text email" id="userEmail"></span>
-        </a>
-      </div>
-    </li>
-
-
-    <li>
-      <a class="waves-effect" href="#">Menu</a>
-    </li>
-    <li>
-      <div class="divider"></div>
-    </li>
-    <li>
-      <a href="#"><i class="material-icons">home</i>Home</a>
-    </li>
-    <li>
-      <a href="#"><i class="material-icons">search</i>Buscar</a>
-    </li>
-    <li>
-      <a href="#"><i class="material-icons">notifications</i>Notificaciones</a>
-    </li>
-    <li>
-      <a href="#"><i class="material-icons">person</i>Perfil</a>
-    </li>
-    <li>
-      <a href="#"><i class="material-icons">exit_to_app</i>Salir</a>
-    </li>
-
-
-    <li class="no-padding">
-      <ul class="collapsible collapsible-accordion">
+  <div class="container row">
+    <div class="col l3 ">
+      <ul id="slide-out" class="side-nav fixed">
         <li>
-          <a class="collapsible-header">Mas<i class="material-icons">arrow_drop_down</i></a>
-          <div class="collapsible-body">
-            <ul>
-              <li>
-                <a href="#">Acerca de Mom Center</a>
-              </li>
-              <li>
-                <a href="#">Ayuda</a>
-              </li>
-              <li>
-                <a href="#">Terminos y condiciones</a>
-              </li>
-
-            </ul>
+          <div class="user-view">
+            <div class="background">
+              <img class="responsive-img" src="images/banner.jpg">
+            </div>
+            <a href="#">
+              <div class="" id="userPhoto"></div>
+            </a>
+            <a href="##">
+              <span class="white-text name" id="userName"></span>
+            </a>
+            <a href="#">
+              <span class="white-text email" id="userEmail"></span>
+            </a>
           </div>
         </li>
+
+
+        <li>
+          <a class="waves-effect" href="#">Menu</a>
+        </li>
+        <li>
+          <div class="divider"></div>
+        </li>
+        <li>
+          <a href="#" id="btn-home"><i class="material-icons">home</i>Home</a>
+        </li>
+        <li>
+          <a href="#" id="btn-search"><i class="material-icons">search</i>Buscar</a>
+        </li>
+        <li>
+          <a href="#" id="btn-notification"><i class="material-icons">notifications</i>Notificaciones</a>
+        </li>
+        <li>
+          <a href="#" id="btn-userProfile"><i class="material-icons">person</i>Perfil</a>
+        </li>
+        <li>
+          <a href="#" id="signOut"><i class="material-icons">exit_to_app</i>Salir</a>
+        </li>
+
+
+        <li class="no-padding">
+          <ul class="collapsible collapsible-accordion">
+            <li>
+              <a class="collapsible-header">Mas<i class="material-icons">arrow_drop_down</i></a>
+              <div class="collapsible-body">
+                <ul>
+                  <li>
+                    <a href="#">Acerca de Mom Center</a>
+                  </li>
+                  <li>
+                    <a href="#">Ayuda</a>
+                  </li>
+                  <li>
+                    <a href="#">Terminos y condiciones</a>
+                  </li>
+
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </li>
       </ul>
-    </li>
-  </ul>
 
-  <a class="btn hide-on-large-only" data-activates="slide-out">
-    <i class="material-icons">menu</i>
-  </a>
-  <!-- termina nav -->
-  <div class="container" id="home">
-    <input id="currentPost" placeholder="Escribe lo que quieras publicar">
-    <select id="privateOptions">
-      <option value="0">Amigos</option>
-      <option value="1">Publico</option>
-    </select>
-    <button class="btn" id="savePost">Publicar</button>
-    <div id="myFriendsPost" class="collection">
-      <h2>Publicaciones de personas a quienes sigo</h2>
+      <a class="btn hide-on-large-only" data-activates="slide-out">
+        <i class="material-icons">menu</i>
+      </a>
     </div>
-  </div>
+    <!-- termina nav -->
+    <div class="col l9 m12 s12">
+      <div class="container-fluid section" id="home">
+        <div class="row">
+          <input class="col s9 m10 l10"id="currentPost" placeholder="Escribe lo que quieras publicar">
+          <div class="input-field col s3 m2 l2">
+            <select id="privateOptions">
+              <option value="0">Amigos</option>
+              <option value="1">Publico</option>
+            </select>
+            <label>Tipo de privacidad</label>
+          </div>
+        </div>
+        <button class="btn" id="savePost">Publicar</button>
+        <div id="myFriendsPost" class="collection">
+          <h2>Publicaciones de personas a quienes sigo</h2>
+        </div>
+      </div>
 
-  <div class="container" id="search">
-   <input type="text" id="searchText" placeholder="Search...">
-   <button class="btn" id="buttonSearch">Look</button>
-   <div id="userFilterList"></div>
-  </div>
+      <div class="container" id="search">
+       <input type="text" id="searchText" placeholder="Search...">
+       <button class="btn" id="buttonSearch">Look</button>
+       <div id="userFilterList"></div>
+      </div>
 
-  <div class="container" id="notifications"></div>
+      <div class="container" id="notifications"></div>
 
-  <div class="container" id="userProfile">
-    <div id="userData">
-      <h3>Bienvenida</h3>
-      <div class="row">
-        <div class="col s6 m4" id="userPhoto"></div>
-        <h4 class="col s6 m8"><span id="userName"></span></h4>
+      <div class="container" id="userProfile">
+        <div id="userData">
+          <h3>Bienvenida</h3>
+          <div class="row">
+            <div class="col s6 m4" id="userPhoto"></div>
+            <h4 class="col s6 m8"><span id="userName"></span></h4>
+          </div>
+        </div>
+        <div id="userPosts">
+          <h2>Mis publicaciones</h2>
+          <div id="myPosts" class="collection"></div>
+        </div>
       </div>
     </div>
-    <div id="userPosts">
-      <h2>Mis publicaciones</h2>
-      <div id="myPosts" class="collection"></div>
-    </div>
   </div>
+
   <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"
