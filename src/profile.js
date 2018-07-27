@@ -58,7 +58,7 @@ function chargePosts(userUID, muroPosts) {
        let userData = JSON.stringify(snap.val(),null,3);//tbm funciona un solo parametro
        userData = JSON.parse(userData);
       //  muroPosts.innerHTML += "<img width='100px' class='circle img-responsive' src='"+userData.foto+"  '/>";
-      console.log(objPost.optionValue)
+      console.log(userData)
       let privacidad=objPost.optionValue
       let a = 'favorite_border';
       if(privacidad == 0){
@@ -66,15 +66,14 @@ function chargePosts(userUID, muroPosts) {
       }else{
         a = 'public';
       }
-
-     
        muroPosts.innerHTML += `
        <div class="card horizontal pink lighten-4">
         <div class = "card-image">
           <img width="5px" class="circle" src="${userData.foto}"/>
         </div>
         <div class="card-content">
-          <a href="https://www.youtube.com/watch?v=h-1Mqbi2nVg" id="ab" class="secondary-content"><i class="material-icons">${a}</i></a></li>
+          <span>${userData.nombre}</span>
+          <a id="ab" class="secondary-content"><i class="material-icons">${a}</i></a></li>
           <textarea id=${snapshot.key} class="collection-item avatar">${objPost.message}</textarea>
           <button  id=${snapshot.key+ 'a'} onclick="contLikes()"><i class="material-icons">favorite_border</i></button>
           <button  onclick="removePost('${snapshot.key}','${userUID}')"><i class="material-icons">delete</i></button>
