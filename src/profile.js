@@ -25,16 +25,23 @@ function welcomeUser(uid) {
 document.getElementById('savePost').addEventListener("click", savePost)
 function savePost() {
   let message = document.getElementById('currentPost').value;
-  document.getElementById('currentPost').value = '';
-  let userUID = firebase.auth().currentUser.uid;
-  let optionValue = document.getElementById('privateOptions');
-  optionValue = optionValue.options[optionValue.selectedIndex].value;
-  firebase.database().ref('users/'+userUID+'/publicaciones').push({
-    optionValue,
-    message
-  });
-  muroPosts.innerHTML = '';
-  chargePosts(userUID, muroPosts);
+  console.log(message);
+  console.log("veamos si es vacio o no ")
+  if(message != ''){
+    document.getElementById('currentPost').value = '';
+    let userUID = firebase.auth().currentUser.uid;
+    let optionValue = document.getElementById('privateOptions');
+    optionValue = optionValue.options[optionValue.selectedIndex].value;
+    firebase.database().ref('users/'+userUID+'/publicaciones').push({
+      optionValue,
+      message
+    });
+    muroPosts.innerHTML = '';
+    chargePosts(userUID, muroPosts);
+  }else{
+    alert("Usted no escribi ningun post")
+  }
+  
 };
 //mostrando todos las publicaciones del usuario actual
 function chargePosts(userUID, muroPosts) {
@@ -50,13 +57,19 @@ function chargePosts(userUID, muroPosts) {
        console.log("entro");
        let userData = JSON.stringify(snap.val(),null,3);//tbm funciona un solo parametro
        userData = JSON.parse(userData);
-       muroPosts.innerHTML += "<img width='100px' class='circle img-responsive' src='"+userData.foto+"  '/>";
+      //  muroPosts.innerHTML += "<img width='100px' class='circle img-responsive' src='"+userData.foto+"  '/>";
        muroPosts.innerHTML += `
-       <div>
-       <textarea id=${snapshot.key} class="collection-item avatar">${objPost.message}</textarea>
-       <a href="#!" class="secondary-content"><i class="material-icons">favorite_border</i></a></li>
-       <button  onclick="removePost('${snapshot.key}','${userUID}')" >DELETE</button>
-       <button id=${snapshot.key + 'b'} onclick="editPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key + 'b'}')">Update</button>
+       <div class="card horizontal pink lighten-4">
+        <div class = "card-image">
+          <img width="5px" class="circle" src="${userData.foto}"/>
+        </div>
+        <div class="card-content">
+          <textarea id=${snapshot.key} class="collection-item avatar">${objPost.message}</textarea>
+          <a href="#!" class="secondary-content"><i class="material-icons">favorite_border</i></a></li>
+          <button  onclick="removePost('${snapshot.key}','${userUID}')" >DELETE</button>
+          <button id=${snapshot.key + 'b'} onclick="editPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key + 'b'}')">Update</button>
+        </div>
+        
        </div>
        `;
        // document.getElementById(snapshot.key).disabled = true;
