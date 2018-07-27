@@ -1,35 +1,186 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Profile</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
-  <link rel="icon" type="image/jpg" href="../src/images/pregnant.png" >
+  <link rel="icon" type="image/jpg" href="../src/images/pregnant.png">
   <link rel="stylesheet" type="text/css" media="screen" href="styleprofile.css" />
-  <link rel="stylesheet" href="../src/fonts.css">
-  <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+  <!--<link rel="stylesheet" href="../src/fonts.css">
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Materialize CSS-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
 </head>
+
 <body>
-  <!--Cabecera-->
+
+  <!--Cabecera
   <div class="log">
-    <img class= "logo" src="../src/images/pregnant.png" alt="">
-    <p class="profile">Mom Center</p>
+      <img class= class="responsive-img" src="../src/images/pregnancy.png" alt="">
+      <p class="profile">Mom Center</p>
   </div>
-  <h2>
-    <span id="userEmail"></span>
-  </h2>
-  <header>
-    <nav>
-      <ul>
-        <li><a href="#"><span class="primero"><i class="icon icon-home3"></i></span>Inicio</a></li>
-        <li><a href="#"><span class="segundo"><i class="icon icon-search"></i></span>Buscar</a></li>
-        <li><a href="#"><span class="tercero"><i class="icon icon-bell"></i></span>Notificaciones</a></li>
-        <li><a href="#"><span class="cuarto"><i class="icon icon-user"></i></span>Perfil</a></li>
+    <h2>
+      <span id="userEmail"></span>
+    </h2>
+<!--Cabecera-->
+
+<!--Menu responsive usando materialize-->
+  <ul id="slide-out" class="side-nav fixed">
+    <li>
+      <div class="user-view">
+        <div class="background">
+          <img class="responsive-img" src="images/banner.jpg">
+        </div>
+        <a href="#">
+          <img class="circle" src="images/user.png">
+        </a>
+        <a href="##">
+          <span class="white-text name">Fiorella Effio</span>
+        </a>
+        <a href="#">
+          <span class="white-text email">fiorellaeffio@gmail.com</span>
+        </a>
+      </div>
+    </li>
+
+
+    <li>
+      <a class="waves-effect" href="#">Menu</a>
+    </li>
+    <li>
+      <div class="divider"></div>
+    </li>
+    <li>
+      <a href="#"><i class="material-icons">home</i>Home</a>
+    </li>
+    <li>
+      <a href="#"><i class="material-icons">search</i>Buscar</a>
+    </li>
+    <li>
+      <a href="#"><i class="material-icons">notifications</i>Notificaciones</a>
+    </li>
+    <li>
+      <a href="#"><i class="material-icons">person</i>Perfil</a>
+    </li>
+    <li>
+      <a href="#"><i class="material-icons">exit_to_app</i>Salir</a>
+    </li>
+
+
+    <li class="no-padding">
+      <ul class="collapsible collapsible-accordion">
+        <li>
+          <a class="collapsible-header">Mas<i class="material-icons">arrow_drop_down</i></a>
+          <div class="collapsible-body">
+            <ul>
+              <li>
+                <a href="#">Acerca de Mom Center</a>
+              </li>
+              <li>
+                <a href="#">Ayuda</a>
+              </li>
+              <li>
+                <a href="#">Terminos y condiciones</a>
+              </li>
+
+            </ul>
+          </div>
+        </li>
       </ul>
-    </nav>
+    </li>
+  </ul>
+
+  <a class="btn hide-on-large-only" data-activates="slide-out">
+    <i class="material-icons">menu</i>
+  </a>
+<!--Menu responsive usando Materialize-->
+
+
+  <!--
   </header>
+  <main>
+     <div class="container-comments">
+      <div class="comments">
+        <div class="photo-perfil">
+          <img src="..//src/images/mami.gif" alt="">
+        </div>
+        <div class="info-comments">
+          <div class="header">
+            <h4>Usuario Logueado</h4>
+            <h5>19 julio 2018</h5>
+          </div>
+        </div>
+  
+        <div class="col s12 m8 l9"> <!-- Note that "m8 l9" was added -->
+  <!-- Teal page content
+  
+                This content will be:
+            9-columns-wide on large screens,
+            8-columns-wide on medium screens,
+            12-columns-wide on small screens  -->
+  <!--
+            <main>
+                <h2>Pregunta del mes</h2>
+                <hr class="line">
+                <div class="container-comments">
+                  <div class="comments">
+                    <div class="photo-perfil">
+                      <img src="..//src/images/mami.gif" alt="">
+                    </div>
+                    <div class="info-comments">
+                      <div class="header">
+                        <h4>Usuario Logueado</h4>
+                        <h5>19 julio 2018</h5>
+                      </div>
+            
+                      <p>Aqui va el comentario: Aprende como diseñar esta hermosa caja de comentarios, todo creado simplemente con HTML5 y CSS3, de una manera muy fácil y bien explicada, espero que te guste la idea.
+            
+                          No olvides compartir, para que otros se beneficien del vídeo de la misma manera en la que tu te has beneficiado, saludos.</p>
+            
+                      <div class="footer">
+                        <h6 class="request">Responder</h6>
+                        <label class="">Corazon</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="container-comments"></div>
+                <div class="container-comments-request">
+            
+                  <div class="comments-request">
+                    <div class="photo-perfil-request">
+                      <img src="..//src/images/mami.gif" alt="">
+                    </div>
+                    <div class="info-comments-request">
+                      <div class="header">
+                        <h4>Usuario Logueado</h4>
+                        <h5>19 julio 2018</h5>
+                      </div>
+            
+                      <p>Aqui va el comentario: Aprende como diseñar esta hermosa caja de comentarios, todo creado simplemente con HTML5 y CSS3, de una manera muy fácil y bien explicada, espero que te guste la idea.
+            
+                          No olvides compartir, para que otros se beneficien del vídeo de la misma manera en la que tu te has beneficiado, saludos.</p>
+            
+                      <div class="footer">
+                        <h6 class="request">Responder</h6>
+                        <label class="">Corazon</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </main>
+
+        </div>
+  
+      </div>
+    </div>
+  </main>
+
+  
+
   <div class="container">
     <div id="userProfile"></div>
     <button id="close">Cerrar sesion</button>
@@ -46,18 +197,25 @@
         <option value="1">Publico</option>
       </select>
       <button id="btnPost" class="">Postear</button>
-      <div id="listpostsgeneral"></div>
     </div>
   </div>
 
   <div><span id="userName"></span></div>
   <span id="userPhoto"></span>
   <h2 id="userEmail"></h2>
-
+-->
   <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
   <script src="init-fbase.js"></script>
   <script src="post.js"></script>
-  <script src="main.js"></script>
   <script src="postDOM.js"></script>
+  <!--JQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!--Materialize JS-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
+
+  <script src="main.js"></script>
+
 </body>
+​
+
 </html>

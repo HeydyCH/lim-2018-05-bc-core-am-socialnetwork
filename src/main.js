@@ -83,3 +83,13 @@ function writeDatabase(user) {
   firebase.database().ref("users/" + usuario.uid)
   .set(usuario)
 }
+
+
+//Menu Materialize//
+$(document).ready(function () {
+  $(".btn").sideNav({
+    menuWidth: 300,
+    edge: 'left'
+  });
+});
+ //Menu Materialize//
