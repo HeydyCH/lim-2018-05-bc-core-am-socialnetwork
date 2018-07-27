@@ -191,7 +191,7 @@ document.getElementById('buttonSearch').addEventListener('click', ()=>{
         <div class='row'>
           <img class='col s4 m2 circle' width=100px class="circle" src= ${user.foto} />
           <p class='col s6 m10'> ${user.nombre} </p>
-          <button class='btn-small col s2 m2' value= ${user.uid} onclick= "followPeople()">Seguir</button>
+          <button class='btn-small col s2 m2' value= ${user.uid} onclick= "followPeople()"><i class="material-icons white-text">group_add</i></li></button>
         </div>
         `);
       }
