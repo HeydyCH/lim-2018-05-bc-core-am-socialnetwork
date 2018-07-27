@@ -1,64 +1,162 @@
-<!-- <!DOCTYPE html> -->
+<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Profile</title>
+  <title>Page Title</title>
+  <link rel="icon" type="image/jpg" href="../src/images/pregnant.png">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
-  <link rel="icon" type="image/jpg" href="../src/images/pregnant.png" >
-  <link rel="stylesheet" type="text/css" media="screen" href="styleprofile.css" />
-  <link rel="stylesheet" href="../src/fonts.css">
-  <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-  <!--Cabecera-->
-  <div class="log">
-    <img class= "logo" src="../src/images/pregnant.png" alt="">
-    <p class="profile">Mom Center</p>
-  </div>
-  <h2>
-    <span id="userEmail"></span>
-  </h2>
-  <header>
-    <nav>
-      <ul>
-        <li><a href="#"><span class="primero"><i class="icon icon-home3"></i></span>Inicio</a></li>
-        <li><a href="#"><span class="segundo"><i class="icon icon-search"></i></span>Buscar</a></li>
-        <li><a href="#"><span class="tercero"><i class="icon icon-bell"></i></span>Notificaciones</a></li>
-        <li><a href="#"><span class="cuarto"><i class="icon icon-user"></i></span>Perfil</a></li>
+  <!-- Header logo y cerrar sesion -->
+  <div class="container row">
+    <div class="col l3 ">
+      <ul id="slide-out" class="side-nav fixed">
+        <li>
+          <div class="user-view">
+            <div class="background">
+              <img class="responsive-img" src="images/banner.jpg">
+            </div>
+            <a href="#">
+              <div class="" id="userPhoto"></div>
+            </a>
+            <a href="##">
+              <span class="white-text name" id="userName"></span>
+            </a>
+            <a href="#">
+              <span class="white-text email" id="userEmail"></span>
+            </a>
+          </div>
+        </li>
+        <li>
+          <a class="waves-effect" href="#">Menu</a>
+        </li>
+        <li>
+          <div class="divider"></div>
+        </li>
+        <li>
+          <a href="#" id="btn-home"><i class="material-icons">home</i>Home</a>
+        </li>
+        <li>
+          <a href="#" id="btn-search"><i class="material-icons">search</i>Buscar</a>
+        </li>
+        <li>
+          <a href="#" id="btn-notification"><i class="material-icons">notifications</i>Notificaciones</a>
+        </li>
+        <li>
+          <a href="#" id="btn-userProfile"><i class="material-icons">person</i>Perfil</a>
+        </li>
+        <li>
+          <a href="#" id="signOut"><i class="material-icons">exit_to_app</i>Salir</a>
+        </li>
+        <li class="no-padding">
+          <ul class="collapsible collapsible-accordion">
+            <li>
+              <a class="collapsible-header">Mas<i class="material-icons">arrow_drop_down</i></a>
+              <div class="collapsible-body">
+                <ul>
+                  <li>
+                    <a href="#">Acerca de Mom Center</a>
+                  </li>
+                  <li>
+                    <a href="#">Ayuda</a>
+                  </li>
+                  <li>
+                    <a href="#">Terminos y condiciones</a>
+                  </li>
+
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </li>
       </ul>
-    </nav>
-  </header>
-  <div class="container">
-    <div id="userProfile"></div>
-    <button id="close">Cerrar sesion</button>
-    <pre id="object"></pre>
-    <div id="sectionPost">
-        <span id = "name"></span>
-        <div id="listposts"></div>
-        <button id= "addPost">MIS PUBLICACIONES</button>
-        <input type="button" id="addPostPublica" value="PUBLICACIONES PUBLICAS GENERALES">
-        <h1>Agregar Post !!</h1>
-      <!-- <input id="inputPost" type="text" placeholder="Ingrese post"> -->
-        <textarea name="Ingrese post" id="inputPost" placeholder="Ingrese post"cols="30" rows="5"></textarea>
-      <select id="privateOptions">
-        <option value="0">Amigos</option>
-        <option value="1">Publico</option>
-      </select>
-      <button id="btnPost" class="">Postear</button>
-      <div id="listpostsgeneral"></div>
+
+      <a class="btn hide-on-large-only" data-activates="slide-out">
+        <i class="material-icons">menu</i>
+      </a>
+    </div>
+    <!-- termina nav -->
+    <div class="col l9 m12 s12 container-fluid">
+      <div class="container-fluid section" id="home">
+        <h2>Publicaciones de personas a quienes sigo</h2>
+        <div id="myFriendsPost" class="collection">
+        </div>
+      </div>
+
+      <div class="container" id="search">
+       <input type="text" id="searchText" placeholder="Search...">
+       <button class="btn" id="buttonSearch">Look</button>
+       <div id="userFilterList"></div>
+      </div>
+
+      <div class="container" id="myNotifications">
+        <h2>Mis notificaciones</h2>
+        <div class="container" id="notifications">
+        </div>
+      </div>
+
+      <div class="container" id="userProfile">
+        <div id="userData">
+          <div class="row">
+            <div class="col s6 m4" id="userPhoto"></div>
+            <h4 class="col s6 m8"><span id="userName"></span></h4>
+          </div>
+        </div>
+        <div id="userPosts">
+<!-- empieza -->
+          <div class="card horizontal row">
+
+            <div class="col m2">
+              <img class="img-responsive" width="100px" src="./images/pregnancy.png">
+            </div>
+            <div class="col m10">
+              <div class="card-content">
+                <span class="card-title"> Mamita</span>
+
+                <div class="input-field col s12">
+                  <input class="col s9 m10 l10"id="currentPost" placeholder="Escribe lo que quieras publicar">
+                </div>
+                <div class="row">
+                <div class="input-field col s6 ">
+                  <select id="privateOptions">
+                    <option value="0">Amigos</option>
+                    <option value="1">Publico</option>
+                  </select>
+                  <label>Tipo de privacidad</label>
+                </div>
+                <button class="btn col s6" id="savePost">Publicar</button>
+              </div>
+              </div>
+          </div>
+          </div>
+
+          <!-- termina -->
+          <h2>Mis publicaciones</h2>
+          <div id="myPosts" class="collection"></div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div><span id="userName"></span></div>
-  <span id="userPhoto"></span>
-  <h2 id="userEmail"></h2>
-
   <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
-  <script src="init-fbase.js"></script>
-  <script src="post.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
+  <script src="firebase.js"></script>
   <script src="main.js"></script>
-  <script src="postDOM.js"></script>
+  <script src="muro.js"></script>
+  <script src="anterior/app.js"></script>
+  <script src="search.js"></script>
+  <script src="profile.js"></script>
+  <!-- <script src="notifications.js"></script>
+  <script src="home.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
 </body>
 </html>
