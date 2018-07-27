@@ -22,7 +22,7 @@
 
 <body>
   <div class="container">
-    <div class="row">
+    <div class="row" id="userLogin">
       <div class="col s10 offset-s1 m6 offset-m3">
         <div class="row">
           <div class="card-panel">
@@ -31,46 +31,94 @@
               <div class="row">
                 <div class="">
                   <img src="images/pregnancy.png" class="responsive-img valign profile-image-login img-trans logo-image">
-                  <p class="center login-form-text">INGRESA AQUÍ</p>
+                  <p class="center login-form-text">INICIA SESIÓN</p>
                 </div>
               </div>
 
               <div class="row margin">
                 <div class="input-field col s12">
-                  <i class="small material-icons person-icon-color orange-text mdi-action-look-outline prefix">pregnant_woman</i>
-                  <input type="text" name="username">
+                  <i class="small material-icons person-icon-color purple-text mdi-action-look-outline prefix">pregnant_woman</i>
+                  <input type="text" name="username" id="email">
                   <label for="username" data-error="wrong" data sucess="right" class="center-align">Ingresa tu email</label>                                                                                                                                                                                                    "
                 </div>
               </div>
-              <br>
               <div class="row margin">
                 <div class="input-field col s12">
-                  <i class="small material-icons pass-icon-color orange-text mdi-action-look-outline prefix">lock_outline</i>
-                  <input type="password" name= "password">
+                  <i class="small material-icons pass-icon-color purple-text mdi-action-look-outline prefix">lock_outline</i>
+                  <input type="password" name= "password" id="password">
                   <label for="password" data-error="wrong" data-success="rigth" class="lbl-pass center-align">Ingresa tu contraseña</label>
                 </div>
               </div>
-              <br>
               <div class="row">
                 <div class="input-field col s6 offset-s3"></div>
-                <button type="submit" class="btn-color btn pink darken-1 col s12">Login
+                <button type="submit" class="btn-color btn pink darken-1 col s12" id="login">Acceder
               </div>
               <div class="row">
                 <div class="input-field col s6 offset-s3"></div>
-                <button type="submit" class="btn-color btn blue darken-1 col s12">Facebook
+                <button type="submit" class="btn-color btn blue darken-1 col s12" id="loginFacebook">Facebook
               </div>
               <div class="row">
                 <div class="input-field col s6 offset-s3"></div>
-                <button type="submit" class="btn-color btn orange darken-1 col s12">Google
+                <button type="submit" class="btn-color btn orange darken-1 col s12" id="loginGoogle">Google
               </div>
               <div class="row">
                   <div class="input-field col s6 offset-s3"></div>
-                  <button type="submit" class="btn-color btn pink darken-1 col s12">Registrate
+                  <button type="submit" class="btn-color btn pink darken-1 col s12" id="registerUser">Registrar
               </div>
             </form>
           </div>
         </div>
       </div>
+
+
+      <div class="row" id="userRegister">
+        <div class="col s10 offset-s1 m6 offset-m3">
+          <div class="row">
+            <div class="card-panel">
+  
+              <form>
+                <div class="row">
+                  <div class="">
+                    <img src="images/pregnancy.png" class="responsive-img valign profile-image-login img-trans logo-image">
+                    <p class="center login-form-text">REGISTRO DE USUARIA</p>
+                  </div>
+                </div>
+                <div class="row margin">
+                  <div class="input-field col s12">
+                    <i class="small material-icons person-icon-color purple-text mdi-action-look-outline prefix">pregnant_woman</i>
+                    <input type="text" name="username" id="name">
+                    <label for="username" data-error="wrong" data sucess="right" class="center-align">Ingresa tu nombre</label>                                                                                                                                                                                                    "
+                  </div>
+                </div>
+
+                <div class="row margin">
+                  <div class="input-field col s12">
+                    <i class="small material-icons person-icon-color purple-text mdi-action-look-outline prefix">pregnant_woman</i>
+                    <input type="text" name="username" id="email2">
+                    <label for="username" data-error="wrong" data sucess="right" class="center-align">Ingresa tu email</label>                                                                                                                                                                                                    "
+                  </div>
+                </div>
+
+                <div class="row margin">
+                  <div class="input-field col s12">
+                    <i class="small material-icons pass-icon-color purple-text mdi-action-look-outline prefix">lock_outline</i>
+                    <input type="password" name= "password" id="password2">
+                    <label for="password" data-error="wrong" data-success="rigth" class="lbl-pass center-align">Ingresa tu contraseña</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s6 offset-s3"></div>
+                  <button type="submit" class="btn-color btn pink darken-1 col s12" id="register">Registrar ahora
+                </div>
+                
+                <div class="row">
+                    <div class="input-field col s6 offset-s3"></div>
+                    <button type="submit" class="btn-color btn pink darken-1 col s12" id="returnHome">Volver a Inicio
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
     </div>
   </div>
 
@@ -105,9 +153,9 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
   
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  <!--<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous">
-  </script>
+  </script>-->
   <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
   <script src="init-fbase.js"></script>
   <script src="main.js"></script>
