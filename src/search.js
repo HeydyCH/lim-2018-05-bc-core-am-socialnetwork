@@ -10,11 +10,11 @@ function chargeFriendPosts() {
     let postUIDs = Object.keys(postData);
     for(i=0; i<postUIDs.length; i++) {
       let mensaje = (postData[postUIDs[i]].uidFollow);
-      console.log(mensaje);
+      // console.log(mensaje);
       usersIFollow.push(mensaje);
-      console.log(usersIFollow);
+      // console.log(usersIFollow);
     }
-    console.log(usersIFollow);
+    // console.log(usersIFollow);
     let friendPosts = document.getElementById('myFriendsPost');
     friendPosts.innerHTML = '';
     usersIFollow.forEach(function(element) {

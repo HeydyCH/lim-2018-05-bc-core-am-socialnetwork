@@ -9,8 +9,8 @@ function welcomeUser(uid) {
   profile.on('value', snap => {
     let userData = JSON.stringify(snap.val(),null,3);//tbm funciona un solo parametro
     userData = JSON.parse(userData);
-    console.log(userData);
-    console.log(userData.nombre);
+    // console.log(userData);
+    // console.log(userData.nombre);
     document.getElementById("userName").innerHTML = userData.nombre;
     document.getElementById('userPhoto').innerHTML = "<img width='100px' class='circle img-responsive' src='"+userData.foto+"  '/>"
     document.getElementById('userEmail').innerHTML = userData.email;
@@ -26,7 +26,7 @@ document.getElementById('savePost').addEventListener("click", savePost)
 function savePost() {
   let message = document.getElementById('currentPost').value;
   console.log(message);
-  console.log("veamos si es vacio o no ")
+  // console.log("veamos si es vacio o no ")
   if(message != ''){
     document.getElementById('currentPost').value = '';
     let userUID = firebase.auth().currentUser.uid;
@@ -45,37 +45,54 @@ function savePost() {
 };
 //mostrando todos las publicaciones del usuario actual
 function chargePosts(userUID, muroPosts) {
-  console.log('Mostrando todas las publicaciones x usuario logueado')
+  // console.log('Mostrando todas las publicaciones x usuario logueado')
   muroPosts.innerHTML = '';
   firebase.database().ref('users/'+userUID+'/publicaciones')
   .on('child_added', function(snapshot) {
      var objPost = snapshot.val();
-     console.log(objPost);
+    //  console.log(objPost);
      let aux = 0;
      var profile = firebase.database().ref().child('users/'+userUID);
      profile.on('value',snap => {
-       console.log("entro");
+      //  console.log("entro");
        let userData = JSON.stringify(snap.val(),null,3);//tbm funciona un solo parametro
        userData = JSON.parse(userData);
       //  muroPosts.innerHTML += "<img width='100px' class='circle img-responsive' src='"+userData.foto+"  '/>";
+      console.log(objPost.optionValue)
+      let privacidad=objPost.optionValue
+      let a = 'favorite_border';
+      if(privacidad == 0){
+        a = 'group';
+      }else{
+        a = 'public';
+      }
+
+     
        muroPosts.innerHTML += `
        <div class="card horizontal pink lighten-4">
         <div class = "card-image">
           <img width="5px" class="circle" src="${userData.foto}"/>
         </div>
         <div class="card-content">
+          <a href="https://www.youtube.com/watch?v=h-1Mqbi2nVg" id="ab" class="secondary-content"><i class="material-icons">${a}</i></a></li>
           <textarea id=${snapshot.key} class="collection-item avatar">${objPost.message}</textarea>
-          <a href="#!" class="secondary-content"><i class="material-icons">favorite_border</i></a></li>
-          <button  onclick="removePost('${snapshot.key}','${userUID}')" >DELETE</button>
-          <button id=${snapshot.key + 'b'} onclick="editPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key + 'b'}')">Update</button>
-        </div>
-        
+          <button  id=${snapshot.key+ 'a'} onclick="contLikes()"><i class="material-icons">favorite_border</i></button>
+          <button  onclick="removePost('${snapshot.key}','${userUID}')"><i class="material-icons">delete</i></button>
+          <button id=${snapshot.key + 'b'} onclick="editPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key + 'b'}')"><i class="material-icons">border_color</i></button>
+        </div> 
        </div>
        `;
-       // document.getElementById(snapshot.key).disabled = true;
+      document.getElementById(snapshot.key).disabled = true;
      })
   });
 }
+
+
+function contLikes(){
+  console.log("le he dado like")
+}
+
+
 //eliminar post
 function removePost(idPost, userUID) {
   console.log("se va a borrar")
@@ -99,9 +116,12 @@ function removePost(idPost, userUID) {
  }
 //editar pulicaciones
 function editPost(idPost, userUID, usuario, option, aux, btn) {
+ console.log(aux)
  console.log("voy a editar")
+ console.log(idPost)
  const newUpdate = document.getElementById(idPost);
  const boton = document.getElementById(btn);
+ console.log(newUpdate.value)
  boton.innerHTML = 'Guardar';
  if (aux == 0) {
    console.log("false")
@@ -120,16 +140,14 @@ function editPost(idPost, userUID, usuario, option, aux, btn) {
  };
  console.log(nuevoPost)
  var updatesUser = {};
- var updatesPost = {};
-
+//  var updatesPost = {};
 
  updatesUser['users/' + userUID + '/publicaciones/' + idPost] = nuevoPost;
  firebase.database().ref().update(updatesUser);
- console.log("no funciona")
  let muroPosts = document.getElementById('myPosts');
  muroPosts.innerHTML = '';
  chargePosts(userUID, muroPosts);
- window.location.reload();
+//  window.location.reload();
 }
 //cargar las Notificaciones
 function chargeNotifications() {
@@ -139,10 +157,10 @@ function chargeNotifications() {
     let notificationData = JSON.stringify(snapshot.val(),null,3);//tbm funciona un solo parametro
     notificationData = JSON.parse(notificationData);
     let notifications = Object.keys(notificationData);
-    console.log(notifications)
+    // console.log(notifications)
     for(i=0; i<notifications.length; i++) {
       let mensaje = (notificationData[notifications[i]].message);
-      console.log(mensaje);
+      // console.log(mensaje);
       myNotifications.push(mensaje);
       console.log(myNotifications);
 
@@ -207,6 +225,7 @@ function closeSession() {
       console.log(error);
     })
 }
+
 
 document.getElementById('btn-home').addEventListener('click', redirectHome);
 function redirectHome() {
