@@ -116,6 +116,7 @@ function editPost(idPost, userUID, usuario, option, aux, btn) {
  let muroPosts = document.getElementById('myPosts');
  muroPosts.innerHTML = '';
  chargePosts(userUID, muroPosts);
+ window.location.reload();
 }
 //cargar las Notificaciones
 function chargeNotifications() {
@@ -230,3 +231,7 @@ document.getElementById('home').style.display = 'none';
 document.getElementById('search').style.display = 'none';
 document.getElementById('myNotifications').style.display = 'none';
 document.getElementById('userProfile').style.display = 'block';
+
+// document.getElementById('myNotifications').style.display = 'none';
+// document.getElementById('search').style.display = 'none';
+// document.getElementById('userProfile').style.display = 'none';
