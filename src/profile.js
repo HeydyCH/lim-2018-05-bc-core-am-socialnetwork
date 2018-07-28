@@ -58,7 +58,6 @@ function chargePosts(userUID, muroPosts) {
        let userData = JSON.stringify(snap.val(),null,3);//tbm funciona un solo parametro
        userData = JSON.parse(userData);
       //  muroPosts.innerHTML += "<img width='100px' class='circle img-responsive' src='"+userData.foto+"  '/>";
-      console.log(userData)
       let privacidad=objPost.optionValue
       let a = 'favorite_border';
       if(privacidad == 0){
@@ -66,18 +65,18 @@ function chargePosts(userUID, muroPosts) {
       }else{
         a = 'public';
       }
-       muroPosts.innerHTML += `
+      muroPosts.innerHTML += `
        <div class="card horizontal pink lighten-4">
         <div class = "card-image">
           <img width="5px" class="circle" src="${userData.foto}"/>
         </div>
         <div class="card-content">
           <span>${userData.nombre}</span>
-          <a id="ab" class="secondary-content"><i class="material-icons">${a}</i></a></li>
+          <i class="material-icons">${a}</i>
           <textarea id=${snapshot.key} class="collection-item avatar">${objPost.message}</textarea>
-          <button  id=${snapshot.key+ 'a'} onclick="contLikes()"><i class="material-icons">favorite_border</i></button>
-          <button  onclick="removePost('${snapshot.key}','${userUID}')"><i class="material-icons">delete</i></button>
-          <button id=${snapshot.key + 'b'} onclick="editPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key + 'b'}')"><i class="material-icons">border_color</i></button>
+          <button  class='waves-effect waves-light btn-small' id=${snapshot.key+ 'a'} onclick="contLikes()"><i class="material-icons">favorite_border</i></button>
+          <button  class='waves-effect waves-light btn-small' onclick="removePost('${snapshot.key}','${userUID}')"><i class="material-icons">delete</i></button>
+          <button class='waves-effect waves-light btn-small' id=${snapshot.key + 'b'} onclick="editPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key + 'b'}')"><i class="material-icons">border_color</i></button>
         </div> 
        </div>
        `;
