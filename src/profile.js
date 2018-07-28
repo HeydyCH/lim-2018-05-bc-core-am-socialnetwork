@@ -187,11 +187,11 @@ document.getElementById('buttonSearch').addEventListener('click', ()=>{
       var user = s.val();
       if((user.nombre.toUpperCase()).indexOf(wordSearch.toUpperCase())!==-1){
         $('#userFilterList').append(`
-        <div class='row'>
-          <img class='col s4 m2 circle' width=100px class="circle" src= ${user.foto} />
-          <p class='col s6 m10'> ${user.nombre} </p>
-          <button class='btn-small col s2 m2' value= ${user.uid} onclick= "followPeople()"><i class="material-icons white-text">group_add</i></li></button>
-        </div>
+        <li class="collection-item avatar">
+        <img class='col s4 m2 circle' width=100px class="circle" src= ${user.foto} />
+        <span class='title col s6 m10'> ${user.nombre} </span>
+        <button class='btn-small col s2 m2' value= ${user.uid} onclick= "followPeople()"><i class="material-icons white-text">group_add</i></li></button>
+          </li>
         `);
       }
     })
