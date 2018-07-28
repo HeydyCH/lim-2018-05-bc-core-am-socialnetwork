@@ -2,6 +2,7 @@
 initFirebase();
 let userUID = localStorage.currentUser;
 const muroPosts = document.getElementById('myPosts');
+// const btnSave = document.getElementById('myPosts');
 welcomeUser(userUID);
 //redireccionando al muro
 function welcomeUser(uid) {
@@ -51,7 +52,6 @@ function chargePosts(userUID, muroPosts) {
   .on('child_added', function(snapshot) {
      var objPost = snapshot.val();
     //  console.log(objPost);
-     let aux = 0;
      var profile = firebase.database().ref().child('users/'+userUID);
      profile.on('value',snap => {
       //  console.log("entro");
@@ -65,6 +65,7 @@ function chargePosts(userUID, muroPosts) {
       }else{
         a = 'public';
       }
+      let aux= 0 ;
       muroPosts.innerHTML += `
        <div class="card horizontal pink lighten-4">
         <div class = "card-image">
@@ -76,11 +77,15 @@ function chargePosts(userUID, muroPosts) {
           <textarea id=${snapshot.key} class="collection-item avatar">${objPost.message}</textarea>
           <button  class='waves-effect waves-light btn-small' id=${snapshot.key+ 'a'} onclick="contLikes()"><i class="material-icons">favorite_border</i></button>
           <button  class='waves-effect waves-light btn-small' onclick="removePost('${snapshot.key}','${userUID}')"><i class="material-icons">delete</i></button>
-          <button class='waves-effect waves-light btn-small' id=${snapshot.key + 'b'} onclick="editPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key + 'b'}')"><i class="material-icons">border_color</i></button>
-        </div> 
+          <button class='waves-effect waves-light btn-small' id=${snapshot.key + 'e'} onclick="editPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key}')"><i class="material-icons">border_color</i></button>
+          <button class='waves-effect waves-light btn-small' id=${snapshot.key + 'se'} onclick="saveEditPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key}')"><i class="material-icons">archive</i></button>
+          </div> 
        </div>
        `;
       document.getElementById(snapshot.key).disabled = true;
+      document.getElementById(snapshot.key + 'se').disabled = true;
+      // <i class="material-icons">border_color</i>
+
      })
   });
 }
@@ -113,42 +118,89 @@ function removePost(idPost, userUID) {
   }
  }
 //editar pulicaciones
-function editPost(idPost, userUID, usuario, option, aux, btn) {
- console.log(aux)
- console.log("voy a editar")
- console.log(idPost)
- const newUpdate = document.getElementById(idPost);
- const boton = document.getElementById(btn);
- console.log(newUpdate.value)
- boton.innerHTML = 'Guardar';
- if (aux == 0) {
-   console.log("false")
-   newUpdate.disabled = false;
-   aux = 1;
-   console.log(aux)
- } else {
-   console.log("true")
-   newUpdate.disabled = true;
-   aux = 0;
- }
- const nuevoPost = {
-   optionValue: option,
-   message: newUpdate.value
-   // usuario: usuario
- };
- console.log(nuevoPost)
- var updatesUser = {};
-//  var updatesPost = {};
+function editPost(idPost, userUID, usuario, option, aux, idbtn) {
 
- updatesUser['users/' + userUID + '/publicaciones/' + idPost] = nuevoPost;
- firebase.database().ref().update(updatesUser);
- let muroPosts = document.getElementById('myPosts');
- muroPosts.innerHTML = '';
- chargePosts(userUID, muroPosts);
-//  window.location.reload();
+ console.log(aux)
+ console.log("voy a poder editar el texto")
+ console.log(idPost)
+
+ idBtnEdit= idbtn+'e';
+ idBtnSaveEdit= idbtn+'se';
+
+ document.getElementById(idBtnEdit).disabled = true;
+ document.getElementById(idBtnSaveEdit).disabled = false;
+ 
+
+ let newUpdate = document.getElementById(idPost);
+ console.log(newUpdate.value)
+ console.log(idbtn)
+ newUpdate.disabled = false
+
+// // inicio
+
+//   if(aux == 0 ){
+
+//     console.log("deberia de poner editar mi mensaje")
+      
+//     idbtn.innerHTML = "guardar"
+//     // alert("voy a postear")
+//     // alert(mensaje.value)
+//     newUpdate.disabled = false
+//     aux = 1 ;
+//     console.log(aux)
+    
+//   }else{
+//     idbtn.innerHTML = "editar" ;
+//     // alert("voy a postear")
+//     alert(newUpdate.value)
+//     newUpdate.disabled = true ; 
+//     aux=0;
+//   } 
+//FIN
+
 }
+
+function saveEditPost(idPost, userUID, usuario, option, aux, idbtn){
+
+  idBtnEdit= idbtn+'e';
+  idBtnSaveEdit= idbtn+'se';
+
+ document.getElementById(idBtnEdit).disabled = false;
+ document.getElementById(idBtnSaveEdit).disabled = true;
+
+  console.log("aqui guardaremos")
+  let newUpdate = document.getElementById(idPost);
+  alert(newUpdate.value)
+  console.log(newUpdate.value)
+  newUpdate.disabled = true
+
+  //Inicio
+
+  const nuevoPost = {
+    optionValue: option,
+    message: newUpdate.value
+    // usuario: usuario
+  };
+  console.log(nuevoPost)
+  var updatesUser = {};
+ //  var updatesPost = {};
+ 
+  updatesUser['users/' + userUID + '/publicaciones/' + idPost] = nuevoPost;
+  firebase.database().ref().update(updatesUser);
+  let muroPosts = document.getElementById('myPosts');
+  muroPosts.innerHTML = '';
+  chargePosts(userUID, muroPosts);
+
+  //Fin
+
+
+}
+
+
+
 //cargar las Notificaciones
 function chargeNotifications() {
+
   firebase.database().ref('users/'+userUID+'/notificaciones')
   .on('value', function(snapshot) {
     let myNotifications = [];
@@ -160,16 +212,12 @@ function chargeNotifications() {
       let mensaje = (notificationData[notifications[i]].message);
       // console.log(mensaje);
       myNotifications.push(mensaje);
-      console.log(myNotifications);
+      // console.log(myNotifications);
 
     }
     let friendNotifications = document.getElementById('notifications');
     friendNotifications.innerHTML = '';
     myNotifications.forEach(function(element) {
-      // friendNotifications.innerHTML += '<li> ';
-      // friendNotifications.innerHTML += element;
-      // friendNotifications.innerHTML += '</li>';
-
       friendNotifications.innerHTML= `
       <div class="card-panel teal lighten-2"> ${element}
       </div>
