@@ -166,10 +166,14 @@ function chargeNotifications() {
     let friendNotifications = document.getElementById('notifications');
     friendNotifications.innerHTML = '';
     myNotifications.forEach(function(element) {
-      friendNotifications.innerHTML += '<li>';
-      friendNotifications.innerHTML += element;
-      friendNotifications.innerHTML += '</li>';
+      // friendNotifications.innerHTML += '<li> ';
+      // friendNotifications.innerHTML += element;
+      // friendNotifications.innerHTML += '</li>';
 
+      friendNotifications.innerHTML= `
+      <div class="card-panel teal lighten-2"> ${element}
+      </div>
+      `;
     });
 
   });
@@ -191,7 +195,7 @@ document.getElementById('buttonSearch').addEventListener('click', ()=>{
         <img class='col s4 m2 circle' width=100px class="circle" src= ${user.foto} />
         <span class='title col s6 m10'> ${user.nombre} </span>
         <button class='btn-small col s2 m2' value= ${user.uid} onclick= "followPeople()"><i class="material-icons white-text">group_add</i></li></button>
-          </li>
+        </li>
         `);
       }
     })
