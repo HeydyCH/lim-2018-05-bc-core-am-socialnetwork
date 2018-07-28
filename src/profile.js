@@ -83,8 +83,8 @@ function chargePosts(userUID, muroPosts) {
        </div>
        `;
       document.getElementById(snapshot.key).disabled = true;
-      document.getElementById(snapshot.key + 'se').disabled = true;
-      // <i class="material-icons">border_color</i>
+      document.getElementById(snapshot.key + 'se').style.display = 'none';
+ 
 
      })
   });
@@ -127,36 +127,15 @@ function editPost(idPost, userUID, usuario, option, aux, idbtn) {
  idBtnEdit= idbtn+'e';
  idBtnSaveEdit= idbtn+'se';
 
- document.getElementById(idBtnEdit).disabled = true;
- document.getElementById(idBtnSaveEdit).disabled = false;
+
+document.getElementById(idBtnSaveEdit).style.display = 'block';
+document.getElementById( idBtnEdit).style.display = 'none';
  
 
  let newUpdate = document.getElementById(idPost);
  console.log(newUpdate.value)
  console.log(idbtn)
  newUpdate.disabled = false
-
-// // inicio
-
-//   if(aux == 0 ){
-
-//     console.log("deberia de poner editar mi mensaje")
-      
-//     idbtn.innerHTML = "guardar"
-//     // alert("voy a postear")
-//     // alert(mensaje.value)
-//     newUpdate.disabled = false
-//     aux = 1 ;
-//     console.log(aux)
-    
-//   }else{
-//     idbtn.innerHTML = "editar" ;
-//     // alert("voy a postear")
-//     alert(newUpdate.value)
-//     newUpdate.disabled = true ; 
-//     aux=0;
-//   } 
-//FIN
 
 }
 
@@ -165,12 +144,12 @@ function saveEditPost(idPost, userUID, usuario, option, aux, idbtn){
   idBtnEdit= idbtn+'e';
   idBtnSaveEdit= idbtn+'se';
 
- document.getElementById(idBtnEdit).disabled = false;
- document.getElementById(idBtnSaveEdit).disabled = true;
+
+ document.getElementById(idBtnSaveEdit).style.display = 'none';
+document.getElementById(idBtnEdit).style.display = 'block';
 
   console.log("aqui guardaremos")
   let newUpdate = document.getElementById(idPost);
-  alert(newUpdate.value)
   console.log(newUpdate.value)
   newUpdate.disabled = true
 
