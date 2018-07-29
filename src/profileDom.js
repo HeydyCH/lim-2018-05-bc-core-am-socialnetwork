@@ -17,7 +17,7 @@ $('#btn-notification').click(()=>{
   document.getElementById('search').style.display = 'none';
   document.getElementById('userProfile').style.display = 'none';
 });
-$('#btn-notification').click(()=>{
+$('#btn-userProfile').click(()=>{
   document.getElementById('home').style.display = 'none';
   document.getElementById('myNotifications').style.display = 'none';
   document.getElementById('search').style.display = 'none';
@@ -34,6 +34,7 @@ document.getElementById("searchText").addEventListener("change", () => {
 $('#buttonSearch').click(()=>searchPeople(wordSearch));
 //boton para cerrar sesion
 $('#signOut').click(()=>closeSession());
+$('#savePost').click(()=>savePost());
 //le damos la bienvenida al usuario actual
 let userUID = localStorage.currentUser;
 welcomeUser(userUID);

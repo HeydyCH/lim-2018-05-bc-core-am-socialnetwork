@@ -10,21 +10,11 @@ const welcomeUser = (uid) => {
   })
   let muroPosts = document.getElementById('myPosts');
   muroPosts.innerHTML = '';
-  // chargePosts(userUID,muroPosts);
-  // chargeFriendPosts();
-  // chargeNotifications();
+  chargePosts(userUID,muroPosts);
+  chargeFriendPosts();
+  chargeNotifications();
 }
 
-//funcion para cerrar sesion
-function closeSession() {
-  firebase.auth().signOut()
-  .then(function () {
-    document.location.href = 'index.html';
-  })
-  .catch(function (error) {
-    console.log(error);
-  })
-}
 //mostrando la lista de usuarios registrados por busqueda
 const searchPeople = (wordSearch) => {
   document.getElementById('userFilterList').innerHTML = '';
@@ -33,7 +23,7 @@ const searchPeople = (wordSearch) => {
     let user = s.val();
     console.log(s.val())
     console.log(s.key);
-    if((user.nombre.toUpperCase()).indexOf(wordSearch.toUpperCase())!==-1){
+    if((user.nombre.toUpperCase()).indexOf(wordSearch.toUpperCase())!==-1 && user.nombre != document.getElementById("userName").innerHTML){
       $('#userFilterList').append(`
       <div class="collection-item avatar">
         <img class='col s3 circle' width=100px class="circle" src= ${user.foto} />
@@ -72,18 +62,14 @@ const unfollowPeople = (btnFollow, btnUnfollow) => {
   firebase.database().ref('users/'+ userUID + '/quienes-sigo/')
   .on('value', snap => {
     let usersIFollow = JSON.stringify(snap.val(),null,3);//tbm funciona un solo parametro
-      usersIFollow = JSON.parse(usersIFollow);
-      console.log(usersIFollow);
-      usersIFollowObject = usersIFollow;
-      usersIFollow = Object.keys(usersIFollow);
-      console.log(usersIFollow);
-      usersIFollow.forEach(function(element) {
-        console.log(usersIFollowObject[element].uidFollow);
-        if(usersIFollowObject[element].uidFollow = uidFollow){
-          unfollowNow1 = element;
-        }
-      });
-      console.log(unfollowNow1);
+    usersIFollow = JSON.parse(usersIFollow);
+    usersIFollowObject = usersIFollow;
+    usersIFollow = Object.keys(usersIFollow);
+    usersIFollow.forEach(function(element) {
+      if(usersIFollowObject[element].uidFollow = uidFollow){
+        unfollowNow1 = element;
+      }
+    });
   })
   firebase.database().ref('users/' + userUID + '/quienes-sigo/' + unfollowNow1).remove();
   //eliminando la notificacion
@@ -91,21 +77,30 @@ const unfollowPeople = (btnFollow, btnUnfollow) => {
   firebase.database().ref('users/'+ uidFollow + '/notificaciones/')
   .on('value', snap => {
     let usersIFollow = JSON.stringify(snap.val(),null,3);//tbm funciona un solo parametro
-      usersIFollow = JSON.parse(usersIFollow);
-      console.log(usersIFollow);
-      usersIFollowObject = usersIFollow;
-      usersIFollow = Object.keys(usersIFollow);
-      console.log(usersIFollow);
-      usersIFollow.forEach(function(element) {
-        console.log(usersIFollowObject[element].amigo);
-        if(usersIFollowObject[element].amigo = userUID){
-          unfollowNow2 = element;
-        }
-      });
-      console.log(unfollowNow2);
+    usersIFollow = JSON.parse(usersIFollow);
+    console.log(usersIFollow);
+    usersIFollowObject = usersIFollow;
+    usersIFollow = Object.keys(usersIFollow);
+    console.log(usersIFollow);
+    usersIFollow.forEach(function(element) {
+      console.log(usersIFollowObject[element].amigo);
+      if(usersIFollowObject[element].amigo = userUID){
+        unfollowNow2 = element;
+      }
+    });
   })
-  console.log(unfollowNow2);
   firebase.database().ref('users/' + uidFollow + '/notificaciones/' + unfollowNow2).remove();
   btnFollow.style.display = 'block';
   btnUnfollow.style.display = 'none';
+}
+
+//funcion para cerrar sesion
+function closeSession() {
+  firebase.auth().signOut()
+  .then(function () {
+    document.location.href = 'index.html';
+  })
+  .catch(function (error) {
+    console.log(error);
+  })
 }
