@@ -1,71 +1,126 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8" />
-  <title>Page Title</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name = "viewport" content = "width = device-width, initial-scale = 1">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <!-- Empieza el login -->
-  <nav>
-    <div class="container-fluid section color nav-wrapper">
-      <img class="img-responsive" width="80px"src="images/pregnancy.png" alt="">MomCenter
-    </div>
-  </nav>
-  <div class="container row ">
-    <div class="col m6 hide-on-small-only	">
-      <div class="card horizontal">
-        <div class="row">
-          <div class="card-image col m3">
-            <img class="img-responsive" src="https://i.pinimg.com/originals/97/cd/d2/97cdd2f03c8f71aab6608a528a905475.jpg" alt="">
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>MomCenter</title>
+    <meta name = "viewport" content = "width = device-width, initial-scale = 1">
+    <!-- Materialize link css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+    <!-- Materialize icons link -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <nav class="nav align-center valign-wrapper">
+      <img id="logo" class="brand-logo center" src="images/logo.png" alt="">
+    </nav>
+    <!-- Este div solo sirve para dar espacio -->
+    <div class="input-field col s12"></div>
+    <!-- Contenido muestra e inicio de sesion -->
+    <div class="container-fluid valign-wrapper content">
+      <div class="row">
+        <!-- Presentacion de la pagina -->
+        <div class="col m5 offset-m1 hide-on-small-only">
+          <h1>Nuestros hijos son el futuro</h1>
+          <h6>Pero para cuidarlos no nacemos sabiendolo todo, aprende aqui con nosotros.</h6>
+          <h4>¿Que podras encontrar aqui?</h4>
+          <div class="card horizontal">
+            <div class="row">
+              <div class="card-image col m3">
+                <img class="img-responsive" src="https://i.pinimg.com/originals/97/cd/d2/97cdd2f03c8f71aab6608a528a905475.jpg" alt="">
+              </div>
+              <div class="card-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+              </div>
+            </div>
           </div>
-          <div class="card-content">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+        </div>
+        <!-- Inicio de sesion -->
+        <div class="col s10 m4 offset-m1 offset-s1 container-fluid" id="userLogin">
+          <div class="card-panel">
+            <div class="col s12">
+              <h5 class="center login-form-text">Inicia sesión</h5>
+            </div>
+            <div class="row margin">
+              <div class="input-field col s12">
+                <i class="small material-icons person-icon-color purple-text mdi-action-look-outline prefix">pregnant_woman</i>
+                <input type="text" id="emailNormalAccess">
+                <label class="center-align">Ingresa tu email</label>
+              </div>
+            </div>
+            <div class="row margin">
+              <div class="input-field col s12">
+                <i class="small material-icons pass-icon-color purple-text mdi-action-look-outline prefix">lock_outline</i>
+                <input type="password" id="passwordNormalAccess">
+                <label data-error="wrong" data-success="rigth" class="lbl-pass center-align">Contraseña</label>
+              </div>
+            </div>
+            <p>Aún no tienes cuenta, <a id="registerUser"> registrate!</a></p>
+            <div class="row">
+              <button id="login" class="btn-color btn pink darken-1 col s12">Acceder</button>
+            </div>
+            <p>O ingresa con :</p>
+            <div class="row">
+              <a class="col offset-s2 btn-floating btn-large waves-effect red" id="loginGoogle"><strong>G+</strong></a>
+              <a class="col offset-s2 btn-floating btn-large waves-effect blue darken-1" id="loginFacebook"><strong>f</strong></a>
+            </div>
+          </div>
+        </div>
+        <!-- Registrarme -->
+        <div class="col s10 m4 offset-m1 offset-s1 container-fluid" id="userRegister">
+          <div class="card-panel">
+              <div class="col s12">
+                <h5 class="center login-form-text">Registrate aqui</h5>
+              </div>
+              <div class="row margin">
+                <div class="input-field col s12">
+                  <i class="small material-icons person-icon-color purple-text mdi-action-look-outline prefix">pregnant_woman</i>
+                  <input type="text" id="name">
+                  <span id="nameOK"></span>
+                  <label class="center-align">Ingresa tu nombre</label>
+                </div>
+              </div>
+              <div class="row margin">
+                <div class="input-field col s12">
+                  <i class="small material-icons person-icon-color purple-text mdi-action-look-outline prefix">pregnant_woman</i>
+                  <input type="text" id="emailRegisterAccess">
+                  <span id="emailOK"></span>
+                  <label class="center-align">Ingresa tu email</label>
+                </div>
+              </div>
+              <div class="row margin">
+                <div class="input-field col s12">
+                  <i class="small material-icons pass-icon-color purple-text mdi-action-look-outline prefix">lock_outline</i>
+                  <input type="password" name= "password" id="passwordRegisterAccess">
+                  <span id="passwordOK"></span>
+                  <label for="password" data-error="wrong" data-success="rigth" class="lbl-pass center-align">Ingresa tu contraseña</label>
+                </div>
+              </div>
+              <div class="row">
+                <button class="btn-color btn pink darken-1 col s12" id="register">Registrar</button>
+                <button class="btn-color btn pink darken-1 col s12" id="returnHome">Volver al login</button>
+                <span id="sugerencias"></span>
+              </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="col s12 m6 container-fluid">
-      <div id="userLogin">
-        <input id="email" type="email" placeholder="Ingrese email" class="formulario">
-        <input id="password" type="password" placeholder="Ingrese contraseña" class="formulario">
-        <p>Aún no tienes cuenta, registrate!</p>
-        <button class="btn" id="login">Acceder</button>
-        <button class="btn" id="loginGoogle">Google</button>
-        <button class="btn" id="loginFacebook">Facebook</button>
-        <button class="btn" id="registerUser">Registrar</button>
-      </div>
-      <div id="userRegister">
-        <input id="name" type="text" placeholder="Nombre de usuario: min 8">
-        <span id="nameOK"></span>
-        <input id="email2" type="email" placeholder="Ingrese email" class="formulario">
-        <span id="emailOK"></span>
-        <input id="password2" type="password" placeholder="Ingrese contraseña" class="formulario">
-        <span id="passwordOK"></span>
-        <p>Registrate aqui :)</p>
-        <button class="register btn" id="register">Registrar ahora</button>
-        <button class="btn" id="returnHome">volver a inicio</button>
-        <span id="sugerencias"></span>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- Codigos para los archivos javascript -->
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous">
-  </script>
-  <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
-  <script src="firebase.js"></script>
-  <script src="login.js"></script>
-  <script src="anterior/app.js"></script>
-  <script src="anterior/domvalidator.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
-</body>
+    <!-- Link jquery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous">
+    </script>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+    <script src="firebase.js"></script>
+    <!-- Funciones para el login -->
+    <script src="login.js"></script>
+    <script src="loginDom.js"></script>
+    <!-- Scripts para validaciones -->
+    <script src="anterior/app.js"></script>
+    <script src="anterior/domvalidator.js"></script>
+    <!-- Materialize js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+  </body>
 </html>
