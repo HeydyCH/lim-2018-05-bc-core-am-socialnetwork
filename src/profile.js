@@ -1,9 +1,3 @@
-// Inicializando  Firebase
-initFirebase();
-let userUID = localStorage.currentUser;
-const muroPosts = document.getElementById('myPosts');
-// const btnSave = document.getElementById('myPosts');
-welcomeUser(userUID);
 //redireccionando al muro
 function welcomeUser(uid) {
   var profile = firebase.database().ref().child('users/'+uid);
@@ -22,8 +16,7 @@ function welcomeUser(uid) {
   chargeFriendPosts();
   chargeNotifications();
 }
-//escribiendo publicaciones
-document.getElementById('savePost').addEventListener("click", savePost)
+
 function savePost() {
   let message = document.getElementById('currentPost').value;
   console.log(message);
@@ -90,11 +83,9 @@ function chargePosts(userUID, muroPosts) {
   });
 }
 
-
 function contLikes(){
   console.log("le he dado like")
 }
-
 
 //eliminar post
 function removePost(idPost, userUID) {
@@ -175,8 +166,6 @@ document.getElementById(idBtnEdit).style.display = 'block';
 
 }
 
-
-
 //cargar las Notificaciones
 function chargeNotifications() {
 
@@ -206,27 +195,7 @@ function chargeNotifications() {
   });
 }
 
-//mostrando la lista de usuarios registrados por busqueda
-document.getElementById('searchText').addEventListener('input', () =>{
-  let wordSearch = document.getElementById('searchText').value;
-})
-document.getElementById('buttonSearch').addEventListener('click', ()=>{
-  document.getElementById('userFilterList').innerHTML = '';
-  firebase.database().ref("users")
-    .on("child_added", function(s){
-      let wordSearch = document.getElementById('searchText').value;
-      var user = s.val();
-      if((user.nombre.toUpperCase()).indexOf(wordSearch.toUpperCase())!==-1){
-        $('#userFilterList').append(`
-        <li class="collection-item avatar">
-        <img class='col s4 m2 circle' width=100px class="circle" src= ${user.foto} />
-        <span class='title col s6 m10'> ${user.nombre} </span>
-        <button class='btn-small col s2 m2' value= ${user.uid} onclick= "followPeople()"><i class="material-icons white-text">group_add</i></li></button>
-        </li>
-        `);
-      }
-    })
-})
+
 //funcion para almacenar uid de seguidores
 function followPeople() {
   //amigos 0 si son amigos y 1 si no son amigos
@@ -242,9 +211,6 @@ function followPeople() {
   console.log(uidFollow);
 }
 //funcion para dejar de seguir a alguie
-//funciones para los botones de redireccionamiento
-document.getElementById('signOut').addEventListener('click', closeSession);
-//funcion para cerrar sesion
 function closeSession() {
   firebase.auth().signOut()
     .then(function () {
@@ -256,7 +222,7 @@ function closeSession() {
 }
 
 
-document.getElementById('btn-home').addEventListener('click', redirectHome);
+
 function redirectHome() {
   document.getElementById('home').style.display = 'block';
   document.getElementById('myNotifications').style.display = 'none';
@@ -264,7 +230,7 @@ function redirectHome() {
   document.getElementById('userProfile').style.display = 'none';
 }
 
-document.getElementById('btn-search').addEventListener('click', redirectSearch);
+
 function redirectSearch() {
   document.getElementById('home').style.display = 'none';
   document.getElementById('myNotifications').style.display = 'none';
@@ -272,7 +238,7 @@ function redirectSearch() {
   document.getElementById('userProfile').style.display = 'none';
 }
 
-document.getElementById('btn-notification').addEventListener('click', redirectNotification);
+
 function redirectNotification() {
   document.getElementById('home').style.display = 'none';
   document.getElementById('myNotifications').style.display = 'block';
@@ -280,7 +246,7 @@ function redirectNotification() {
   document.getElementById('userProfile').style.display = 'none';
 }
 
-document.getElementById('btn-userProfile').addEventListener('click', redirectProfile);
+
 function redirectProfile() {
   document.getElementById('home').style.display = 'none';
   document.getElementById('myNotifications').style.display = 'none';
@@ -288,10 +254,7 @@ function redirectProfile() {
   document.getElementById('userProfile').style.display = 'block';
 }
 
-document.getElementById('home').style.display = 'none';
-document.getElementById('search').style.display = 'none';
-document.getElementById('myNotifications').style.display = 'none';
-document.getElementById('userProfile').style.display = 'block';
+
 
 // document.getElementById('myNotifications').style.display = 'none';
 // document.getElementById('search').style.display = 'none';
