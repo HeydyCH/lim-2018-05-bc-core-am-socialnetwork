@@ -1,5 +1,5 @@
 //mostrando todas las publicaciones de personas a las que sigo
-function chargeFriendPosts() {
+const chargeFriendPosts = () => {
   let usersIFollow =[];
   let friendPosts = document.getElementById('myFriendsPost');
   friendPosts.innerHTML = '';

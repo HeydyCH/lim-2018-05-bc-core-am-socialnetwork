@@ -1,143 +1,56 @@
-// Inicializando  Firebase
-initFirebase();
-let userUID = localStorage.currentUser;
-welcomeUser(userUID);
-//redireccionando al muro
-function welcomeUser(uid) {
+//cargando todo del muro
+const welcomeUser = (uid) => {
   var profile = firebase.database().ref().child('users/'+uid);
   profile.on('value', snap => {
     let userData = JSON.stringify(snap.val(),null,3);//tbm funciona un solo parametro
     userData = JSON.parse(userData);
-    console.log(userData);
-    console.log(userData.nombre);
     document.getElementById("userName").innerHTML = userData.nombre;
-    document.getElementById('userPhoto').innerHTML = "<img width='100px' class='circle img-responsive' src='"+userData.foto+"  '/>"
+    document.getElementById('userPhoto').innerHTML = "<img id='user-photo' width='100px' class='circle img-responsive' src='"+userData.foto+"  '/>"
     document.getElementById('userEmail').innerHTML = userData.email;
   })
   let muroPosts = document.getElementById('myPosts');
   muroPosts.innerHTML = '';
-  chargePosts(userUID,muroPosts);
-  chargeFriendPosts();
-  chargeNotifications();
-}
-//escribiendo publicaciones
-document.getElementById('savePost').addEventListener("click", savePost)
-function savePost() {
-  let message = document.getElementById('currentPost').value;
-  document.getElementById('currentPost').value = '';
-  let userUID = firebase.auth().currentUser.uid;
-  let optionValue = document.getElementById('privateOptions');
-  optionValue = optionValue.options[optionValue.selectedIndex].value;
-  firebase.database().ref('users/'+userUID+'/publicaciones').push({
-    optionValue,
-    message
-  });
-  let muroPosts = document.getElementById('myPosts');
-  muroPosts.innerHTML = '';
-  chargePosts(userUID, muroPosts);
-};
-//mostrando todos las publicaciones del usuario actual
-function chargePosts(userUID, muroPosts) {
-  firebase.database().ref('users/'+userUID+'/publicaciones')
-  .on('child_changed', function(snapshot) {
-     var objPost = snapshot.val();
-     console.log(objPost);
-     let aux = 0;
-     var profile = firebase.database().ref().child('users/'+userUID);
-     profile.on('value', snap => {
-       let userData = JSON.stringify(snap.val(),null,3);//tbm funciona un solo parametro
-       userData = JSON.parse(userData);
-       muroPosts.innerHTML += "<img width='100px' class='circle img-responsive' src='"+userData.foto+"  '/>";
-       muroPosts.innerHTML += `
-       <div>
-       <textarea id=${snapshot.key} class="collection-item avatar">${objPost.message}</textarea>
-       <a href="#!" class="secondary-content"><i class="material-icons">favorite_border</i></a></li>
-       <button  onclick="removePost('${snapshot.key}','${userUID}')" >DELETE</button>
-       <button id=${snapshot.key + 'b'} onclick="editPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key + 'b'}')">Update</button>
-       </div>
-       `;
-       document.getElementById(snapshot.key).disabled = true;
-     })
-  });
-}
-//eliminar post
-function removePost(idPost, userUID) {
- console.log("se va a borrar")
- //Ingresamos un mensaje a mostrar
- let mensaje = confirm("¿Deseas eliminar el POST");
- //Detectamos si el usuario acepto el mensaje
- if (mensaje) {
-   // alert("¡Gracias por aceptar!");
-   console.log(idPost)
-   console.log(userUID)
-   let dbRefObjectUsersPosts = firebase.database().ref().child('users-posts')
-   firebase.database().ref().child('users/' + userUID + '/publicaciones/' + idPost).remove();
-   // firebase.database().ref().child('posts/' + idPost).remove();
-   muroPosts = document.getElementById('myFriendsPost');
-   while (muroPosts.firstChild) muroPosts.removeChild(muroPosts.firstChild);
-   chargePosts(userUID, muroPosts);
-   // alert('The user is deleted successfully!');
- }
- //Detectamos si el usuario denegó el mensaje
- else {
-   alert("¡Haz denegado la eliminacion del post !");
- }
-}
-//cargar las Notificaciones
-function chargeNotifications() {
-  firebase.database().ref('users/'+userUID+'/notificaciones')
-  .on('value', function(snapshot) {
-    let myNotifications = [];
-    let notificationData = JSON.stringify(snapshot.val(),null,3);//tbm funciona un solo parametro
-    notificationData = JSON.parse(notificationData);
-    let notifications = Object.keys(notificationData);
-    console.log(notifications)
-    for(i=0; i<notifications.length; i++) {
-      let mensaje = (notificationData[notifications[i]].message);
-      console.log(mensaje);
-      myNotifications.push(mensaje);
-      console.log(myNotifications);
-
-    }
-    let friendNotifications = document.getElementById('notifications');
-    friendNotifications.innerHTML = '';
-    myNotifications.forEach(function(element) {
-      friendNotifications.innerHTML += '<li>';
-      friendNotifications.innerHTML += element;
-      friendNotifications.innerHTML += '</li>';
-
-    });
-
-  });
+  // chargePosts(userUID,muroPosts);
+  // chargeFriendPosts();
+  // chargeNotifications();
 }
 
+//funcion para cerrar sesion
+function closeSession() {
+  firebase.auth().signOut()
+  .then(function () {
+    document.location.href = 'index.html';
+  })
+  .catch(function (error) {
+    console.log(error);
+  })
+}
 //mostrando la lista de usuarios registrados por busqueda
-document.getElementById('searchText').addEventListener('input', () =>{
-  let wordSearch = document.getElementById('searchText').value;
-})
-document.getElementById('buttonSearch').addEventListener('click', ()=>{
+const searchPeople = (wordSearch) => {
   document.getElementById('userFilterList').innerHTML = '';
   firebase.database().ref("users")
-    .on("child_changed", function(s){
-      let wordSearch = document.getElementById('searchText').value;
-      var user = s.val();
-      console.log(s.key);
-      if((user.nombre.toUpperCase()).indexOf(wordSearch.toUpperCase())!==-1){
-        $('#userFilterList').append(`
-        <div class='row'>
-          <img class='col s4 m2 circle' width=100px class="circle" src= ${user.foto} />
-          <p class='col s6 m10'> ${user.nombre} </p>
-          <button class='btn-small col s2 m2' id=${s.key + 'a'} value = ${user.uid} onclick= "followPeople(${s.key + 'a'},${s.key + 'b'})">Seguir</button>
-          <button class='btn-small col s2 m2' id=${s.key + 'b'} value = ${user.uid} onclick="unfollowPeople(${s.key + 'a'},${s.key + 'b'})">No seguir</button>
-        </div>
-        `);
-        document.getElementById(s.key + 'b').style.display = 'none';
-      }
-    })
-})
+  .on("child_added", s => {
+    let user = s.val();
+    console.log(s.val())
+    console.log(s.key);
+    if((user.nombre.toUpperCase()).indexOf(wordSearch.toUpperCase())!==-1){
+      $('#userFilterList').append(`
+      <div class="collection-item avatar">
+        <img class='col s3 circle' width=100px class="circle" src= ${user.foto} />
+        <p class='col s6'><strong> ${user.nombre} </strong></p>
+        <button class='btn-small col s3' id=${'a' + s.key} value = ${user.uid} onclick="followPeople(${'a' + s.key},${'b' + s.key})">Seguir</button>
+        <button class='btn-small col s3' id=${'b' + s.key} value = ${user.uid} onclick="unfollowPeople(${'a' + s.key},${'b' + s.key})">Dejar de seguir</button>
+      </div>
+      `);
+      document.getElementById('b' + s.key).style.display = 'none';
+    }
+  })
+}
+
 //funcion para almacenar uid de seguidores
-function followPeople(btnFollow, btnUnfollow) {
+const followPeople = (btnFollow, btnUnfollow) => {
   //amigos 0 si son amigos y 1 si no son amigos
+  console.log(btnFollow);
   uidFollow = event.target.value;
   firebase.database().ref('users/'+userUID+'/quienes-sigo').push({
     uidFollow,
@@ -145,72 +58,54 @@ function followPeople(btnFollow, btnUnfollow) {
   });
   let userName = document.getElementById('userName').innerHTML;
   firebase.database().ref('users/'+uidFollow+'/notificaciones').push({
-    message : userName + ' quiere ser tu amigo'
+    message : userName + ' quiere ser tu amigo',
+    amigo : userUID
   });
   btnFollow.style.display = 'none';
   btnUnfollow.style.display = 'block';
 }
 //funcion para dejar de seguir a alguien
-function unfollowPeople(btnFollow, btnUnfollow) {
+const unfollowPeople = (btnFollow, btnUnfollow) => {
+  console.log('remover');
   uidFollow = event.target.value;
-  firebase.database().ref('users/'+userUID+'/quienes-sigo').push({
-    uidFollow,
-    habilitado : 1
-  });
-  let userName = document.getElementById('userName').innerHTML;
-  firebase.database().ref('users/'+uidFollow+'/notificaciones').push({
-    message : userName + ' quiere ser tu amigo'
-  });
-  firebase.database().ref().child('users/' + userUID + '/quienes-sigo/' + idPost).remove();
+  let unfollowNow1;
+  firebase.database().ref('users/'+ userUID + '/quienes-sigo/')
+  .on('value', snap => {
+    let usersIFollow = JSON.stringify(snap.val(),null,3);//tbm funciona un solo parametro
+      usersIFollow = JSON.parse(usersIFollow);
+      console.log(usersIFollow);
+      usersIFollowObject = usersIFollow;
+      usersIFollow = Object.keys(usersIFollow);
+      console.log(usersIFollow);
+      usersIFollow.forEach(function(element) {
+        console.log(usersIFollowObject[element].uidFollow);
+        if(usersIFollowObject[element].uidFollow = uidFollow){
+          unfollowNow1 = element;
+        }
+      });
+      console.log(unfollowNow1);
+  })
+  firebase.database().ref('users/' + userUID + '/quienes-sigo/' + unfollowNow1).remove();
+  //eliminando la notificacion
+  let unfollowNow2;
+  firebase.database().ref('users/'+ uidFollow + '/notificaciones/')
+  .on('value', snap => {
+    let usersIFollow = JSON.stringify(snap.val(),null,3);//tbm funciona un solo parametro
+      usersIFollow = JSON.parse(usersIFollow);
+      console.log(usersIFollow);
+      usersIFollowObject = usersIFollow;
+      usersIFollow = Object.keys(usersIFollow);
+      console.log(usersIFollow);
+      usersIFollow.forEach(function(element) {
+        console.log(usersIFollowObject[element].amigo);
+        if(usersIFollowObject[element].amigo = userUID){
+          unfollowNow2 = element;
+        }
+      });
+      console.log(unfollowNow2);
+  })
+  console.log(unfollowNow2);
+  firebase.database().ref('users/' + uidFollow + '/notificaciones/' + unfollowNow2).remove();
   btnFollow.style.display = 'block';
   btnUnfollow.style.display = 'none';
 }
-
-//funciones para los botones de redireccionamiento
-document.getElementById('signOut').addEventListener('click', closeSession);
-//funcion para cerrar sesion
-function closeSession() {
-  firebase.auth().signOut()
-    .then(function () {
-      document.location.href = 'index.html';
-    })
-    .catch(function (error) {
-      console.log(error);
-    })
-}
-
-document.getElementById('btn-home').addEventListener('click', redirectHome);
-function redirectHome() {
-  document.getElementById('home').style.display = 'block';
-  document.getElementById('myNotifications').style.display = 'none';
-  document.getElementById('search').style.display = 'none';
-  document.getElementById('userProfile').style.display = 'none';
-}
-
-document.getElementById('btn-search').addEventListener('click', redirectSearch);
-function redirectSearch() {
-  document.getElementById('home').style.display = 'none';
-  document.getElementById('myNotifications').style.display = 'none';
-  document.getElementById('search').style.display = 'block';
-  document.getElementById('userProfile').style.display = 'none';
-}
-
-document.getElementById('btn-notification').addEventListener('click', redirectNotification);
-function redirectNotification() {
-  document.getElementById('home').style.display = 'none';
-  document.getElementById('myNotifications').style.display = 'block';
-  document.getElementById('search').style.display = 'none';
-  document.getElementById('userProfile').style.display = 'none';
-}
-
-document.getElementById('btn-userProfile').addEventListener('click', redirectProfile);
-function redirectProfile() {
-  document.getElementById('home').style.display = 'none';
-  document.getElementById('myNotifications').style.display = 'none';
-  document.getElementById('search').style.display = 'none';
-  document.getElementById('userProfile').style.display = 'block';
-}
-
-document.getElementById('myNotifications').style.display = 'none';
-document.getElementById('search').style.display = 'none';
-document.getElementById('userProfile').style.display = 'none';
