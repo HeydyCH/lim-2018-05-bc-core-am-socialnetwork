@@ -17,74 +17,82 @@
 </head>
 
 <body>
+  <nav class="nav align-center valign-wrapper pink lighten-4">
+      <img id="logo" class="brand-logo center" width=90px src="images/mom center.png" alt="">
   <!-- Header logo y cerrar sesion -->
   <div class="container row">
-    <div class="col l3 ">
-      <ul id="slide-out" class="side-nav fixed">
-        <li>
-          <div class="user-view">
-            <div class="background">
-              <img class="responsive-img" src="images/banner.jpg">
-            </div>
-            <a href="#">
-              <div class="" id="userPhoto"></div>
-            </a>
-            <a href="##">
-              <span class="white-text name" id="userName"></span>
-            </a>
-            <a href="#">
-              <span class="white-text email" id="userEmail"></span>
-            </a>
-          </div>
-        </li>
-        <li>
-          <a class="waves-effect" href="#">Menu</a>
-        </li>
-        <li>
-          <div class="divider"></div>
-        </li>
-        <li>
-          <a href="#" id="btn-home"><i class="material-icons">home</i>Home</a>
-        </li>
-        <li>
-          <a href="#" id="btn-search"><i class="material-icons">search</i>Buscar</a>
-        </li>
-        <li>
-          <a href="#" id="btn-notification"><i class="material-icons">notifications</i>Notificaciones</a>
-        </li>
-        <li>
-          <a href="#" id="btn-userProfile"><i class="material-icons">person</i>Perfil</a>
-        </li>
-        <li>
-          <a href="#" id="signOut"><i class="material-icons">exit_to_app</i>Salir</a>
-        </li>
-        <li class="no-padding">
-          <ul class="collapsible collapsible-accordion">
-            <li>
-              <a class="collapsible-header">Mas<i class="material-icons">arrow_drop_down</i></a>
-              <div class="collapsible-body">
-                <ul>
-                  <li>
-                    <a href="#">Acerca de Mom Center</a>
-                  </li>
-                  <li>
-                    <a href="#">Ayuda</a>
-                  </li>
-                  <li>
-                    <a href="#">Terminos y condiciones</a>
-                  </li>
-
-                </ul>
+      <div class="col l3">
+        <ul id="slide-out" class="side-nav fixed">
+          <li>
+            <div class="user-view">
+              <div class="background">
+                <img class="responsive-img" src="images/banner.jpg">
               </div>
-            </li>
-          </ul>
-        </li>
-      </ul>
-      <a class="btn hide-on-large-only" data-activates="slide-out">
-        <i class="material-icons">menu</i>
-      </a>
-    </div>
-    <!-- termina nav -->
+              <a href="#">
+                <div class="" id="userPhoto"></div>
+              </a>
+              <a href="##">
+                <span class="white-text name" id="userName"></span>
+              </a>
+              <a href="#">
+                <span class="white-text email" id="userEmail"></span>
+              </a>
+            </div>
+          </li>
+          <li>
+            <a class="waves-effect" href="#">Menú</a>
+          </li>
+          <li>
+            <div class="divider"></div>
+          </li>
+          <li>
+            <a href="#" id="btn-home"><i class="material-icons">home</i>Home</a>
+          </li>
+          <li>
+            <a href="#" id="btn-search"><i class="material-icons">search</i>Buscar</a>
+          </li>
+          <li>
+            <a href="#" id="btn-notification"><i class="material-icons">notifications</i>Notificaciones</a>
+          </li>
+          <li>
+            <a href="#" id="btn-userProfile"><i class="material-icons">person</i>Perfil</a>
+          </li>
+          <li>
+            <a href="#" id="signOut"><i class="material-icons">exit_to_app</i>Salir</a>
+          </li>
+          <li class="no-padding">
+            <ul class="collapsible collapsible-accordion">
+              <li>
+                <a class="collapsible-header">Más<i class="material-icons">arrow_drop_down</i></a>
+                <div class="collapsible-body">
+                  <ul>
+                    <li>
+                      <a href="#">Acerca de Mom Center</a>
+                    </li>
+                    <li>
+                      <a href="#">Ayuda</a>
+                    </li>
+                    <li>
+                      <a href="#">Términos y condiciones</a>
+                    </li>
+  
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </li>
+  
+        </ul>
+        <a class="btn hide-on-large-only pink accent-1" data-activates="slide-out">
+          <i class="material-icons">menu</i>
+        </a>
+      </div>
+  </div>
+      <!-- termina nav -->
+  
+  
+    </nav>
+  
     <div class="col l9 m12 s12 container-fluid">
       <div class="container-fluid section" id="home">
         <h2>Publicaciones de personas a quienes sigo</h2>
@@ -120,8 +128,8 @@
         <div id="userPosts">
           <!-- empieza -->
           <div class="card horizontal row">
-            <div class="col m2">
-              <img class="img-responsive" width="100px" src="./images/pregnancy.png">
+            <div class="col m1">
+              <img class="img-responsive" width="50px" src="./images/mom-center-img.png">
             </div>
             <div class="col m10">
               <div class="card-content">
@@ -134,11 +142,11 @@
                 <div class="input-field col s6 ">
                   <select id="privateOptions">
                     <option value="0">Amigos</option>
-                    <option value="1">Publico</option>
+                    <option value="1">Público</option>
                   </select>
                   <label>Tipo de privacidad</label>
                 </div>
-                <button class="btn col s6" id="savePost">Publicar</button>
+                <button class="btn col s6 pink accent-1 btn-small" id="savePost">Publicar</button>
                 </div>
               </div>
             </div>
