@@ -39,7 +39,7 @@ function savePost() {
 //mostrando todos las publicaciones del usuario actual
 function chargePosts(userUID, muroPosts) {
   firebase.database().ref('users/'+userUID+'/publicaciones')
-  .on('child_added', function(snapshot) {
+  .on('child_changed', function(snapshot) {
      var objPost = snapshot.val();
      console.log(objPost);
      let aux = 0;
@@ -118,24 +118,27 @@ document.getElementById('searchText').addEventListener('input', () =>{
 document.getElementById('buttonSearch').addEventListener('click', ()=>{
   document.getElementById('userFilterList').innerHTML = '';
   firebase.database().ref("users")
-    .on("child_added", function(s){
+    .on("child_changed", function(s){
       let wordSearch = document.getElementById('searchText').value;
       var user = s.val();
+      console.log(s.key);
       if((user.nombre.toUpperCase()).indexOf(wordSearch.toUpperCase())!==-1){
         $('#userFilterList').append(`
         <div class='row'>
           <img class='col s4 m2 circle' width=100px class="circle" src= ${user.foto} />
           <p class='col s6 m10'> ${user.nombre} </p>
-          <button class='btn-small col s2 m2' value= ${user.uid} onclick= "followPeople()">Seguir</button>
+          <button class='btn-small col s2 m2' id=${s.key + 'a'} value = ${user.uid} onclick= "followPeople(${s.key + 'a'},${s.key + 'b'})">Seguir</button>
+          <button class='btn-small col s2 m2' id=${s.key + 'b'} value = ${user.uid} onclick="unfollowPeople(${s.key + 'a'},${s.key + 'b'})">No seguir</button>
         </div>
         `);
+        document.getElementById(s.key + 'b').style.display = 'none';
       }
     })
 })
 //funcion para almacenar uid de seguidores
-function followPeople() {
+function followPeople(btnFollow, btnUnfollow) {
   //amigos 0 si son amigos y 1 si no son amigos
-  let uidFollow = event.target.value;
+  uidFollow = event.target.value;
   firebase.database().ref('users/'+userUID+'/quienes-sigo').push({
     uidFollow,
     habilitado : 1
@@ -144,9 +147,25 @@ function followPeople() {
   firebase.database().ref('users/'+uidFollow+'/notificaciones').push({
     message : userName + ' quiere ser tu amigo'
   });
-  console.log(uidFollow);
+  btnFollow.style.display = 'none';
+  btnUnfollow.style.display = 'block';
 }
-//funcion para dejar de seguir a alguie
+//funcion para dejar de seguir a alguien
+function unfollowPeople(btnFollow, btnUnfollow) {
+  uidFollow = event.target.value;
+  firebase.database().ref('users/'+userUID+'/quienes-sigo').push({
+    uidFollow,
+    habilitado : 1
+  });
+  let userName = document.getElementById('userName').innerHTML;
+  firebase.database().ref('users/'+uidFollow+'/notificaciones').push({
+    message : userName + ' quiere ser tu amigo'
+  });
+  firebase.database().ref().child('users/' + userUID + '/quienes-sigo/' + idPost).remove();
+  btnFollow.style.display = 'block';
+  btnUnfollow.style.display = 'none';
+}
+
 //funciones para los botones de redireccionamiento
 document.getElementById('signOut').addEventListener('click', closeSession);
 //funcion para cerrar sesion

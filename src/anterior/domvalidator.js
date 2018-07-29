@@ -12,8 +12,8 @@ sugerir.appendChild(itemUpper);
 sugerir.appendChild(itemLower);
 sugerir.appendChild(itemNum);
 document.getElementById("register").disabled = true;
-document.getElementById('email2').addEventListener('input', () =>{
-  let myInput = document.getElementById('email2').value;
+document.getElementById('emailRegisterAccess').addEventListener('input', () =>{
+  let myInput = document.getElementById('emailRegisterAccess').value;
   valido = document.getElementById('emailOK');
   emailValidator(myInput) ? valido.innerHTML = "\u2714" : valido.innerHTML ="\u2718";
 });
@@ -22,8 +22,8 @@ document.getElementById('name').addEventListener('input', () => {
   valido = document.getElementById('nameOK');
   nameValidator(myInput) ? valido.innerHTML = "\u2714" : valido.innerHTML ="\u2718";
 });
-document.getElementById('password2').addEventListener('input', () => {
-  let myInput = document.getElementById('password2').value;
+document.getElementById('passwordRegisterAccess').addEventListener('input', () => {
+  let myInput = document.getElementById('passwordRegisterAccess').value;
   validoEmail = document.getElementById('emailOK');
   valido = document.getElementById('passwordOK');
   sugerir = document.getElementById('sugerencias');
