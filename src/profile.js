@@ -1,4 +1,5 @@
 //redireccionando al muro
+window.userLike =["hola"];
 function welcomeUser(uid) {
   var profile = firebase.database().ref().child('users/'+uid);
   profile.on('value', snap => {
@@ -28,7 +29,8 @@ function savePost() {
     optionValue = optionValue.options[optionValue.selectedIndex].value;
     firebase.database().ref('users/'+userUID+'/publicaciones').push({
       optionValue,
-      message
+      message ,
+      userLike
     });
     muroPosts.innerHTML = '';
     chargePosts(userUID, muroPosts);
@@ -68,7 +70,7 @@ function chargePosts(userUID, muroPosts) {
           <span>${userData.nombre}</span>
           <i class="material-icons">${a}</i>
           <textarea id=${snapshot.key} class="collection-item avatar">${objPost.message}</textarea>
-          <button  class='waves-effect waves-light btn-small' id=${snapshot.key+ 'a'} onclick="contLikes()"><i class="material-icons">favorite_border</i></button>
+          <button  class='waves-effect waves-light btn-small' id=${snapshot.key+ 'a'} onclick="contLikes('${snapshot.key}' , '${userUID}', '${snapshot.key+ 'a'}')"><i class="material-icons">favorite_border</i></button>
           <button  class='waves-effect waves-light btn-small' onclick="removePost('${snapshot.key}','${userUID}')"><i class="material-icons">delete</i></button>
           <button class='waves-effect waves-light btn-small' id=${snapshot.key + 'e'} onclick="editPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key}')"><i class="material-icons">border_color</i></button>
           <button class='waves-effect waves-light btn-small' id=${snapshot.key + 'se'} onclick="saveEditPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key}')"><i class="material-icons">archive</i></button>
@@ -83,10 +85,25 @@ function chargePosts(userUID, muroPosts) {
   });
 }
 
-function contLikes(){
+function contLikes(idPost , userUID , idLike){
   console.log("le he dado like")
-}
+  console.log(idPost)
+  console.log(userUID)
+  console.log("le he dado like x2")
+  firebase.database().ref('users/'+ userUID +'/publicaciones/'+ idPost + '/likes').push({
+    userUID,
+    habilitado : 1
+  });
 
+  document.getElementById(idLike).disabled="true"
+
+  // console.log(userLike);
+  // userLike.push(userUID);
+  // console.log(userLike);
+  // firebase.database().ref('users/'+ userUID +'/publicaciones/'+ idPost + '/userLike').push({
+  //   userUID
+  // });
+}
 //eliminar post
 function removePost(idPost, userUID) {
   console.log("se va a borrar")
@@ -129,7 +146,6 @@ document.getElementById( idBtnEdit).style.display = 'none';
  newUpdate.disabled = false
 
 }
-
 function saveEditPost(idPost, userUID, usuario, option, aux, idbtn){
 
   idBtnEdit= idbtn+'e';
@@ -165,7 +181,23 @@ document.getElementById(idBtnEdit).style.display = 'block';
 
 
 }
-
+function userFilterList(){
+  document.getElementById('userFilterList').innerHTML = '';
+  firebase.database().ref("users")
+    .on("child_added", function(s){
+      let wordSearch = document.getElementById('searchText').value;
+      var user = s.val();
+      if((user.nombre.toUpperCase()).indexOf(wordSearch.toUpperCase())!==-1){
+        $('#userFilterList').append(`
+        <li class="collection-item avatar">
+        <img class='col s4 m2 circle' width=100px class="circle" src= ${user.foto} />
+        <span class='title col s6 m10'> ${user.nombre} </span>
+        <button class='btn-small col s2 m2' value= ${user.uid} onclick= "followPeople()"><i class="material-icons white-text">group_add</i></li></button>
+        </li>
+        `);
+      }
+    })
+}
 //cargar las Notificaciones
 function chargeNotifications() {
 
@@ -195,7 +227,6 @@ function chargeNotifications() {
   });
 }
 
-
 //funcion para almacenar uid de seguidores
 function followPeople() {
   //amigos 0 si son amigos y 1 si no son amigos
@@ -220,8 +251,6 @@ function closeSession() {
       console.log(error);
     })
 }
-
-
 
 function redirectHome() {
   document.getElementById('home').style.display = 'block';
@@ -254,8 +283,3 @@ function redirectProfile() {
   document.getElementById('userProfile').style.display = 'block';
 }
 
-
-
-// document.getElementById('myNotifications').style.display = 'none';
-// document.getElementById('search').style.display = 'none';
-// document.getElementById('userProfile').style.display = 'none';
