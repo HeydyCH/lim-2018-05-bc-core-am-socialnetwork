@@ -131,4 +131,6 @@ body{
 }
 #login, #loginGoogle, #loginFacebook, #registerUser, #register, #returnHome:active{
   transform: scale(0.95);
+.color {
+  background-color: #B8F7DF;
 }

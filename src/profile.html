@@ -2,9 +2,9 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Profile</title>
+  <title>Page Title</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/jpg" href="../src/images/pregnant.png">
   <link rel="stylesheet" type="text/css" media="screen" href="styleprofile.css" />
@@ -13,209 +13,160 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!--Materialize CSS-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
 </head>
 
 <body>
-
-  <!--Cabecera
-  <div class="log">
-      <img class= class="responsive-img" src="../src/images/pregnancy.png" alt="">
-      <p class="profile">Mom Center</p>
-  </div>
-    <h2>
-      <span id="userEmail"></span>
-    </h2>
-<!--Cabecera-->
-
-<!--Menu responsive usando materialize-->
-  <ul id="slide-out" class="side-nav fixed">
-    <li>
-      <div class="user-view">
-        <div class="background">
-          <img class="responsive-img" src="images/banner.jpg">
-        </div>
-        <a href="#">
-          <img class="circle" src="images/user.png">
-        </a>
-        <a href="##">
-          <span class="white-text name">Fiorella Effio</span>
-        </a>
-        <a href="#">
-          <span class="white-text email">fiorellaeffio@gmail.com</span>
-        </a>
-      </div>
-    </li>
-
-
-    <li>
-      <a class="waves-effect" href="#">Menu</a>
-    </li>
-    <li>
-      <div class="divider"></div>
-    </li>
-    <li>
-      <a href="#"><i class="material-icons">home</i>Home</a>
-    </li>
-    <li>
-      <a href="#"><i class="material-icons">search</i>Buscar</a>
-    </li>
-    <li>
-      <a href="#"><i class="material-icons">notifications</i>Notificaciones</a>
-    </li>
-    <li>
-      <a href="#"><i class="material-icons">person</i>Perfil</a>
-    </li>
-    <li>
-      <a href="#"><i class="material-icons">exit_to_app</i>Salir</a>
-    </li>
-
-
-    <li class="no-padding">
-      <ul class="collapsible collapsible-accordion">
+  <!-- Header logo y cerrar sesion -->
+  <div class="container row">
+    <div class="col l3 ">
+      <ul id="slide-out" class="side-nav fixed">
         <li>
-          <a class="collapsible-header">Mas<i class="material-icons">arrow_drop_down</i></a>
-          <div class="collapsible-body">
-            <ul>
-              <li>
-                <a href="#">Acerca de Mom Center</a>
-              </li>
-              <li>
-                <a href="#">Ayuda</a>
-              </li>
-              <li>
-                <a href="#">Terminos y condiciones</a>
-              </li>
-
-            </ul>
+          <div class="user-view">
+            <div class="background">
+              <img class="responsive-img" src="images/banner.jpg">
+            </div>
+            <a href="#">
+              <div class="" id="userPhoto"></div>
+            </a>
+            <a href="##">
+              <span class="white-text name" id="userName"></span>
+            </a>
+            <a href="#">
+              <span class="white-text email" id="userEmail"></span>
+            </a>
           </div>
         </li>
+        <li>
+          <a class="waves-effect" href="#">Menu</a>
+        </li>
+        <li>
+          <div class="divider"></div>
+        </li>
+        <li>
+          <a href="#" id="btn-home"><i class="material-icons">home</i>Home</a>
+        </li>
+        <li>
+          <a href="#" id="btn-search"><i class="material-icons">search</i>Buscar</a>
+        </li>
+        <li>
+          <a href="#" id="btn-notification"><i class="material-icons">notifications</i>Notificaciones</a>
+        </li>
+        <li>
+          <a href="#" id="btn-userProfile"><i class="material-icons">person</i>Perfil</a>
+        </li>
+        <li>
+          <a href="#" id="signOut"><i class="material-icons">exit_to_app</i>Salir</a>
+        </li>
+        <li class="no-padding">
+          <ul class="collapsible collapsible-accordion">
+            <li>
+              <a class="collapsible-header">Mas<i class="material-icons">arrow_drop_down</i></a>
+              <div class="collapsible-body">
+                <ul>
+                  <li>
+                    <a href="#">Acerca de Mom Center</a>
+                  </li>
+                  <li>
+                    <a href="#">Ayuda</a>
+                  </li>
+                  <li>
+                    <a href="#">Terminos y condiciones</a>
+                  </li>
+
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </li>
       </ul>
-    </li>
-  </ul>
+      <a class="btn hide-on-large-only" data-activates="slide-out">
+        <i class="material-icons">menu</i>
+      </a>
+    </div>
+    <!-- termina nav -->
+    <div class="col l9 m12 s12 container-fluid">
+      <div class="container-fluid section" id="home">
+        <h2>Publicaciones de personas a quienes sigo</h2>
+        <div id="myFriendsPost" class="collection"></div>
+      </div>
 
-  <a class="btn hide-on-large-only" data-activates="slide-out">
-    <i class="material-icons">menu</i>
-  </a>
-<!--Menu responsive usando Materialize-->
-
-
-  <!--
-  </header>
-  <main>
-     <div class="container-comments">
-      <div class="comments">
-        <div class="photo-perfil">
-          <img src="..//src/images/mami.gif" alt="">
-        </div>
-        <div class="info-comments">
-          <div class="header">
-            <h4>Usuario Logueado</h4>
-            <h5>19 julio 2018</h5>
+      <div class="container" id="search">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text"> 
+            <input type="text" id="searchText" placeholder="Buscar ...">
+            <button class="btn" id="buttonSearch"><i class="material-icons rigth">search</i></button>
           </div>
         </div>
-  
-        <div class="col s12 m8 l9"> <!-- Note that "m8 l9" was added -->
-  <!-- Teal page content
-  
-                This content will be:
-            9-columns-wide on large screens,
-            8-columns-wide on medium screens,
-            12-columns-wide on small screens  -->
-  <!--
-            <main>
-                <h2>Pregunta del mes</h2>
-                <hr class="line">
-                <div class="container-comments">
-                  <div class="comments">
-                    <div class="photo-perfil">
-                      <img src="..//src/images/mami.gif" alt="">
-                    </div>
-                    <div class="info-comments">
-                      <div class="header">
-                        <h4>Usuario Logueado</h4>
-                        <h5>19 julio 2018</h5>
-                      </div>
-            
-                      <p>Aqui va el comentario: Aprende como diseñar esta hermosa caja de comentarios, todo creado simplemente con HTML5 y CSS3, de una manera muy fácil y bien explicada, espero que te guste la idea.
-            
-                          No olvides compartir, para que otros se beneficien del vídeo de la misma manera en la que tu te has beneficiado, saludos.</p>
-            
-                      <div class="footer">
-                        <h6 class="request">Responder</h6>
-                        <label class="">Corazon</label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="container-comments"></div>
-                <div class="container-comments-request">
-            
-                  <div class="comments-request">
-                    <div class="photo-perfil-request">
-                      <img src="..//src/images/mami.gif" alt="">
-                    </div>
-                    <div class="info-comments-request">
-                      <div class="header">
-                        <h4>Usuario Logueado</h4>
-                        <h5>19 julio 2018</h5>
-                      </div>
-            
-                      <p>Aqui va el comentario: Aprende como diseñar esta hermosa caja de comentarios, todo creado simplemente con HTML5 y CSS3, de una manera muy fácil y bien explicada, espero que te guste la idea.
-            
-                          No olvides compartir, para que otros se beneficien del vídeo de la misma manera en la que tu te has beneficiado, saludos.</p>
-            
-                      <div class="footer">
-                        <h6 class="request">Responder</h6>
-                        <label class="">Corazon</label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </main>
-
-        </div>
-  
+        <!-- <div id="userFilterList"></div> -->
+        <ul class="collection">
+            <div id="userFilterList"></div>
+        </ul>
       </div>
-    </div>
-  </main>
 
-  
+      <div class="container" id="myNotifications">
+        <h2>Mis notificaciones</h2>
+        <div class="container" id="notifications"></div>
+      </div>
 
-  <div class="container">
-    <div id="userProfile"></div>
-    <button id="close">Cerrar sesion</button>
-    <pre id="object"></pre>
-    <div id="sectionPost">
-        <span id = "name"></span>
-        <div id="listposts"></div>
-        <button id= "addPost">MIS PUBLICACIONES</button>
-        <input type="button" id="addPostPublica" value="PUBLICACIONES PUBLICAS GENERALES">
-        <h1>Agregar Post !!</h1>
-      <input id="inputPost" type="text" placeholder="Ingrese post">
-      <select id="privateOptions">
-        <option value="0">Amigos</option>
-        <option value="1">Publico</option>
-      </select>
-      <button id="btnPost" class="">Postear</button>
+      <div class="container" id="userProfile">
+
+        <div id="userData">
+          <div class="row">
+            <div class="col s6 m4" id="userPhoto"></div>
+            <h4 class="col s6 m8"><span id="userName"></span></h4>
+          </div>
+        </div>
+        <div id="userPosts">
+          <!-- empieza -->
+          <div class="card horizontal row">
+            <div class="col m2">
+              <img class="img-responsive" width="100px" src="./images/pregnancy.png">
+            </div>
+            <div class="col m10">
+              <div class="card-content">
+                <span class="card-title"> Mamita</span>
+
+                <div class="input-field col s12">
+                  <input class="col s9 m10 l10"id="currentPost" placeholder="Escribe lo que quieras publicar">
+                </div>
+                <div class="row">
+                <div class="input-field col s6 ">
+                  <select id="privateOptions">
+                    <option value="0">Amigos</option>
+                    <option value="1">Publico</option>
+                  </select>
+                  <label>Tipo de privacidad</label>
+                </div>
+                <button class="btn col s6" id="savePost">Publicar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- termina -->
+          <h2>Mis publicaciones</h2>
+          <div id="myPosts"></div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div><span id="userName"></span></div>
-  <span id="userPhoto"></span>
-  <h2 id="userEmail"></h2>
--->
   <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
-  <script src="init-fbase.js"></script>
-  <script src="post.js"></script>
-  <script src="postDOM.js"></script>
-  <!--JQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <!--Materialize JS-->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous">
+  </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
-
+  <script src="firebase.js"></script>
   <script src="main.js"></script>
-
+  <script src="muro.js"></script>
+  <script src="anterior/app.js"></script>
+  <script src="search.js"></script>
+  <script src="profile.js"></script>
+  <!-- <script src="notifications.js"></script>
+  <script src="home.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
 </body>
-​
-
 </html>
