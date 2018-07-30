@@ -6,10 +6,12 @@ const likePost = (btnLike, btnDislike, uidFollow, idPost) => {
     amigo : userUID
   });
   firebase.database().ref('users/'+uidFollow+'/publicaciones/'+idPost+'/likesFromUsers').push({
-    amigo : userUID
+    amigo : userUID,
+    nombre : userName
   });
   document.getElementById(btnLike).style.display = 'none';
   document.getElementById(btnDislike).style.display = 'block';
+  chargeFriendPosts();
 }
 //funcion para dejar de seguir a alguien
 const dislikePost = (btnLike, btnDislike, uidFollow, idPost) => {
@@ -43,4 +45,12 @@ const dislikePost = (btnLike, btnDislike, uidFollow, idPost) => {
   firebase.database().ref('users/'+uidFollow+'/publicaciones/'+idPost+'/likesFromUsers/' + unfollowNow2).remove();
   document.getElementById(btnLike).style.display = 'block';
   document.getElementById(btnDislike).style.display = 'none';
+  recharge();
+}
+const recharge = () => {
+  let muroPosts = document.getElementById('myPosts');
+  muroPosts.innerHTML = '';
+  chargeFriendPosts();
+  chargePosts(userUID,muroPosts);
+  chargeNotifications();
 }

@@ -45,10 +45,9 @@ function removePost(idPost, userUID) {
 const chargeFriendPosts = () => {
   let usersIFollow = [];
   let friendPosts = document.getElementById('myFriendsPost');
+  friendPosts.innerHTML = ''
   firebase.database().ref('users/'+userUID+'/quienes-sigo')
   .on('value', function(snapshot) {
-    console.log('repite');
-
     let postData = JSON.stringify(snapshot.val(),null,3);//tbm funciona un solo parametro
     postData = JSON.parse(postData);
     let postUIDs = Object.keys(postData);
@@ -56,8 +55,6 @@ const chargeFriendPosts = () => {
       let mensaje = (postData[postUIDs[i]].uidFollow);
       usersIFollow.push(mensaje);
     }
-    console.log(usersIFollow);
-    friendPosts.innerHTML = ''
     usersIFollow.forEach(function(element) {
       console.log(element);
       chargePosts(element, friendPosts);
@@ -88,9 +85,9 @@ function chargePosts(userUID, muroPosts) {
       let aux= 0 ;
       muroPosts.innerHTML += `
        <div class="card horizontal card-posts">
-        <div class = "row">
+        <div class = "row" >
           <div class="input-field col s12"></div>
-          <img width="4px" class="circle col s2 offset-s1" src="${userData.foto}"/>
+          <img width="4px" class="circle col s2" src="${userData.foto}"/>
           <div class="col s7">
             <span>${userData.nombre}</span>
             <i class="material-icons">${a}</i>
@@ -103,6 +100,7 @@ function chargePosts(userUID, muroPosts) {
             <button class='waves-effect btn-small' id=${snapshot.key + 'e'} onclick="editPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key}')"><i class="material-icons">border_color</i></button>
             <button class='waves-effect btn-small' id=${snapshot.key + 'se'} onclick="saveEditPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key}')"><i class="material-icons">archive</i></button>
           </div>
+          <div class="s12" id=${snapshot.key+ 'card'}><strong>Le gusta a:</strong></div>
         </div>
        </div>
        `;
@@ -115,10 +113,12 @@ function chargePosts(userUID, muroPosts) {
            usersLikesObject = usersLikes;
            usersLikes = Object.keys(usersLikes);
            console.log(usersLikes);
+           document.getElementById(snapshot.key+ 'card').innerHTML = '<strong>Le gusta a:</strong>';
            usersLikes.forEach(function(element) {
              if(usersLikesObject[element].amigo == localStorage.currentUser){
                countLikeFriendExist = 1;
              }
+             document.getElementById(snapshot.key+ 'card').innerHTML += `<p>${usersLikesObject[element].nombre}</p>`;
            });
          }
        })

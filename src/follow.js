@@ -14,6 +14,7 @@ const followPeople = (btnFollow, btnUnfollow) => {
   });
   btnFollow.style.display = 'none';
   btnUnfollow.style.display = 'block';
+  recharge();
 }
 //funcion para dejar de seguir a alguien
 const unfollowPeople = (btnFollow, btnUnfollow) => {
@@ -53,4 +54,5 @@ const unfollowPeople = (btnFollow, btnUnfollow) => {
   firebase.database().ref('users/' + uidFollow + '/notificaciones/' + unfollowNow2).remove();
   btnFollow.style.display = 'block';
   btnUnfollow.style.display = 'none';
+  recharge();
 }
