@@ -10,8 +10,8 @@ const welcomeUser = (uid) => {
   })
   let muroPosts = document.getElementById('myPosts');
   muroPosts.innerHTML = '';
-  chargePosts(userUID,muroPosts);
   chargeFriendPosts();
+  chargePosts(userUID,muroPosts);
   chargeNotifications();
 }
 
@@ -32,7 +32,28 @@ const searchPeople = (wordSearch) => {
         <button class='btn-small col s3' id=${'b' + s.key} value = ${user.uid} onclick="unfollowPeople(${'a' + s.key},${'b' + s.key})">Dejar de seguir</button>
       </div>
       `);
-      document.getElementById('b' + s.key).style.display = 'none';
+      let countFriendExist = 0;
+      firebase.database().ref('users/'+ user.uid + '/notificaciones/')
+      .on('value', snap => {
+        let usersIFollow = JSON.stringify(snap.val(),null,3);//tbm funciona un solo parametro
+        usersIFollow = JSON.parse(usersIFollow);
+        usersIFollowObject = usersIFollow;
+        usersIFollow = Object.keys(usersIFollow);
+        usersIFollow.forEach(function(element) {
+          if(usersIFollowObject[element].amigo == userUID){
+            console.log(usersIFollowObject[element].amigo);
+            countFriendExist = 1;  
+          }
+        });
+      })
+      if(countFriendExist == 1){
+        document.getElementById('a' + s.key).style.display = 'none';
+        document.getElementById('b' + s.key).style.display = 'block';
+      } else {
+        console.log('no hay coincidencias');
+        document.getElementById('a' + s.key).style.display = 'block';
+        document.getElementById('b' + s.key).style.display = 'none';
+      }
     }
   })
 }

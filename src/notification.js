@@ -6,7 +6,6 @@ function chargeNotifications() {
     let notificationData = JSON.stringify(snapshot.val(),null,3);//tbm funciona un solo parametro
     notificationData = JSON.parse(notificationData);
     let notifications = Object.keys(notificationData);
-    console.log(notifications)
     for(i=0; i<notifications.length; i++) {
       let mensaje = (notificationData[notifications[i]].message);
       myNotifications.push(mensaje);

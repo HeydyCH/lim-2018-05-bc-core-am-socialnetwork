@@ -42,21 +42,14 @@ function removePost(idPost, userUID) {
 }
 
 function chargePosts(userUID, muroPosts) {
-  // console.log('Mostrando todas las publicaciones x usuario logueado')
-  muroPosts.innerHTML = '';
   firebase.database().ref('users/'+userUID+'/publicaciones')
   .on('child_added', function(snapshot) {
      var objPost = snapshot.val();
-    //  console.log(objPost);
      var profile = firebase.database().ref().child('users/'+userUID);
-    //  var estadoLike =firebase.database().ref('users/'+ userUID +'/publicaciones/'+ idPost + '/likes');
      profile.on('value',snap => {
-      //  console.log("entro");
        let userData = JSON.stringify(snap.val(),null,3);//tbm funciona un solo parametro
        userData = JSON.parse(userData);
-      //  muroPosts.innerHTML += "<img width='100px' class='circle img-responsive' src='"+userData.foto+"  '/>";
       let privacidad=objPost.optionValue
-      console.log(objPost)
       let a = 'favorite_border';
       if(privacidad == 0){
         a = 'group';
@@ -76,40 +69,39 @@ function chargePosts(userUID, muroPosts) {
             <textarea id=${snapshot.key} class="contenido-post">${objPost.message}</textarea>
           </div>
           <div class="col s6 offset-s3">
-            <button  class='waves-effect waves-light btn-small' id=${snapshot.key+ 'a'} onclick="contLikes('${snapshot.key}' , '${userUID}', '${snapshot.key+ 'a'}')"><i class="material-icons">favorite_border</i></button>
-            <button  class='waves-effect waves-light btn-small' id=${snapshot.key + 'r'}  onclick="removePost('${snapshot.key}','${userUID}')"><i class="material-icons">delete</i></button>
-            <button class='waves-effect waves-light btn-small' id=${snapshot.key + 'e'} onclick="editPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key}')"><i class="material-icons">border_color</i></button>
+            <button  class='waves-effect waves-light btn-small' id=${'a' + snapshot.key} onclick="contLikes('${snapshot.key}' , '${userUID}', '${'a' + snapshot.key}')"><i class="material-icons">favorite_border</i></button>
+            <button  class='waves-effect waves-light btn-small' id=${'r' + snapshot.key}  onclick="removePost('${snapshot.key}','${userUID}')"><i class="material-icons">delete</i></button>
+            <button class='waves-effect waves-light btn-small' id=${'e' + snapshot.key} onclick="editPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key}')"><i class="material-icons">border_color</i></button>
           </div>
         </div>
        </div>
        `;
+       if(userUID !== localStorage.currentUser){
+         document.getElementById('r' + snapshot.key).style.display = 'none';
+         document.getElementById('e' + snapshot.key).style.display = 'none';
+       }
        //<button class='waves-effect waves-light btn-small' id=${snapshot.key + 'se'} onclick="saveEditPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key}')"><i class="material-icons">archive</i></button>
-      document.getElementById(snapshot.key).disabled = true;
-      document.getElementById(snapshot.key + 'se').style.display = 'block';
      })
+     console.log(userUID);
   });
 }
-
 //mostrando todas las publicaciones de personas a las que sigo
 const chargeFriendPosts = () => {
-  let usersIFollow =[];
+  let usersIFollow = [];
   let friendPosts = document.getElementById('myFriendsPost');
-  friendPosts.innerHTML = '';
-  console.log('repite');
   firebase.database().ref('users/'+userUID+'/quienes-sigo')
   .on('value', function(snapshot) {
-    let usersIFollow = [];
+    console.log('repite');
+
     let postData = JSON.stringify(snapshot.val(),null,3);//tbm funciona un solo parametro
     postData = JSON.parse(postData);
     let postUIDs = Object.keys(postData);
     for(i=0; i<postUIDs.length; i++) {
       let mensaje = (postData[postUIDs[i]].uidFollow);
-      console.log(mensaje);
       usersIFollow.push(mensaje);
-      console.log(usersIFollow);
     }
     console.log(usersIFollow);
-    friendPosts.innerHTML = '';
+    friendPosts.innerHTML = ''
     usersIFollow.forEach(function(element) {
       console.log(element);
       chargePosts(element, friendPosts);
