@@ -86,14 +86,6 @@ function chargePosts(userUID, muroPosts) {
         a = 'public';
       }
       let aux= 0 ;
-      //             <button class='waves-effect waves-light btn-small' id=${'a' + snapshot.key} onclick="contLikes('${snapshot.key}' , '${userUID}', '${'a' + snapshot.key}')"><i class="material-icons">favorite_border</i></button>
-      //             <button class='waves-effect waves-light btn-small' id=${'r' + snapshot.key}  onclick="removePost('${snapshot.key}','${userUID}')"><i class="material-icons">delete</i></button>
-      //             <button class='waves-effect waves-light btn-small' id=${'e' + snapshot.key} onclick="editPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key}')"><i class="material-icons">border_color</i></button>
-      //             <button class='waves-effect waves-light btn-small' id=${snapshot.key + 'se'} onclick="saveEditPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key}')"><i class="material-icons">archive</i></button>
-      //           </div>
-      //         </div>
-      //        </div>
-      //        `;
       muroPosts.innerHTML += `
        <div class="card horizontal card-posts">
         <div class = "row">
@@ -105,21 +97,45 @@ function chargePosts(userUID, muroPosts) {
             <textarea id=${snapshot.key} class="contenido-post">${objPost.message}</textarea>
           </div>
           <div class="col s6 offset-s3">
-            <button  class='waves-effect waves-light btn-small' id=${snapshot.key+ 'a'} onclick="contLikes()"><i class="material-icons">favorite_border</i></button>
-            <button  class='waves-effect waves-light btn-small' id=${snapshot.key+ 'r'} onclick="removePost('${snapshot.key}','${userUID}')"><i class="material-icons">delete</i></button>
-            <button class='waves-effect waves-light btn-small' id=${snapshot.key + 'e'} onclick="editPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key}')"><i class="material-icons">border_color</i></button>
-            <button class='waves-effect waves-light btn-small' id=${snapshot.key + 'se'} onclick="saveEditPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key}')"><i class="material-icons">archive</i></button>
+            <button  class='waves-effect btn-small' id=${snapshot.key+ 'a'} onclick="likePost('${snapshot.key+'a'}','${snapshot.key+'d'}','${userUID}', '${snapshot.key}')"><i class="material-icons">favorite_border</i></button>
+            <button  class='waves-effect btn-small' id=${snapshot.key+ 'd'} onclick="dislikePost('${snapshot.key+'a'}','${snapshot.key+'d'}','${userUID}', '${snapshot.key}')"><i class="material-icons">favorite</i></button>
+            <button  class='waves-effect btn-small' id=${snapshot.key+ 'r'} onclick="removePost('${snapshot.key}','${userUID}')"><i class="material-icons">delete</i></button>
+            <button class='waves-effect btn-small' id=${snapshot.key + 'e'} onclick="editPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key}')"><i class="material-icons">border_color</i></button>
+            <button class='waves-effect btn-small' id=${snapshot.key + 'se'} onclick="saveEditPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key}')"><i class="material-icons">archive</i></button>
           </div>
         </div>
        </div>
        `;
+       let countLikeFriendExist = 0;
+       firebase.database().ref('users/'+ userUID + '/publicaciones/'+snapshot.key+'/likesFromUsers')
+       .on('value', snap => {
+         if(snap.val()!= null) {
+           let usersLikes = JSON.stringify(snap.val(),null,3);//tbm funciona un solo parametro
+           usersLikes = JSON.parse(usersLikes);
+           usersLikesObject = usersLikes;
+           usersLikes = Object.keys(usersLikes);
+           console.log(usersLikes);
+           usersLikes.forEach(function(element) {
+             if(usersLikesObject[element].amigo == localStorage.currentUser){
+               countLikeFriendExist = 1;
+             }
+           });
+         }
+       })
+       if(countLikeFriendExist == 1){
+         document.getElementById(snapshot.key + 'a').style.display = 'none';
+         document.getElementById(snapshot.key + 'd').style.display = 'block';
+       } else {
+         console.log('no hay coincidencias');
+         document.getElementById(snapshot.key + 'a').style.display = 'block';
+         document.getElementById(snapshot.key + 'd').style.display = 'none';
+       }
        if(userUID !== localStorage.currentUser){
          document.getElementById(snapshot.key+'r' ).style.display = 'none';
          document.getElementById(snapshot.key+'e').style.display = 'none';
        }
       document.getElementById(snapshot.key).disabled = true;
       document.getElementById(snapshot.key + 'se').style.display = 'none';
-
      })
   });
 }
