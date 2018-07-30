@@ -31,12 +31,12 @@ tareas planificadas son:
 Cada una de las tareas fueron aplicadas de acuerdo a un planning poker de Laboratoria, la finalidad es poder entender cada uno de 
 nuestros tiempos y poder lograr comprendernos mejor.
 
-[!planning-poker](img/poker-planing.jpg)
+![planning-poker](img/poker-planing.jpg)
 
 Esta imagen muestra un ejemplo de lo que comprendemos que una tarea nos puede tomar el mismo esfuerzo para lograr mejorar nuestro trabajo 
 en equipo.
 
-[!ejemplo](img/ejemplo.jpg) 
+![ejemplo](img/ejemplo.jpg) 
 
 
 ### 1) Definir Tema, nombre, colores y usuarios
