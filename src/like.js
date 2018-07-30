@@ -11,7 +11,8 @@ const likePost = (btnLike, btnDislike, uidFollow, idPost) => {
   });
   document.getElementById(btnLike).style.display = 'none';
   document.getElementById(btnDislike).style.display = 'block';
-  chargeFriendPosts();
+  console.log('le di like');
+  window.location.reload();
 }
 //funcion para dejar de seguir a alguien
 const dislikePost = (btnLike, btnDislike, uidFollow, idPost) => {
@@ -45,7 +46,7 @@ const dislikePost = (btnLike, btnDislike, uidFollow, idPost) => {
   firebase.database().ref('users/'+uidFollow+'/publicaciones/'+idPost+'/likesFromUsers/' + unfollowNow2).remove();
   document.getElementById(btnLike).style.display = 'block';
   document.getElementById(btnDislike).style.display = 'none';
-  recharge();
+  window.location.reload();
 }
 const recharge = () => {
   let muroPosts = document.getElementById('myPosts');
