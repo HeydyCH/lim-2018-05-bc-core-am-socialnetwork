@@ -41,22 +41,41 @@ function removePost(idPost, userUID) {
  }
 }
 
+//mostrando todas las publicaciones de personas a las que sigo
+const chargeFriendPosts = () => {
+  let usersIFollow = [];
+  let friendPosts = document.getElementById('myFriendsPost');
+  friendPosts.innerHTML = ''
+  firebase.database().ref('users/'+userUID+'/quienes-sigo')
+  .on('value', function(snapshot) {
+    let postData = JSON.stringify(snapshot.val(),null,3);//tbm funciona un solo parametro
+    postData = JSON.parse(postData);
+    let postUIDs = Object.keys(postData);
+    for(i=0; i<postUIDs.length; i++) {
+      let mensaje = (postData[postUIDs[i]].uidFollow);
+      usersIFollow.push(mensaje);
+    }
+    usersIFollow.forEach(function(element) {
+      console.log(element);
+      chargePosts(element, friendPosts);
+    });
+  });
+}
+
+//mostrando todos las publicaciones del usuario actual
 function chargePosts(userUID, muroPosts) {
-  // console.log('Mostrando todas las publicaciones x usuario logueado')
   muroPosts.innerHTML = '';
   firebase.database().ref('users/'+userUID+'/publicaciones')
   .on('child_added', function(snapshot) {
      var objPost = snapshot.val();
     //  console.log(objPost);
      var profile = firebase.database().ref().child('users/'+userUID);
-    //  var estadoLike =firebase.database().ref('users/'+ userUID +'/publicaciones/'+ idPost + '/likes');
      profile.on('value',snap => {
       //  console.log("entro");
        let userData = JSON.stringify(snap.val(),null,3);//tbm funciona un solo parametro
        userData = JSON.parse(userData);
       //  muroPosts.innerHTML += "<img width='100px' class='circle img-responsive' src='"+userData.foto+"  '/>";
       let privacidad=objPost.optionValue
-      console.log(objPost)
       let a = 'favorite_border';
       if(privacidad == 0){
         a = 'group';
@@ -66,53 +85,103 @@ function chargePosts(userUID, muroPosts) {
       let aux= 0 ;
       muroPosts.innerHTML += `
        <div class="card horizontal card-posts">
-        <!-- Este div solo sirve para dar espacio -->
-        <div class = "row">
+        <div class = "row" >
           <div class="input-field col s12"></div>
-          <img width="4px" class="circle col s2 offset-s1" src="${userData.foto}"/>
+          <img width="4px" class="circle col s2" src="${userData.foto}"/>
           <div class="col s7">
             <span>${userData.nombre}</span>
             <i class="material-icons">${a}</i>
             <textarea id=${snapshot.key} class="contenido-post">${objPost.message}</textarea>
           </div>
           <div class="col s6 offset-s3">
-            <button  class='waves-effect waves-light btn-small' id=${snapshot.key+ 'a'} onclick="contLikes('${snapshot.key}' , '${userUID}', '${snapshot.key+ 'a'}')"><i class="material-icons">favorite_border</i></button>
-            <button  class='waves-effect waves-light btn-small' id=${snapshot.key + 'r'}  onclick="removePost('${snapshot.key}','${userUID}')"><i class="material-icons">delete</i></button>
-            <button class='waves-effect waves-light btn-small' id=${snapshot.key + 'e'} onclick="editPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key}')"><i class="material-icons">border_color</i></button>
+            <button  class='waves-effect btn-small' id=${snapshot.key+ 'a'} onclick="likePost('${snapshot.key+'a'}','${snapshot.key+'d'}','${userUID}', '${snapshot.key}')"><i class="material-icons">favorite_border</i></button>
+            <button  class='waves-effect btn-small' id=${snapshot.key+ 'd'} onclick="dislikePost('${snapshot.key+'a'}','${snapshot.key+'d'}','${userUID}', '${snapshot.key}')"><i class="material-icons">favorite</i></button>
+            <button  class='waves-effect btn-small' id=${snapshot.key+ 'r'} onclick="removePost('${snapshot.key}','${userUID}')"><i class="material-icons">delete</i></button>
+            <button class='waves-effect btn-small' id=${snapshot.key + 'e'} onclick="editPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key}')"><i class="material-icons">border_color</i></button>
+            <button class='waves-effect btn-small' id=${snapshot.key + 'se'} onclick="saveEditPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key}')"><i class="material-icons">archive</i></button>
           </div>
+          <div class="s12" id=${snapshot.key+ 'card'}><strong>Le gusta a:</strong></div>
         </div>
        </div>
        `;
-       //<button class='waves-effect waves-light btn-small' id=${snapshot.key + 'se'} onclick="saveEditPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key}')"><i class="material-icons">archive</i></button>
+       let countLikeFriendExist = 0;
+       firebase.database().ref('users/'+ userUID + '/publicaciones/'+snapshot.key+'/likesFromUsers')
+       .on('value', snap => {
+         if(snap.val()!= null) {
+           let usersLikes = JSON.stringify(snap.val(),null,3);//tbm funciona un solo parametro
+           usersLikes = JSON.parse(usersLikes);
+           usersLikesObject = usersLikes;
+           usersLikes = Object.keys(usersLikes);
+           console.log(usersLikes);
+           document.getElementById(snapshot.key+ 'card').innerHTML = '<strong>Le gusta a:</strong>';
+           usersLikes.forEach(function(element) {
+             if(usersLikesObject[element].amigo == localStorage.currentUser){
+               countLikeFriendExist = 1;
+             }
+             document.getElementById(snapshot.key+ 'card').innerHTML += `<p>${usersLikesObject[element].nombre}</p>`;
+           });
+         }
+       })
+       if(countLikeFriendExist == 1){
+         document.getElementById(snapshot.key + 'a').style.display = 'none';
+         document.getElementById(snapshot.key + 'd').style.display = 'block';
+       } else {
+         console.log('no hay coincidencias');
+         document.getElementById(snapshot.key + 'a').style.display = 'block';
+         document.getElementById(snapshot.key + 'd').style.display = 'none';
+       }
+       if(userUID !== localStorage.currentUser){
+         document.getElementById(snapshot.key+'r' ).style.display = 'none';
+         document.getElementById(snapshot.key+'e').style.display = 'none';
+       }
       document.getElementById(snapshot.key).disabled = true;
-      document.getElementById(snapshot.key + 'se').style.display = 'block';
+      document.getElementById(snapshot.key + 'se').style.display = 'none';
      })
   });
 }
 
-//mostrando todas las publicaciones de personas a las que sigo
-const chargeFriendPosts = () => {
-  let usersIFollow =[];
-  let friendPosts = document.getElementById('myFriendsPost');
-  friendPosts.innerHTML = '';
-  console.log('repite');
-  firebase.database().ref('users/'+userUID+'/quienes-sigo')
-  .on('value', function(snapshot) {
-    let usersIFollow = [];
-    let postData = JSON.stringify(snapshot.val(),null,3);//tbm funciona un solo parametro
-    postData = JSON.parse(postData);
-    let postUIDs = Object.keys(postData);
-    for(i=0; i<postUIDs.length; i++) {
-      let mensaje = (postData[postUIDs[i]].uidFollow);
-      console.log(mensaje);
-      usersIFollow.push(mensaje);
-      console.log(usersIFollow);
-    }
-    console.log(usersIFollow);
-    friendPosts.innerHTML = '';
-    usersIFollow.forEach(function(element) {
-      console.log(element);
-      chargePosts(element, friendPosts);
-    });
-  });
+//editar pulicaciones
+function editPost(idPost, userUID, usuario, option, aux, idbtn) {
+
+  console.log(aux)
+  console.log("voy a poder editar el texto")
+  let idBtnEdit= idbtn+'e';
+  let idBtnSaveEdit= idbtn+'se';
+
+  console.log("el id del post es : " + idPost )
+  console.log("el id del btnEditar es " + idBtnEdit)
+
+  let newUpdate = document.getElementById(idPost);
+  console.log("el msje editado " + newUpdate.value)
+  newUpdate.disabled = false;
+
+  document.getElementById( idBtnEdit).style.display = 'none';
+  document.getElementById(idBtnSaveEdit).style.display = 'block';
+
+}
+
+function saveEditPost(idPost, userUID, usuario, option, aux, idbtn){
+   idBtnEdit= idbtn+'e';
+   idBtnSaveEdit= idbtn+'se';
+   console.log("aqui guardaremos")
+   console.log(aux)
+   console.log(idPost)
+   let newUpdateBySave = document.getElementById(idPost);
+   console.log(newUpdateBySave.value)
+    newUpdateBySave.disabled = true
+    document.getElementById( idBtnEdit).style.display = 'block';
+    document.getElementById(idBtnSaveEdit).style.display = 'none';
+   //Inicio
+   const nuevoPost = {
+     optionValue: option,
+     message: newUpdateBySave.value
+     // usuario: usuario
+   };
+   console.log(nuevoPost)
+   var updatesUser = {};
+   updatesUser['users/' + userUID + '/publicaciones/' + idPost] = nuevoPost;
+   firebase.database().ref().update(updatesUser);
+   let muroPosts = document.getElementById('myPosts');
+   muroPosts.innerHTML = '';
+   chargePosts(userUID, muroPosts);
 }

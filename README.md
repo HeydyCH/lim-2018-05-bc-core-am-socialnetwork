@@ -28,6 +28,17 @@ tareas planificadas son:
 
 ![primer-sprint](img/sprint1.jpg)
 
+Cada una de las tareas fueron aplicadas de acuerdo a un planning poker de Laboratoria, la finalidad es poder entender cada uno de 
+nuestros tiempos y poder lograr comprendernos mejor.
+
+[!planning-poker](img/poker-planing.jpg)
+
+Esta imagen muestra un ejemplo de lo que comprendemos que una tarea nos puede tomar el mismo esfuerzo para lograr mejorar nuestro trabajo 
+en equipo.
+
+[!ejemplo](img/ejemplo.jpg) 
+
+
 ### 1) Definir Tema, nombre, colores y usuarios
 
 Nos enfocamos en la problemática de nuestro país y empezamos a trabajar en ello. Preparamos una encuesta virtual para 
@@ -50,7 +61,7 @@ para nuestros usuarios.
 ### 3) Definir un prototipo de alta fidelidad
 
 Usamos Marvelapp para desarrollar el diseño de alta fidelidad porque muestra de una manera más real como llegar a 
-usarlo.
+usarlo. Hagan click aquí!
 
 [Marvel](https://marvelapp.com/3a0001f/screen/45389678)
 
@@ -104,6 +115,44 @@ Los usuarios a los que se entrevistó, lo hicimos a través de nuestro prototipo
 nuestra red social, recibimos mucho feedback como manejar mejor los colores, logo, o pensar en como vamos a redireccionar algunas vistas.
 
 
+### 4) Entrevistas directas a usuarios
+
+* Nancy Urcia - Mamá de 2 niños
+
+¿Qué redes sociales usas con frecuencia?
+*Uso más Facebook y Whatsapp.*
+
+¿Logras encontrar temas de maternidad como primera información ahí?
+*No, porque más encuentro fotos de mis amigos o cosas graciosas que ellos comparten.*
+
+¿Te gustaría usar una red social dónde puedas encontrar información de maternidad y/o consejos?
+*Sí, porque cuando mi hijito mayor le empezó una alergía además de recurrir a doctores, ninguno supo darme una explicación clara y solo me recetaban jarabes y cremitas, que muy facilmente eran caseras.*
+
+¿Te gustaría interactuar con otras mamás acerca de algún tema en específico?
+*Sí, por el tema de la alergia de mi hijo entré a varios foros y encontraba consejos de otras mamás que pasaban por lo mismo que yo.*
+
+¿Recomendarías una red social de ese tema a tus amigos?
+*Sí, porque sería de mucha ayuda para todos.*
+
+
+* Karen Moreno - Estudiante de psicología y cuida a muchos de sus primitos pequeños.
+
+¿Qué redes sociales usas con frecuencia?
+*Uso más Facebook, Instagram y Whatsapp.*
+
+¿Logras encontrar temas de maternidad como primera información ahí?
+*No, porque más encuentro fotos de mis amigos o publicaciones que ellos comparten o memes.*
+
+¿Te gustaría usar una red social dónde puedas encontrar información de maternidad y/o consejos?
+*Sí, porque cuando cuido a mis primos menores muchos de ellos hacen actividades diferentes y es difícil controlarlos al mismo tiempo, mientras algunos duermen y otros quieren jugar. Sería de mucha ayuda encontrar tips de como hacerlos dormir a todos juntos, por ejemplo.*
+
+¿Te gustaría interactuar con otras mamás acerca de algún tema en específico?
+*Sí, por el tema de tips o sugerencias de comidas que son buenos para los bebés y niños.*
+
+¿Recomendarías una red social de ese tema a tus amigos?
+*Sí, porque sería de mucha ayuda para todos. Porque tengo muchas amigas y amigos que son padres primerizos.*
+
+
 
 ### Tercer Sprint
 
@@ -120,14 +169,15 @@ recibimos mucho feedback acerca del tiempo de espera para poder loguearse, hasta
 problemas técnicos como ese.
 
 
-Recomendaciones a las entrevistas:
-** Karen Moreno (18 años)
-Cuando se registren e ingresen por primera vez, que haya un texto como de bienvenida o algo así como una pestaña de sugerencias.
-Cuando editaba no sabia que el botón de guardar era ese.
+Recomendaciones que nos dieron unas usuarias de las entrevistas:
 
-** Nancy Urcia (42 años)
-Antes de la parte de registro me gustaría saber de que trata la aplicación para poder animarme a ingresar, pude observar que es 
-muy parecido a tener una cuenta de facebook. Me agrada.
+* Karen Moreno (18 años)
+
+*Cuando se registren e ingresen por primera vez, que haya un texto como de bienvenida o algo así como una pestaña de sugerencias. Cuando editaba no sabia que el botón de guardar era ese.*
+
+* Nancy Urcia (42 años)
+
+*Antes de la parte de registro me gustaría saber de que trata la aplicación para poder animarme a ingresar, pude observar que es muy parecido a tener una cuenta de facebook. Me agrada*
 
 
 ## Colaboradoras del Proyecto:
