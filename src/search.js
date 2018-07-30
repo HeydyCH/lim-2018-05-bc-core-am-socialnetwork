@@ -17,7 +17,8 @@ function chargeFriendPosts() {
     usersIFollow.forEach(function(element) {
       console.log(element);
       let auxPublic = 1 ; // 0 es publico de los q sigo 
-      chargePosts(element, friendPosts, auxPublic);
+      // chargePosts(element, friendPosts, auxPublic);
+      chargePosts(element, friendPosts)
     });
   });
 }

@@ -10,7 +10,8 @@ function welcomeUser(uid) {
   let muroPosts = document.getElementById('myPosts');
   muroPosts.innerHTML = '';
   let auxPublic = 0
-  chargePosts(userUID,muroPosts ,auxPublic);
+  // chargePosts(userUID,muroPosts ,auxPublic);
+  chargePosts(userUID,muroPosts)
   chargeFriendPosts();
   chargeNotifications();
 }
@@ -28,8 +29,7 @@ function savePost() {
       message 
     });
     muroPosts.innerHTML = '';
-    let auxPublic = 0
-    chargePosts(userUID, muroPosts , auxPublic);
+    chargePosts(userUID, muroPosts);
   }else{
     alert("Usted no escribi ningun post")
   }
@@ -37,7 +37,66 @@ function savePost() {
 };
 
 //mostrando todos las publicaciones del usuario actual
-function chargePosts(userUID, muroPosts,auxPublic) {
+// function chargePosts(userUID, muroPosts) {
+//   // console.log('Mostrando todas las publicaciones x usuario logueado')
+//   muroPosts.innerHTML = '';
+//   firebase.database().ref('users/'+userUID+'/publicaciones')
+//   .on('child_added', function(snapshot) {
+//      var objPost = snapshot.val();
+//     //  console.log(objPost);
+//      var profile = firebase.database().ref().child('users/'+userUID);
+//     //  var estadoLike =firebase.database().ref('users/'+ userUID +'/publicaciones/'+ idPost + '/likes');
+//      profile.on('value',snap => {
+//       //  console.log("entro");
+//        let userData = JSON.stringify(snap.val(),null,3);//tbm funciona un solo parametro
+//        userData = JSON.parse(userData);
+//       //  muroPosts.innerHTML += "<img width='100px' class='circle img-responsive' src='"+userData.foto+"  '/>";
+//       let privacidad=objPost.optionValue
+//       console.log(objPost)
+//       let a = 'favorite_border';
+//       if(privacidad == 0){
+//         a = 'group';
+//       }else{
+//         a = 'public';
+//       }
+//       let aux= 0 ;
+//       muroPosts.innerHTML += `
+//        <div class="card horizontal pink lighten-4">
+//         <div class = "card-image">
+//           <img width="5px" class="circle" src="${userData.foto}"/>
+//         </div>
+//         <div class="card-content">
+//           <span>${userData.nombre}</span>
+//           <i class="material-icons">${a}</i>
+//           <textarea id=${snapshot.key} class="collection-item avatar">${objPost.message}</textarea>
+//           <button  class='waves-effect waves-light btn-small' id=${snapshot.key+ 'a'} onclick="contLikes('${snapshot.key}' , '${userUID}', '${snapshot.key+ 'a'}')"><i class="material-icons">favorite_border</i></button>
+//           <button  class='waves-effect waves-light btn-small' id=${snapshot.key + 'r'}  onclick="removePost('${snapshot.key}','${userUID}')"><i class="material-icons">delete</i></button>
+//           <button class='waves-effect waves-light btn-small' id=${snapshot.key + 'e'} onclick="editPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key}')"><i class="material-icons">border_color</i></button>
+//           <button class='waves-effect waves-light btn-small' id=${snapshot.key + 'se'} onclick="saveEditPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key}')"><i class="material-icons">archive</i></button>
+//           </div> 
+//        </div>
+//        `;
+//       document.getElementById(snapshot.key).disabled = true;
+//       document.getElementById(snapshot.key + 'se').style.display = 'block';
+
+//       // if(auxPublic == 1){
+//       //   document.getElementById(snapshot.key + 'e').style.display = 'none';
+//       //   document.getElementById(snapshot.key + 'se').style.display = 'none';
+//       //   document.getElementById(snapshot.key + 'r').style.display = 'none';
+//       // }
+
+//      })
+//   });
+
+
+
+
+// }
+
+
+
+//mostrando todos las publicaciones del usuario actual
+function chargePosts(userUID, muroPosts) {
   // console.log('Mostrando todas las publicaciones x usuario logueado')
   muroPosts.innerHTML = '';
   firebase.database().ref('users/'+userUID+'/publicaciones')
@@ -45,14 +104,12 @@ function chargePosts(userUID, muroPosts,auxPublic) {
      var objPost = snapshot.val();
     //  console.log(objPost);
      var profile = firebase.database().ref().child('users/'+userUID);
-    //  var estadoLike =firebase.database().ref('users/'+ userUID +'/publicaciones/'+ idPost + '/likes');
      profile.on('value',snap => {
       //  console.log("entro");
        let userData = JSON.stringify(snap.val(),null,3);//tbm funciona un solo parametro
        userData = JSON.parse(userData);
       //  muroPosts.innerHTML += "<img width='100px' class='circle img-responsive' src='"+userData.foto+"  '/>";
       let privacidad=objPost.optionValue
-      console.log(objPost)
       let a = 'favorite_border';
       if(privacidad == 0){
         a = 'group';
@@ -69,8 +126,8 @@ function chargePosts(userUID, muroPosts,auxPublic) {
           <span>${userData.nombre}</span>
           <i class="material-icons">${a}</i>
           <textarea id=${snapshot.key} class="collection-item avatar">${objPost.message}</textarea>
-          <button  class='waves-effect waves-light btn-small' id=${snapshot.key+ 'a'} onclick="contLikes('${snapshot.key}' , '${userUID}', '${snapshot.key+ 'a'}')"><i class="material-icons">favorite_border</i></button>
-          <button  class='waves-effect waves-light btn-small' id=${snapshot.key + 'r'}  onclick="removePost('${snapshot.key}','${userUID}')"><i class="material-icons">delete</i></button>
+          <button  class='waves-effect waves-light btn-small' id=${snapshot.key+ 'a'} onclick="contLikes()"><i class="material-icons">favorite_border</i></button>
+          <button  class='waves-effect waves-light btn-small' onclick="removePost('${snapshot.key}','${userUID}')"><i class="material-icons">delete</i></button>
           <button class='waves-effect waves-light btn-small' id=${snapshot.key + 'e'} onclick="editPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key}')"><i class="material-icons">border_color</i></button>
           <button class='waves-effect waves-light btn-small' id=${snapshot.key + 'se'} onclick="saveEditPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key}')"><i class="material-icons">archive</i></button>
           </div> 
@@ -78,36 +135,84 @@ function chargePosts(userUID, muroPosts,auxPublic) {
        `;
       document.getElementById(snapshot.key).disabled = true;
       document.getElementById(snapshot.key + 'se').style.display = 'none';
-
-      if( auxPublic == 1){
-        document.getElementById(snapshot.key + 'e').style.display = 'none';
-        document.getElementById(snapshot.key + 'se').style.display = 'none';
-        document.getElementById(snapshot.key + 'r').style.display = 'none';
-      }
-
+ 
      })
   });
-
-
-
-
 }
+
+
+//editar pulicaciones
+function editPost(idPost, userUID, usuario, option, aux, idbtn) {
+
+  console.log(aux)
+  console.log("voy a poder editar el texto")
+  let idBtnEdit= idbtn+'e';
+  let idBtnSaveEdit= idbtn+'se';
+
+  console.log("el id del post es : " + idPost )
+  console.log("el id del btnEditar es " + idBtnEdit)
+
+  let newUpdate = document.getElementById(idPost);
+  console.log("el msje editado " + newUpdate.value)
+  newUpdate.disabled = false;
+
+  document.getElementById( idBtnEdit).style.display = 'none';
+  document.getElementById(idBtnSaveEdit).style.display = 'block';
+   
+}
+ 
+function saveEditPost(idPost, userUID, usuario, option, aux, idbtn){
+ 
+   idBtnEdit= idbtn+'e';
+   idBtnSaveEdit= idbtn+'se';
+   console.log("aqui guardaremos")
+   console.log(aux)
+   console.log(idPost)
+
+   let newUpdateBySave = document.getElementById(idPost);
+   console.log(newUpdateBySave.value)
+    newUpdateBySave.disabled = true
+
+    document.getElementById( idBtnEdit).style.display = 'block';
+    document.getElementById(idBtnSaveEdit).style.display = 'none';
+ 
+   //Inicio
+ 
+   const nuevoPost = {
+     optionValue: option,
+     message: newUpdateBySave.value
+     // usuario: usuario
+   };
+   console.log(nuevoPost)
+   var updatesUser = {};
+  //  var updatesPost = {};
+  
+   updatesUser['users/' + userUID + '/publicaciones/' + idPost] = nuevoPost;
+   firebase.database().ref().update(updatesUser);
+   let muroPosts = document.getElementById('myPosts');
+   muroPosts.innerHTML = '';
+   chargePosts(userUID, muroPosts);
+ 
+   //Fin
+ 
+ 
+}
+
 
 function contLikes(idPost , userUID , idLike){
 
   console.log("le he dado like")
-  console.log(idPost)
-  console.log(userUID)
-  console.log("le he dado like x2")
+  // console.log(idPost)
+  // console.log(userUID)
+  // console.log("le he dado like x2")
+  // firebase.database().ref('users/'+ userUID +'/publicaciones/'+ idPost + '/likes').push({
+  //   userUID,
+  //   habilitado : 1
+  // });
+  // document.getElementById(idLike).disabled="true"
+  // let muroPosts = document.getElementById('myPosts');
+  // console.log("salio")
 
-  firebase.database().ref('users/'+ userUID +'/publicaciones/'+ idPost + '/likes').push({
-    userUID,
-    habilitado : 1
-  });
-
-  document.getElementById(idLike).disabled="true"
-  let muroPosts = document.getElementById('myPosts');
-  console.log("salio")
 }
 
 //eliminar post
@@ -123,67 +228,18 @@ function removePost(idPost, userUID) {
     // muroPosts = document.getElementById('myFriendsPost');
     // muroPosts.innerHTML= '' ;
     while (muroPosts.firstChild) muroPosts.removeChild(muroPosts.firstChild);
-    let auxPublic = 0 ;
-    chargePosts(userUID, muroPosts, auxPublic );
+    chargePosts(userUID, muroPosts);
   }
   //Detectamos si el usuario denegó el mensaje
   else {
     alert("¡Haz denegado la eliminacion del post !");
   }
  }
-//editar publicaciones
-function editPost(idPost, userUID, usuario, option, aux, idbtn) {
-
- console.log(aux)
- console.log("voy a poder editar el texto")
- console.log(idPost)
-
- idBtnEdit= idbtn+'e';
- idBtnSaveEdit= idbtn+'se';
 
 
-  document.getElementById(idBtnSaveEdit).style.display = 'block';
-  document.getElementById( idBtnEdit).style.display = 'none';
-  
- let newUpdate = document.getElementById(idPost);
- console.log(newUpdate.value)
- console.log(idbtn)
- newUpdate.disabled = false
-
-}
-function saveEditPost(idPost, userUID, usuario, option, aux, idbtn){
-
-  idBtnEdit= idbtn+'e';
-  idBtnSaveEdit= idbtn+'se';
 
 
- document.getElementById(idBtnSaveEdit).style.display = 'none';
- document.getElementById(idBtnEdit).style.display = 'block';
 
-  console.log("aqui guardaremos")
-  let newUpdate = document.getElementById(idPost);
-  console.log(newUpdate.value)
-  newUpdate.disabled = true
-
-  //Inicio
-
-  const nuevoPost = {
-    optionValue: option,
-    message: newUpdate.value
-    // usuario: usuario
-  };
-  console.log(nuevoPost)
-  var updatesUser = {};
- //  var updatesPost = {};
- 
-  updatesUser['users/' + userUID + '/publicaciones/' + idPost] = nuevoPost;
-  firebase.database().ref().update(updatesUser);
-  let muroPosts = document.getElementById('myPosts');
-  muroPosts.innerHTML = '';
-  let auxPublic = 0 ;
-  chargePosts(userUID, muroPosts , auxPublic );
-  //Fin
-}
 function userFilterList(){
   document.getElementById('userFilterList').innerHTML = '';
   firebase.database().ref("users")

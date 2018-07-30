@@ -25,10 +25,10 @@ document.getElementById('signOut').addEventListener('click', closeSession);
 document.getElementById('btn-search').addEventListener('click', redirectSearch);
 document.getElementById('btn-home').addEventListener('click', redirectHome);
 document.getElementById('btn-notification').addEventListener('click', redirectNotification);
+document.getElementById('btn-userProfile').addEventListener('click', redirectProfile);
+
 
 document.getElementById('home').style.display = 'none';
 document.getElementById('search').style.display = 'none';
 document.getElementById('myNotifications').style.display = 'none';
 document.getElementById('userProfile').style.display = 'block';
-
-document.getElementById('btn-userProfile').addEventListener('click', redirectProfile);
