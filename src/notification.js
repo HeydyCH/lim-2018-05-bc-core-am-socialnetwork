@@ -14,9 +14,7 @@ function chargeNotifications() {
     let friendNotifications = document.getElementById('notifications');
     friendNotifications.innerHTML = '';
     myNotifications.forEach(function(element) {
-      friendNotifications.innerHTML += '<li>';
-      friendNotifications.innerHTML += element;
-      friendNotifications.innerHTML += '</li>';
+      friendNotifications.innerHTML += `<div class="card-panel card-notification"> ${element}</div>`;
     });
   });
 }

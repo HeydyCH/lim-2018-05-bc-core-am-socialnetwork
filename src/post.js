@@ -40,28 +40,52 @@ function removePost(idPost, userUID) {
    alert("¡Haz denegado la eliminacion del post !");
  }
 }
-//mostrando todos las publicaciones del usuario actual
+
 function chargePosts(userUID, muroPosts) {
-  console.log(userUID);
+  // console.log('Mostrando todas las publicaciones x usuario logueado')
+  muroPosts.innerHTML = '';
   firebase.database().ref('users/'+userUID+'/publicaciones')
   .on('child_added', function(snapshot) {
      var objPost = snapshot.val();
-     console.log(objPost);
-     let aux = 0;
+    //  console.log(objPost);
      var profile = firebase.database().ref().child('users/'+userUID);
-     profile.on('value', snap => {
+    //  var estadoLike =firebase.database().ref('users/'+ userUID +'/publicaciones/'+ idPost + '/likes');
+     profile.on('value',snap => {
+      //  console.log("entro");
        let userData = JSON.stringify(snap.val(),null,3);//tbm funciona un solo parametro
        userData = JSON.parse(userData);
-       muroPosts.innerHTML += "<img width='100px' class='circle img-responsive' src='"+userData.foto+"  '/>";
-       muroPosts.innerHTML += `
-       <div>
-       <textarea id=${snapshot.key} class="collection-item avatar">${objPost.message}</textarea>
-       <a href="#!" class="secondary-content"><i class="material-icons">favorite_border</i></a></li>
-       <button  onclick="removePost('${snapshot.key}','${userUID}')" >DELETE</button>
-       <button id=${snapshot.key + 'b'} onclick="editPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key + 'b'}')">Update</button>
+      //  muroPosts.innerHTML += "<img width='100px' class='circle img-responsive' src='"+userData.foto+"  '/>";
+      let privacidad=objPost.optionValue
+      console.log(objPost)
+      let a = 'favorite_border';
+      if(privacidad == 0){
+        a = 'group';
+      }else{
+        a = 'public';
+      }
+      let aux= 0 ;
+      muroPosts.innerHTML += `
+       <div class="card horizontal card-posts">
+        <!-- Este div solo sirve para dar espacio -->
+        <div class = "row">
+          <div class="input-field col s12"></div>
+          <img width="4px" class="circle col s2 offset-s1" src="${userData.foto}"/>
+          <div class="col s7">
+            <span>${userData.nombre}</span>
+            <i class="material-icons">${a}</i>
+            <textarea id=${snapshot.key} class="contenido-post">${objPost.message}</textarea>
+          </div>
+          <div class="col s6 offset-s3">
+            <button  class='waves-effect waves-light btn-small' id=${snapshot.key+ 'a'} onclick="contLikes('${snapshot.key}' , '${userUID}', '${snapshot.key+ 'a'}')"><i class="material-icons">favorite_border</i></button>
+            <button  class='waves-effect waves-light btn-small' id=${snapshot.key + 'r'}  onclick="removePost('${snapshot.key}','${userUID}')"><i class="material-icons">delete</i></button>
+            <button class='waves-effect waves-light btn-small' id=${snapshot.key + 'e'} onclick="editPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key}')"><i class="material-icons">border_color</i></button>
+          </div>
+        </div>
        </div>
        `;
-       document.getElementById(snapshot.key).disabled = true;
+       //<button class='waves-effect waves-light btn-small' id=${snapshot.key + 'se'} onclick="saveEditPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key}')"><i class="material-icons">archive</i></button>
+      document.getElementById(snapshot.key).disabled = true;
+      document.getElementById(snapshot.key + 'se').style.display = 'block';
      })
   });
 }

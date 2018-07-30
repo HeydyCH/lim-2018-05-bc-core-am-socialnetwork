@@ -18,7 +18,7 @@
         <li>
           <div class="user-view">
             <div class="background">
-              <img class="responsive-img" src="images/logo.png">
+              <img class="responsive-img" src="images/banner.png">
             </div>
               <div class="" id="userPhoto"></div>
               <span class="red-text text-lighten-1 name" id="userName"></span>
@@ -46,27 +46,6 @@
         <li>
           <a id="signOut"><i class="material-icons">exit_to_app</i>Salir</a>
         </li>
-        <li class="no-padding">
-          <ul class="collapsible collapsible-accordion">
-            <li>
-              <a class="collapsible-header">Mas<i class="material-icons">arrow_drop_down</i></a>
-              <div class="collapsible-body">
-                <ul>
-                  <li>
-                    <a href="#">Acerca de Mom Center</a>
-                  </li>
-                  <li>
-                    <a href="#">Ayuda</a>
-                  </li>
-                  <li>
-                    <a href="#">Terminos y condiciones</a>
-                  </li>
-
-                </ul>
-              </div>
-            </li>
-          </ul>
-        </li>
       </ul>
 
       <a id="btn-menu" class="btn hide-on-large-only" data-activates="slide-out">
@@ -74,6 +53,9 @@
       </a>
     <!-- termina nav -->
     <div class="col offset-l3 l11 m12 s12 container-fluid">
+      <!-- Este div solo sirve para dar espacio -->
+      <div class="input-field col s12"></div>
+      <div class="input-field col s12"></div>
       <div class="container-fluid section" id="home">
         <p>Publicaciones de personas a quienes sigo</p>
         <div id="myFriendsPost" class="collection">
@@ -94,24 +76,24 @@
         </div>
       </div>
 
-      <div class="container" id="userProfile">
-        <div id="userPosts">
+      <div class="container row" id="userProfile">
+        <div id="userPosts" class="offset-s1">
           <!-- Card para postear publicaciones -->
-          <div class="card horizontal row">
-              <div class="card-content">
-                <span class="card-title">Hola ¿que deseas preguntar?</span>
-                <div class="input-field col s8">
-                  <input id="currentPost" placeholder="Escribe lo que quieras publicar">
-                </div>
-                <div class="input-field col s4 ">
-                  <select id="privateOptions">
-                    <option value="0">Amigos</option>
-                    <option value="1">Publico</option>
-                  </select>
-                  <label>Tipo de privacidad</label>
-                </div>
-                <button class="btn col offset-s6 s6" id="savePost">Publicar</button>
+          <div class="card horizontal row container col s12">
+            <div class="card-content">
+              <span class="card-title">Hola ¿que deseas preguntar?</span>
+              <div class="input-field col s8">
+                <input id="currentPost" placeholder="Escribe lo que quieras publicar">
               </div>
+              <div class="input-field col s4 ">
+                <select id="privateOptions">
+                  <option value="0">Amigos</option>
+                  <option value="1">Publico</option>
+                </select>
+                <label>Tipo de privacidad</label>
+              </div>
+              <button class="btn col offset-s6 s6" id="savePost">Publicar</button>
+            </div>
           </div>
           <!-- termina card para postear -->
           <p>Mis publicaciones</p>
