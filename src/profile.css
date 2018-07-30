@@ -1,0 +1,12 @@
+.btn {
+  background-color : #F1AAA8;
+}
+#user-photo {
+  border: 6px solid #F1AAA8;
+}
+.card-posts, .card-notification{
+  background-color : #F1AAA8;
+}
+.contenido-post{
+  background-color : white;
+}

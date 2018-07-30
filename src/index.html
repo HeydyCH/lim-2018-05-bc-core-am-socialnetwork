@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
     <!-- Materialize icons link -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="login.css">
   </head>
   <body>
     <nav class="nav align-center valign-wrapper">
@@ -69,38 +69,38 @@
         <!-- Registrarme -->
         <div class="col s10 m4 offset-m1 offset-s1 container-fluid" id="userRegister">
           <div class="card-panel">
-              <div class="col s12">
-                <h5 class="center login-form-text">Registrate aqui</h5>
+            <div class="col s12">
+              <h5 class="center login-form-text">Registrate aqui</h5>
+            </div>
+            <div class="row margin">
+              <div class="input-field col s12">
+                <i class="small material-icons person-icon-color purple-text mdi-action-look-outline prefix">pregnant_woman</i>
+                <input type="text" id="name">
+                <span id="nameOK"></span>
+                <label class="center-align">Ingresa tu nombre</label>
               </div>
-              <div class="row margin">
-                <div class="input-field col s12">
-                  <i class="small material-icons person-icon-color purple-text mdi-action-look-outline prefix">pregnant_woman</i>
-                  <input type="text" id="name">
-                  <span id="nameOK"></span>
-                  <label class="center-align">Ingresa tu nombre</label>
-                </div>
+            </div>
+            <div class="row margin">
+              <div class="input-field col s12">
+                <i class="small material-icons person-icon-color purple-text mdi-action-look-outline prefix">pregnant_woman</i>
+                <input type="text" id="emailRegisterAccess">
+                <span id="emailOK"></span>
+                <label class="center-align">Ingresa tu email</label>
               </div>
-              <div class="row margin">
-                <div class="input-field col s12">
-                  <i class="small material-icons person-icon-color purple-text mdi-action-look-outline prefix">pregnant_woman</i>
-                  <input type="text" id="emailRegisterAccess">
-                  <span id="emailOK"></span>
-                  <label class="center-align">Ingresa tu email</label>
-                </div>
+            </div>
+            <div class="row margin">
+              <div class="input-field col s12">
+                <i class="small material-icons pass-icon-color purple-text mdi-action-look-outline prefix">lock_outline</i>
+                <input type="password" name= "password" id="passwordRegisterAccess">
+                <span id="passwordOK"></span>
+                <label for="password" data-error="wrong" data-success="rigth" class="lbl-pass center-align">Ingresa tu contraseña</label>
               </div>
-              <div class="row margin">
-                <div class="input-field col s12">
-                  <i class="small material-icons pass-icon-color purple-text mdi-action-look-outline prefix">lock_outline</i>
-                  <input type="password" name= "password" id="passwordRegisterAccess">
-                  <span id="passwordOK"></span>
-                  <label for="password" data-error="wrong" data-success="rigth" class="lbl-pass center-align">Ingresa tu contraseña</label>
-                </div>
-              </div>
-              <div class="row">
-                <button class="btn-color btn pink darken-1 col s12" id="register">Registrar</button>
-                <button class="btn-color btn pink darken-1 col s12" id="returnHome">Volver al login</button>
-                <span id="sugerencias"></span>
-              </div>
+            </div>
+            <div class="row">
+              <button class="btn-color btn pink darken-1 col s12" id="register">Registrar</button>
+              <button class="btn-color btn pink darken-1 col s12" id="returnHome">Volver al login</button>
+              <span id="sugerencias"></span>
+            </div>
           </div>
         </div>
       </div>
