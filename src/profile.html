@@ -12,45 +12,52 @@
   <link rel="stylesheet" href="profile.css">
 </head>
 <body>
+  <nav>
+    <div class="container-fluid section color red lighten-4 nav-wrapper">
+      <a href="#" class="brand-logo center"><img class="img-responsive" width="110px" src="images/logo.png" alt=""></img></a>
+    </div>
+      
+    
   <!-- Header logo y cerrar sesion -->
-  <div class="container row">
-      <ul id="slide-out" class="side-nav fixed">
-        <li>
-          <div class="user-view">
-            <div class="background">
-              <img class="responsive-img" src="images/banner.png">
+    <div class="container row">
+        <ul id="slide-out" class="side-nav fixed">
+          <li>
+            <div class="user-view">
+              <div class="background">
+                <img class="responsive-img" src="images/banner.png">
+              </div>
+                <div class="" id="userPhoto"></div>
+                <span class="red-text text-lighten-1 name" id="userName"></span>
+                <span class="red-text text-lighten-1 email" id="userEmail"></span>
             </div>
-              <div class="" id="userPhoto"></div>
-              <span class="red-text text-lighten-1 name" id="userName"></span>
-              <span class="red-text text-lighten-1 email" id="userEmail"></span>
-          </div>
-        </li>
-        <li>
-          <a class="waves-effect" href="#">Menu</a>
-        </li>
-        <li>
-          <div class="divider"></div>
-        </li>
-        <li>
-          <a id="btn-home"><i class="material-icons">home</i>Home</a>
-        </li>
-        <li>
-          <a id="btn-search"><i class="material-icons">search</i>Buscar</a>
-        </li>
-        <li>
-          <a id="btn-notification"><i class="material-icons">notifications</i>Notificaciones</a>
-        </li>
-        <li>
-          <a id="btn-userProfile"><i class="material-icons">person</i>Perfil</a>
-        </li>
-        <li>
-          <a id="signOut"><i class="material-icons">exit_to_app</i>Salir</a>
-        </li>
-      </ul>
+          </li>
+          <li>
+            <a class="waves-effect" href="#">Menu</a>
+          </li>
+          <li>
+            <div class="divider"></div>
+          </li>
+          <li>
+            <a id="btn-home"><i class="material-icons">home</i>Home</a>
+          </li>
+          <li>
+            <a id="btn-search"><i class="material-icons">search</i>Buscar</a>
+          </li>
+          <li>
+            <a id="btn-notification"><i class="material-icons">notifications</i>Notificaciones</a>
+          </li>
+          <li>
+            <a id="btn-userProfile"><i class="material-icons">person</i>Perfil</a>
+          </li>
+          <li>
+            <a id="signOut"><i class="material-icons">exit_to_app</i>Salir</a>
+          </li>
+        </ul>
 
-      <a id="btn-menu" class="btn hide-on-large-only" data-activates="slide-out">
-        <i class="material-icons">menu</i>
-      </a>
+        <a id="btn-menu" class="btn hide-on-large-only" data-activates="slide-out">
+          <i class="material-icons">menu</i>
+        </a>
+  </nav>
     <!-- termina nav -->
     <div class="col offset-l3 l11 m12 s12 container-fluid">
       <!-- Este div solo sirve para dar espacio -->
