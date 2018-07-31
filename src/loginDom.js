@@ -12,9 +12,7 @@ document.getElementById("emailRegisterAccess").addEventListener("change", () => 
 document.getElementById("passwordRegisterAccess").addEventListener("change", () => {
   passwordRegister = document.getElementById('passwordRegisterAccess').value;
 });
-document.getElementById("login").addEventListener('click', ()=>{
-  loginNormalAccess(email, password);
-});
+$('#login').click(()=>loginNormalAccess(email, password));
 let providerGoogle = new firebase.auth.GoogleAuthProvider();
 $('#loginGoogle').click(()=>loginWithProvider(providerGoogle));
 let providerFb = new firebase.auth.FacebookAuthProvider();
