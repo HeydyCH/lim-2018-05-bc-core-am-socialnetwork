@@ -13,6 +13,8 @@ const welcomeUser = (uid) => {
   chargeFriendPosts();
   chargePosts(userUID,muroPosts);
   chargeNotifications();
+  // window.location.reload();
+  chargePostsPublic();
 }
 
 //mostrando la lista de usuarios registrados por busqueda
