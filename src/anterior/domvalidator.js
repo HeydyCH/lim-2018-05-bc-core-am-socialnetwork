@@ -43,7 +43,7 @@ document.getElementById('passwordRegisterAccess').addEventListener('input', () =
     document.getElementById("register").disabled = true;
   }
 });
-// Validando el Login 
+// Validando el Login
 document.getElementById("login").disabled = true;
 document.getElementById('emailNormalAccess').addEventListener('input', () =>{
   let myInput = document.getElementById('emailNormalAccess').value;

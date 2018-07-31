@@ -4,9 +4,16 @@
 #user-photo {
   border: 6px solid #F1AAA8;
 }
+#card horizontal card-posts{
+  background: #e3f2fd!important;
+}
+
 .card-posts, .card-notification{
-  background-color : #F1AAA8;
+  background-color : #e3f2fd!important;
 }
 .contenido-post{
   background-color : white;
+}
+textarea{
+  border: none;
 }
