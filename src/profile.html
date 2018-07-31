@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8" />
+  <title>MomCenter</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Page Title</title>
-  <link rel="icon" type="image/jpg" href="../src/images/pregnant.png">
+  <link rel="icon" type="image/jpg" href="../src/images/mom-center-img.png">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
@@ -30,29 +30,33 @@
                 <span class="red-text text-lighten-1 name" id="userName"></span>
                 <span class="red-text text-lighten-1 email" id="userEmail"></span>
             </div>
-          </li>
-          <li>
-            <a class="waves-effect" href="#">Menu</a>
-          </li>
-          <li>
-            <div class="divider"></div>
-          </li>
-          <li>
-            <a id="btn-home"><i class="material-icons">home</i>Home</a>
-          </li>
-          <li>
-            <a id="btn-search"><i class="material-icons">search</i>Buscar</a>
-          </li>
-          <li>
-            <a id="btn-notification"><i class="material-icons">notifications</i>Notificaciones</a>
-          </li>
-          <li>
-            <a id="btn-userProfile"><i class="material-icons">person</i>Perfil</a>
-          </li>
-          <li>
-            <a id="signOut"><i class="material-icons">exit_to_app</i>Salir</a>
-          </li>
-        </ul>
+              <div class="" id="userPhoto"></div>
+              <span class="red-text text-lighten-1 name" id="userName"></span>
+              <span class="red-text text-lighten-1 email" id="userEmail"></span>
+          </div>
+        </li>
+        <li>
+          <a class="waves-effect" href="#">Menú</a>
+        </li>
+        <li>
+          <div class="divider"></div>
+        </li>
+        <li>
+          <a id="btn-home"><i class="material-icons">home</i>Home</a>
+        </li>
+        <li>
+          <a id="btn-search"><i class="material-icons">search</i>Buscar</a>
+        </li>
+        <li>
+          <a id="btn-notification"><i class="material-icons">notifications</i>Notificaciones</a>
+        </li>
+        <li>
+          <a id="btn-userProfile"><i class="material-icons">person</i>Perfil</a>
+        </li>
+        <li>
+          <a id="signOut"><i class="material-icons">exit_to_app</i>Salir</a>
+        </li>
+      </ul>
 
         <a id="btn-menu" class="btn hide-on-large-only" data-activates="slide-out">
           <i class="material-icons">menu</i>
@@ -88,14 +92,14 @@
           <!-- Card para postear publicaciones -->
           <div class="card horizontal row container col s12">
             <div class="card-content">
-              <span class="card-title">Hola ¿que deseas preguntar?</span>
+              <span class="card-title">Hola ¿qué deseas preguntar?</span>
               <div class="input-field col s8">
                 <input id="currentPost" placeholder="Escribe lo que quieras publicar">
               </div>
               <div class="input-field col s4 ">
                 <select id="privateOptions">
                   <option value="0">Amigos</option>
-                  <option value="1">Publico</option>
+                  <option value="1">Público</option>
                 </select>
                 <label>Tipo de privacidad</label>
               </div>
