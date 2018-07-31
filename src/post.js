@@ -98,8 +98,8 @@ let chargePostsPublic = () =>{
       if(privacidad == 0){
         a = 'group';
       }else{
-        a = 'group';
-        // a = 'public';
+      //   a = 'group';
+        a = 'public';
         let aux= 0 ;
         postsPublic.innerHTML += `
         <div class="card horizontal card-posts">
