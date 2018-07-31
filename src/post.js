@@ -98,7 +98,8 @@ let chargePostsPublic = () =>{
       if(privacidad == 0){
         a = 'group';
       }else{
-        a = 'public';
+        a = 'group';
+        // a = 'public';
         let aux= 0 ;
         postsPublic.innerHTML += `
         <div class="card horizontal card-posts">
@@ -108,10 +109,10 @@ let chargePostsPublic = () =>{
             <div class="col s7">
               <span>${userData.nombre}</span>
               <i class="material-icons">${a}</i>
-              <textarea id=${snapshot.key} class="contenido-post">${objPost.message}</textarea>
+              <textarea id=${snapshot.key} class="contenido-post" disabled>${objPost.message}</textarea>
             </div>
             <div class="col s6 offset-s3">
-              <button  class='waves-effect btn-small' id=${snapshot.key+ 'a'} onclick="likePost('${snapshot.key+'a'}','${snapshot.key+'d'}','${userUID}', '${snapshot.key}')"><i class="material-icons">favorite_border</i></button>
+              <button  class='waves-effect btn-small' id=${snapshot.key+ 'a'} onclick="likePost('${snapshot.key+'a'}','${snapshot.key+'d'}','${userUID}', '${snapshot.key}')"><i class="material-icons">favorite_border</i>/button>
               <button  class='waves-effect btn-small' id=${snapshot.key+ 'd'} onclick="dislikePost('${snapshot.key+'a'}','${snapshot.key+'d'}','${userUID}', '${snapshot.key}')"><i class="material-icons">favorite</i></button>
             </div>
             <div class="s12" id=${snapshot.key+ 'card'}><strong>Le gusta a:</strong></div>
