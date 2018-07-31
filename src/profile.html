@@ -12,14 +12,13 @@
   <link rel="stylesheet" href="profile.css">
 </head>
 <body>
- 
   <!-- Header logo y cerrar sesion -->
   <div class="container row">
       <ul id="slide-out" class="side-nav fixed">
         <li>
           <div class="user-view">
             <div class="background">
-              <img class="responsive-img" src="images/mami.jpg">
+              <img class="responsive-img" src="images/banner.png">
             </div>
               <div class="" id="userPhoto"></div>
               <span class="red-text text-lighten-1 name" id="userName"></span>
@@ -49,17 +48,18 @@
         </li>
       </ul>
 
-        <a id="btn-menu" class="btn hide-on-large-only" data-activates="slide-out">
-          <i class="material-icons">menu</i>
-        </a>
-  
+      <a id="btn-menu" class="btn hide-on-large-only" data-activates="slide-out">
+        <i class="material-icons">menu</i>
+      </a>
     <!-- termina nav -->
     <div class="col offset-l3 l11 m12 s12 container-fluid">
       <!-- Este div solo sirve para dar espacio -->
       <div class="input-field col s12"></div>
       <div class="input-field col s12"></div>
       <div class="container-fluid section" id="home">
-        
+        <p>Publicaciones de personas a quienes sigo</p>
+        <div id="myFriendsPost" class="collection">
+        </div>
       </div>
 
       <div class="container" id="search">
@@ -98,9 +98,6 @@
           <!-- termina card para postear -->
           <p>Mis publicaciones</p>
           <div id="myPosts" class="collection"></div>
-          <p>Publicaciones de personas a quienes sigo</p>
-          <div id="myFriendsPost" class="collection">
-          </div>
         </div>
       </div>
     </div>
