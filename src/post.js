@@ -1,7 +1,8 @@
 //escribiendo publicaciones
 function savePost() {
   let message = document.getElementById('currentPost').value;
-  if(message != '') {
+  let messageEmpty = message.trim();
+  if(message != '' &&  messageEmpty != '') {
     document.getElementById('currentPost').value = '';
     let optionValue = document.getElementById('privateOptions');
     optionValue = optionValue.options[optionValue.selectedIndex].value;
