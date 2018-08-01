@@ -94,11 +94,11 @@ function chargePosts(userUID, muroPosts) {
             <textarea id=${snapshot.key} class="contenido-post">${objPost.message}</textarea>
           </div>
           <div class="col s6 offset-s3">
-            <button  class='waves-effect btn-small' id=${snapshot.key+ 'a'} onclick="likePost('${snapshot.key+'a'}','${snapshot.key+'d'}','${userUID}', '${snapshot.key}')"><i class="material-icons">favorite_border</i></button>
-            <button  class='waves-effect btn-small' id=${snapshot.key+ 'd'} onclick="dislikePost('${snapshot.key+'a'}','${snapshot.key+'d'}','${userUID}', '${snapshot.key}')"><i class="material-icons">favorite</i></button>
-            <button  class='waves-effect btn-small' id=${snapshot.key+ 'r'} onclick="removePost('${snapshot.key}','${userUID}')"><i class="material-icons">delete</i></button>
-            <button class='waves-effect btn-small' id=${snapshot.key + 'e'} onclick="editPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key}')"><i class="material-icons">border_color</i></button>
-            <button class='waves-effect btn-small' id=${snapshot.key + 'se'} onclick="saveEditPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key}')"><i class="material-icons">archive</i></button>
+            <button  class='waves-effect btn-small amber darken-3' id=${snapshot.key+ 'a'} onclick="likePost('${snapshot.key+'a'}','${snapshot.key+'d'}','${userUID}', '${snapshot.key}')"><i class="material-icons">favorite_border</i></button>
+            <button  class='waves-effect btn-small amber darken-3' id=${snapshot.key+ 'd'} onclick="dislikePost('${snapshot.key+'a'}','${snapshot.key+'d'}','${userUID}', '${snapshot.key}')"><i class="material-icons">favorite</i></button>
+            <button  class='waves-effect btn-small amber darken-3' id=${snapshot.key+ 'r'} onclick="removePost('${snapshot.key}','${userUID}')"><i class="material-icons">delete</i></button>
+            <button class='waves-effect btn-small amber darken-3' id=${snapshot.key + 'e'} onclick="editPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key}')"><i class="material-icons">border_color</i></button>
+            <button class='waves-effect btn-small amber darken-3' id=${snapshot.key + 'se'} onclick="saveEditPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key}')"><i class="material-icons">archive</i></button>
           </div>
           <div class="s12" id=${snapshot.key+ 'card'}><strong>Le gusta a:</strong></div>
         </div>
