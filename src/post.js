@@ -114,7 +114,8 @@ function chargePosts(userUID, muroPosts) {
            usersLikesObject = usersLikes;
            usersLikes = Object.keys(usersLikes);
            console.log(usersLikes);
-           document.getElementById(snapshot.key+ 'card').innerHTML = '<strong>Le gusta a:</strong>';
+           count = usersLikes.length;
+           document.getElementById(snapshot.key+ 'card').innerHTML = '<strong>Le gusta a '+ count +' personas:</strong>';
            usersLikes.forEach(function(element) {
              if(usersLikesObject[element].amigo == localStorage.currentUser){
                countLikeFriendExist = 1;
