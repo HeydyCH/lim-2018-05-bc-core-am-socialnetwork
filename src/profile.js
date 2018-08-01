@@ -100,7 +100,7 @@ let chargePostsPublic = () =>{
             <div class="col s7">
               <span>${userData.nombre}</span>
               <i class="material-icons">${a}</i>
-              <textarea id=${snapshot.key} class="contenido-post">${objPost.message}</textarea>
+              <textarea id=${snapshot.key+'public'} class="contenido-post">${objPost.message}</textarea>
             </div>
             <div class="col s6 offset-s3">
               <button  class='waves-effect btn-small' id=${snapshot.key+ 'a1'} onclick="likePost('${snapshot.key+'a'}','${snapshot.key+'d'}','${userUID}', '${snapshot.key}')"><i class="material-icons">favorite_border</i></button>
@@ -136,7 +136,7 @@ let chargePostsPublic = () =>{
           document.getElementById(snapshot.key + 'a1').style.display = 'block';
           document.getElementById(snapshot.key + 'd1').style.display = 'none';
         }
-        document.getElementById(snapshot.key).disabled = true;
+        document.getElementById(snapshot.key + "public").disabled = true;
       }
       })
     });
