@@ -63,6 +63,97 @@ const chargeFriendPosts = () => {
   });
 }
 
+<<<<<<< HEAD
+=======
+
+//mostrando las publicaciones publicas de todos los usuarios actuales
+let chargePostsPublic = () =>{
+
+  let postsPublic = document.getElementById('postPublic');
+  postsPublic.innerHTML = ''
+
+  firebase.database().ref("users")
+  .on("child_added", s => {
+    let objUser = s.val();
+    let userName = objUser.nombre ;
+    let userPhoto = objUser.foto ;
+    let userUID = objUser.uid ;
+    let publicationsByUser= objUser.publicaciones;
+    console.log(userUID)
+    console.log(objUser)
+    console.log(userName)
+    console.log(publicationsByUser)
+    firebase.database().ref('users/'+userUID+'/publicaciones')
+    .on('child_added', function(snapshot) {
+     var objPost = snapshot.val();
+      //  console.log(objPost);
+     var profile = firebase.database().ref().child('users/'+userUID);
+     profile.on('value',snap => {
+      //  console.log("entro");
+       let userData = JSON.stringify(snap.val(),null,3);//tbm funciona un solo parametro
+       userData = JSON.parse(userData);
+      //  muroPosts.innerHTML += "<img width='100px' class='circle img-responsive' src='"+userData.foto+"  '/>";
+      let privacidad=objPost.optionValue
+      let a = 'favorite_border';
+      if(privacidad == 0){
+        a = 'group';
+      }else{
+        a = 'public';
+        let aux= 0 ;
+        postsPublic.innerHTML += `
+        <div class="card-posts">
+          <div class = "row" >
+            <div class="input-field col s12"></div>
+            <img width="4px" class="circle col s2" src="${userData.foto}"/>
+            <div class="col s7">
+              <span>${userData.nombre}</span>
+              <i class="material-icons">${a}</i>
+              <textarea id=${snapshot.key} class="contenido-post" disabled>${objPost.message}</textarea>
+            </div>
+            <div class="col s6 offset-s3">
+              <button  class='waves-effect btn-small' id=${snapshot.key+ 'a'} onclick="likePost('${snapshot.key+'a'}','${snapshot.key+'d'}','${userUID}', '${snapshot.key}')"><i class="material-icons">favorite_border</i></button>
+              <button  class='waves-effect btn-small' id=${snapshot.key+ 'd'} onclick="dislikePost('${snapshot.key+'a'}','${snapshot.key+'d'}','${userUID}', '${snapshot.key}')"><i class="material-icons">favorite</i></button>
+            </div>
+          </div>
+          <div class="s12" id=${snapshot.key+ 'card'}><strong>Le gusta a:</strong></div>
+        </div>
+        `;
+        let countLikeFriendExist = 0;
+        firebase.database().ref('users/'+ userUID + '/publicaciones/'+snapshot.key+'/likesFromUsers')
+        .on('value', snap => {
+         if(snap.val()!= null) {
+           let usersLikes = JSON.stringify(snap.val(),null,3);//tbm funciona un solo parametro
+           usersLikes = JSON.parse(usersLikes);
+           usersLikesObject = usersLikes;
+           usersLikes = Object.keys(usersLikes);
+           console.log(usersLikes);
+           document.getElementById(snapshot.key+ 'card').innerHTML = '<strong>Le gusta a:</strong>';
+           usersLikes.forEach(function(element) {
+             if(usersLikesObject[element].amigo == localStorage.currentUser){
+               countLikeFriendExist = 1;
+             }
+             document.getElementById(snapshot.key+ 'card').innerHTML += `<p>${usersLikesObject[element].nombre}</p>`;
+           });
+         }
+        })
+        if(countLikeFriendExist == 1){
+          document.getElementById(snapshot.key + 'a').style.display = 'none';
+          document.getElementById(snapshot.key + 'd').style.display = 'block';
+        } else {
+          console.log('no hay coincidencias');
+          document.getElementById(snapshot.key + 'a').style.display = 'block';
+          document.getElementById(snapshot.key + 'd').style.display = 'none';
+        }
+      }
+      })
+    });
+  });
+
+}
+
+
+
+>>>>>>> 8e3353fa9009d85bb9645faebab057121b8fd621
 //mostrando todos las publicaciones del usuario actual
 function chargePosts(userUID, muroPosts) {
   muroPosts.innerHTML = '';
@@ -85,7 +176,7 @@ function chargePosts(userUID, muroPosts) {
       }
       let aux= 0 ;
       muroPosts.innerHTML += `
-       <div class="card horizontal card-posts">
+       <div class="card card-posts">
         <div class = "row" >
           <div class="input-field col s12"></div>
           <img width="4px" class="circle col s2" src="${userData.foto}"/>
@@ -101,8 +192,8 @@ function chargePosts(userUID, muroPosts) {
             <button class='waves-effect btn-small amber darken-3' id=${snapshot.key + 'e'} onclick="editPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key}')"><i class="material-icons">border_color</i></button>
             <button class='waves-effect btn-small amber darken-3' id=${snapshot.key + 'se'} onclick="saveEditPost('${snapshot.key}','${userUID}','${objPost.usuario}','${objPost.optionValue}','${aux}','${snapshot.key}')"><i class="material-icons">archive</i></button>
           </div>
-          <div class="s12" id=${snapshot.key+ 'card'}><strong>Le gusta a:</strong></div>
         </div>
+        <div class="s12" id=${snapshot.key+ 'card'}><strong>Le gusta a:</strong></div>
        </div>
        `;
        let countLikeFriendExist = 0;
@@ -154,7 +245,7 @@ function editPost(idPost, userUID, usuario, option, aux, idbtn) {
   console.log("el id del btnEditar es " + idBtnEdit)
 
   let newUpdate = document.getElementById(idPost);
-  console.log("el msje editado " + newUpdate.value)
+
   newUpdate.disabled = false;
 
   document.getElementById( idBtnEdit).style.display = 'none';
@@ -169,6 +260,7 @@ function saveEditPost(idPost, userUID, usuario, option, aux, idbtn){
    console.log(aux)
    console.log(idPost)
    let newUpdateBySave = document.getElementById(idPost);
+   console.log("el msje editado " + newUpdateBySave.value)
    console.log(newUpdateBySave.value)
     newUpdateBySave.disabled = true
     document.getElementById( idBtnEdit).style.display = 'block';

@@ -48,7 +48,11 @@ document.getElementById("login").disabled = true;
 document.getElementById('emailNormalAccess').addEventListener('input', () =>{
   let myInput = document.getElementById('emailNormalAccess').value;
   valido = document.getElementById('emailOKAccess');
+<<<<<<< HEAD
   emailValidator(myInput) ? valido.innerHTML = "\u2714" : valido.innerHTML ="email inválido";
+=======
+  emailValidator(myInput) ? valido.innerHTML = "\u2714" : valido.innerHTML ="\u2718";
+>>>>>>> 8e3353fa9009d85bb9645faebab057121b8fd621
 });
 
 document.getElementById('passwordNormalAccess').addEventListener('input', () => {
